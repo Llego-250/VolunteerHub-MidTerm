@@ -1,5 +1,39 @@
-# Vue 3 + Vite
+# VolunteerHub - Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A volunteer management platform connecting volunteers with organizations.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Features
+
+### Volunteer Features
+- Browse and search events
+- Register/unregister for events
+- View registered events
+- Track hours and badges
+- Profile management
+- Notifications
+
+### Organizer Features
+- Create and manage events
+- View volunteer registrations
+- Message volunteers
+- Event analytics
+- Profile management
+
+## Setup
+
+```bash
+npm install
+npm run dev
+```
+
+## Default Test Accounts
+
+Create accounts via signup or use localStorage to add test users.
+
+## Tech Stack
+
+- Vue 3 with `<script setup>`
+- Vue Router for navigation
+- Pinia for state management
+- LocalStorage for data persistence
+- Vite for build tooling
