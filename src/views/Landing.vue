@@ -25,6 +25,9 @@
     </header>
     
     <section id="home" class="hero">
+      <video autoplay loop muted playsinline class="hero-video">
+        <source :src="heroVideo" type="video/mp4">
+      </video>
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1>Connect. Volunteer. Make a Difference.</h1>
@@ -96,6 +99,7 @@ import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
 import { HandHeart, Search, Calendar, Users, Heart, ChevronDown, Menu, X } from 'lucide-vue-next'
+import heroVideo from '../assets/vovo.mp4'
 
 const eventsStore = useEventsStore()
 const showLogin = ref(false)
@@ -136,8 +140,9 @@ const scrollTo = (id) => {
 .dropdown-menu button { width: 100%; text-align: left; padding: 12px 20px; background: white; color: var(--dark); border-radius: 0; }
 .dropdown-menu button:hover { background: var(--light-gray); }
 .hamburger { display: none; background: none; border: none; color: var(--dark); cursor: pointer; }
-.hero { position: relative; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200') center/cover; color: white; padding: 120px 60px; text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1; }
+.hero { position: relative; color: white; padding: 120px 60px; text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
 .hero-content { position: relative; z-index: 2; }
 .hero-content h1 { font-size: 48px; margin-bottom: 20px; font-weight: 700; }
 .hero-content p { font-size: 18px; max-width: 800px; margin: 0 auto 40px; }
