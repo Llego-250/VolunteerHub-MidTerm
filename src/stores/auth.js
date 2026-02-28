@@ -4,6 +4,9 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     currentUser: JSON.parse(localStorage.getItem('volunteerHubUser')) || null
   }),
+  getters: {
+    isAuthenticated: (state) => !!state.currentUser
+  },
   actions: {
     login(email, password) {
       const users = JSON.parse(localStorage.getItem('volunteerHubUsers')) || []
