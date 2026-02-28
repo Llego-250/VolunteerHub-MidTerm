@@ -9,7 +9,7 @@
       </select>
     </div>
     <div v-if="myEvents.length === 0" class="empty-state">
-      <div class="empty-icon">📅</div>
+      <div class="empty-icon"><i class="fas fa-calendar" style="font-size: 80px; color: #9ca3af;"></i></div>
       <h3>No Events Created</h3>
       <p>Start by creating your first event to connect with volunteers!</p>
       <button @click="$router.push('/create-event')">Create Event</button>
@@ -53,7 +53,7 @@ const deleteEvent = (id) => {
 .section-header h2 { font-size: 24px; margin: 0; }
 .filter-select { padding: 8px 15px; border: 1px solid var(--border); border-radius: 8px; }
 .empty-state { text-align: center; padding: 60px 20px; }
-.empty-icon { font-size: 80px; margin-bottom: 20px; opacity: 0.5; }
+.empty-icon { margin-bottom: 20px; }
 .empty-state h3 { font-size: 20px; margin-bottom: 10px; }
 .empty-state p { color: var(--gray); margin-bottom: 25px; }
 .events-list { display: grid; gap: 20px; }
