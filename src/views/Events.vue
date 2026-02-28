@@ -2,7 +2,7 @@
   <div class="events">
     <header class="nav-header">
       <div class="logo">
-        <span class="logo-icon">🤝</span>
+        <HandHeart :size="32" color="white" />
         <h1>VolunteerHub</h1>
       </div>
       <nav class="nav-links">
@@ -59,6 +59,7 @@
 import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
+import { HandHeart } from 'lucide-vue-next'
 
 const eventsStore = useEventsStore()
 const authStore = useAuthStore()
@@ -75,15 +76,15 @@ const filteredEvents = computed(() =>
 
 <style scoped>
 .events { background: var(--light-gray); min-height: 100vh; }
-.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: none; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 32px; }
-.logo h1 { font-size: 24px; color: var(--primary); margin: 0; }
+.logo h1 { font-size: 24px; color: white; margin: 0; }
 .nav-links { display: flex; gap: 30px; }
-.nav-links a { color: var(--dark); font-weight: 500; }
+.nav-links a { color: white; font-weight: 500; }
 .user-info { display: flex; align-items: center; gap: 10px; }
 .avatar { width: 40px; height: 40px; border-radius: 50%; }
-.hero-section { background: white; padding: 60px; text-align: center; }
+.hero-section { background: white; padding: 60px; text-align: center; margin-top: 80px; }
 .hero-section h1 { font-size: 42px; margin-bottom: 15px; }
 .hero-section p { color: var(--gray); font-size: 18px; }
 .container { max-width: 1400px; margin: 0 auto; padding: 40px 60px; }
