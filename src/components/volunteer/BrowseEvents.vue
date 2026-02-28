@@ -4,7 +4,7 @@
     <input v-model="search" placeholder="Search events..." />
     <div class="events-grid">
       <div v-for="event in filteredEvents" :key="event.id" class="event-card">
-        <span class="icon">{{ event.icon }}</span>
+        <i :class="eventsStore.categoryIcons[event.category] || 'fas fa-calendar'" class="icon"></i>
         <h3>{{ event.title }}</h3>
         <p>{{ event.date }} • {{ event.location }}</p>
         <p>{{ event.volunteers.length }}/{{ event.maxVolunteers }} volunteers</p>
@@ -46,7 +46,7 @@ const register = (eventId) => {
 input { width: 100%; padding: 10px; margin: 15px 0; }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 .event-card { border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
-.icon { font-size: 30px; }
+.icon { font-size: 40px; color: var(--primary); margin-bottom: 10px; }
 button { padding: 8px 16px; margin-top: 10px; cursor: pointer; }
 button:disabled { background: #6c757d; cursor: not-allowed; }
 </style>
