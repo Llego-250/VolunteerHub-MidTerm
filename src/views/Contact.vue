@@ -2,7 +2,7 @@
   <div class="contact">
     <header class="nav-header">
       <div class="logo">
-        <span class="logo-icon">🤝</span>
+        <HandHeart :size="32" color="white" />
         <h1>VolunteerHub</h1>
       </div>
       <nav class="nav-links">
@@ -82,6 +82,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { HandHeart } from 'lucide-vue-next'
 
 const form = ref({ name: '', email: '', subject: '', message: '' })
 const handleSubmit = () => {
@@ -92,13 +93,13 @@ const handleSubmit = () => {
 
 <style scoped>
 .contact { background: var(--light-gray); min-height: 100vh; }
-.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: none; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 32px; }
-.logo h1 { font-size: 24px; color: var(--primary); margin: 0; }
+.logo h1 { font-size: 24px; color: white; margin: 0; }
 .nav-links { display: flex; gap: 30px; }
-.nav-links a { color: var(--dark); font-weight: 500; }
-.contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 60px auto; padding: 0 60px; }
+.nav-links a { color: white; font-weight: 500; }
+.contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 60px auto; padding: 0 60px; margin-top: 140px; }
 .contact-form, .contact-info { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .contact-form h2, .contact-info h2 { margin-bottom: 30px; font-size: 28px; }
 .form-group { margin-bottom: 20px; }
