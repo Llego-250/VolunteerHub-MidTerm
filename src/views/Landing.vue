@@ -84,8 +84,8 @@
       </div>
     </footer>
 
-    <LoginModal v-if="showLogin" @close="showLogin = false" />
-    <SignupModal v-if="showSignup" @close="showSignup = false" :defaultRole="signupRole" />
+    <LoginModal v-if="showLogin" @close="showLogin = false" @switchToSignup="showLogin = false; showSignup = true" />
+    <SignupModal v-if="showSignup" @close="showSignup = false" :defaultRole="signupRole" @switchToLogin="showSignup = false; showLogin = true" />
   </div>
 </template>
 
