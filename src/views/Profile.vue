@@ -1,6 +1,6 @@
 <template>
   <div class="profile-page">
-    <Header />
+    <Navbar />
     <div class="container">
       <div class="profile-header">
         <h1>My Profile</h1>
@@ -64,7 +64,7 @@
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
-import Header from '../components/common/Header.vue'
+import Navbar from '../components/common/Navbar.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
