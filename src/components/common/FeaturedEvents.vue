@@ -3,15 +3,15 @@
     <div class="events-grid">
       <div v-for="event in events" :key="event.id" class="event-card">
         <div class="event-header" :style="{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))' }">
-          <component :is="getIcon(event.category)" :size="64" color="white" />
+          <i :class="getIcon(event.category)" style="font-size: 64px; color: white;"></i>
         </div>
         <div class="event-body">
           <span class="category-badge">{{ event.category }}</span>
           <h3>{{ event.title }}</h3>
           <div class="event-meta">
-            <span><Calendar :size="14" /> {{ event.date }}</span>
-            <span><Clock :size="14" /> {{ event.time }}</span>
-            <span><MapPin :size="14" /> {{ event.location }}</span>
+            <span><i class="fas fa-calendar"></i> {{ event.date }}</span>
+            <span><i class="fas fa-clock"></i> {{ event.time }}</span>
+            <span><i class="fas fa-map-marker-alt"></i> {{ event.location }}</span>
           </div>
           <p>{{ event.description }}</p>
           <div class="event-footer">
@@ -25,14 +25,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { Calendar, Clock, MapPin, Leaf, Heart, BookOpen } from 'lucide-vue-next'
+import { useEventsStore } from '../../stores/events'
 
 const props = defineProps(['events'])
+const eventsStore = useEventsStore()
 
 const getIcon = (category) => {
-  const icons = { Environment: Leaf, Community: Heart, Education: BookOpen }
-  return icons[category] || Calendar
+  return eventsStore.categoryIcons[category] || 'fas fa-calendar'
 }
 </script>
 
@@ -46,6 +45,7 @@ const getIcon = (category) => {
 .event-body h3 { margin: 15px 0; font-size: 20px; }
 .event-meta { display: flex; flex-direction: column; gap: 8px; margin: 15px 0; color: var(--gray); font-size: 14px; }
 .event-meta span { display: flex; align-items: center; gap: 6px; }
+.event-meta i { font-size: 14px; }
 .event-body p { color: var(--gray); font-size: 14px; line-height: 1.6; margin: 15px 0; }
 .event-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 14px; color: var(--gray); }
 .status-badge { background: var(--light-gray); padding: 5px 10px; border-radius: 5px; font-size: 12px; }
