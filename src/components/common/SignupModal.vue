@@ -21,15 +21,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 
+const props = defineProps(['defaultRole'])
 const emit = defineEmits(['close'])
 const authStore = useAuthStore()
 const router = useRouter()
 const form = ref({ name: '', email: '', password: '', phone: '', location: '', role: '' })
 const error = ref('')
+
+onMounted(() => {
+  if (props.defaultRole) {
+    form.value.role = props.defaultRole
+  }
+})
 
 const handleSignup = () => {
   if (authStore.signup(form.value)) {
@@ -42,7 +49,7 @@ const handleSignup = () => {
 </script>
 
 <style scoped>
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
 .modal-content { background: white; padding: 30px; border-radius: 8px; width: 400px; }
 form { display: flex; flex-direction: column; gap: 15px; }
 input, select { padding: 10px; }
