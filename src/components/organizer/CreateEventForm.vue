@@ -3,7 +3,17 @@
     <h2>Create Event</h2>
     <form @submit.prevent="handleCreate">
       <input v-model="form.title" placeholder="Event Title" required />
-      <input v-model="form.category" placeholder="Category" required />
+      <select v-model="form.category" required>
+        <option value="">Select Category</option>
+        <option>Environment</option>
+        <option>Education</option>
+        <option>Healthcare</option>
+        <option>Community</option>
+        <option>Animals</option>
+        <option>Disaster Relief</option>
+        <option>Elderly Care</option>
+        <option>Youth Programs</option>
+      </select>
       <input v-model="form.date" type="date" required />
       <input v-model="form.time" type="time" required />
       <input v-model="form.location" placeholder="Location" required />
@@ -47,6 +57,6 @@ const handleCreate = () => {
 .create-event-form { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 h2 { margin-bottom: 20px; }
 form { display: flex; flex-direction: column; gap: 15px; }
-input, textarea { padding: 10px; }
+input, textarea, select { padding: 10px; }
 textarea { min-height: 100px; }
 </style>
