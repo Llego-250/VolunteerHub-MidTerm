@@ -36,8 +36,7 @@ const form = ref({
 const handleCreate = () => {
   eventsStore.createEvent({
     ...form.value,
-    organizerId: authStore.currentUser.id,
-    icon: '📅'
+    organizerId: authStore.currentUser.id
   })
   alert('Event created!')
   emit('created')
