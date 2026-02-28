@@ -1,21 +1,6 @@
 <template>
   <div class="events">
-    <header class="nav-header">
-      <div class="logo">
-        <HandHeart :size="32" color="white" />
-        <h1>VolunteerHub</h1>
-      </div>
-      <nav class="nav-links">
-        <router-link to="/">Home</router-link>
-        <router-link to="/events">Events</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/contact">Contact</router-link>
-      </nav>
-      <div class="user-info" v-if="authStore.currentUser">
-        <img src="https://via.placeholder.com/40" class="avatar" />
-        <span>{{ authStore.currentUser.name }}</span>
-      </div>
-    </header>
+    <Navbar />
     <div class="hero-section">
       <h1>Volunteer Events</h1>
       <p>Discover meaningful opportunities to make a difference in your community</p>
@@ -59,7 +44,7 @@
 import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
-import { HandHeart } from 'lucide-vue-next'
+import Navbar from '../components/common/Navbar.vue'
 
 const eventsStore = useEventsStore()
 const authStore = useAuthStore()
@@ -76,14 +61,6 @@ const filteredEvents = computed(() =>
 
 <style scoped>
 .events { background: var(--light-gray); min-height: 100vh; }
-.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: none; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-icon { font-size: 32px; }
-.logo h1 { font-size: 24px; color: white; margin: 0; }
-.nav-links { display: flex; gap: 30px; }
-.nav-links a { color: white; font-weight: 500; }
-.user-info { display: flex; align-items: center; gap: 10px; }
-.avatar { width: 40px; height: 40px; border-radius: 50%; }
 .hero-section { background: white; padding: 60px; text-align: center; margin-top: 80px; }
 .hero-section h1 { font-size: 42px; margin-bottom: 15px; }
 .hero-section p { color: var(--gray); font-size: 18px; }
