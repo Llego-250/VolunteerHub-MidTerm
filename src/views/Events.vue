@@ -2,8 +2,14 @@
   <div class="events">
     <Navbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
     <div class="hero-section">
-      <h1>Volunteer Events</h1>
-      <p>Discover meaningful opportunities to make a difference in your community</p>
+      <video autoplay loop muted playsinline class="hero-video">
+        <source :src="heroVideo" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Volunteer Events</h1>
+        <p>Discover meaningful opportunities to make a difference in your community</p>
+      </div>
     </div>
     <div class="container">
       <div class="browse-section">
@@ -88,6 +94,7 @@ import { useAuthStore } from '../stores/auth'
 import Navbar from '../components/common/Navbar.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
+import heroVideo from '../assets/vovo.mp4'
 
 const eventsStore = useEventsStore()
 const authStore = useAuthStore()
@@ -136,9 +143,12 @@ const toggleRegistration = () => {
 
 <style scoped>
 .events { background: var(--light-gray); min-height: 100vh; }
-.hero-section { background: white; padding: 60px; text-align: center; margin-top: 80px; }
+.hero-section { position: relative; color: white; padding: 150px 60px 100px; text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
+.hero-content { position: relative; z-index: 2; }
 .hero-section h1 { font-size: 42px; margin-bottom: 15px; }
-.hero-section p { color: var(--gray); font-size: 18px; }
+.hero-section p { color: white; font-size: 18px; }
 .container { max-width: 1400px; margin: 0 auto; padding: 40px 60px; }
 .browse-section { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .browse-section h2 { font-size: 28px; margin-bottom: 25px; }
