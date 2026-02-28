@@ -19,7 +19,7 @@
       </div>
       <div v-if="activeTab === 'overview'">
         <DashboardStats :stats="stats" />
-        <MyEvents />
+        <MyEvents @switchTab="activeTab = $event" />
       </div>
       <CreateEventForm v-else-if="activeTab === 'create'" @created="activeTab = 'overview'" />
       <ManageEventsPanel v-else-if="activeTab === 'manage'" />
