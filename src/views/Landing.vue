@@ -129,7 +129,7 @@ const scrollTo = (id) => {
 
 <style scoped>
 .landing { background: white; }
-.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 60px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo h1 { font-size: 24px; color: var(--primary); margin: 0; }
 .nav-links { display: flex; gap: 30px; }
@@ -140,7 +140,7 @@ const scrollTo = (id) => {
 .dropdown-menu button { width: 100%; text-align: left; padding: 12px 20px; background: white; color: var(--dark); border-radius: 0; }
 .dropdown-menu button:hover { background: var(--light-gray); }
 .hamburger { display: none; background: none; border: none; color: var(--dark); cursor: pointer; }
-.hero { position: relative; color: white; padding: 120px 60px; text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero { position: relative; color: white; top:0; padding: 120px 60px; text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
 .hero-content { position: relative; z-index: 2; }
