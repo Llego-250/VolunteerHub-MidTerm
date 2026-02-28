@@ -5,11 +5,11 @@
       <h1>VolunteerHub</h1>
     </div>
     <nav class="nav-links" :class="{ active: mobileMenuOpen }">
-      <router-link v-if="authStore.isAuthenticated" :to="dashboardLink">Dashboard</router-link>
-      <a v-else @click="scrollTo('home')">Home</a>
-      <router-link to="/events">Events</router-link>
-      <a v-if="!authStore.isAuthenticated" @click="scrollTo('about')">About</a>
-      <router-link to="/contact">Contact</router-link>
+      <router-link v-if="authStore.isAuthenticated" :to="dashboardLink" @click="mobileMenuOpen = false">Dashboard</router-link>
+      <router-link v-else to="/" @click="mobileMenuOpen = false">Home</router-link>
+      <router-link to="/events" @click="mobileMenuOpen = false">Events</router-link>
+      <router-link to="/about" @click="mobileMenuOpen = false">About</router-link>
+      <router-link to="/contact" @click="mobileMenuOpen = false">Contact</router-link>
     </nav>
     <div v-if="!authStore.isAuthenticated" class="auth-dropdown">
       <button @click="dropdownOpen = !dropdownOpen" class="btn-get-started">Get Started <ChevronDown :size="16" /></button>
@@ -48,13 +48,19 @@ const dashboardLink = computed(() =>
 )
 
 const scrollTo = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  const element = document.getElementById(id)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    router.push('/')
+  }
   mobileMenuOpen.value = false
 }
 
 const handleLogout = () => {
   authStore.logout()
   router.push('/')
+  mobileMenuOpen.value = false
 }
 </script>
 
@@ -63,8 +69,8 @@ const handleLogout = () => {
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo h1 { font-size: 24px; color: white; margin: 0; }
 .nav-links { display: flex; gap: 30px; }
-.nav-links a { color: white; font-weight: 500; cursor: pointer; }
-.nav-links a:hover { opacity: 0.8; }
+.nav-links a { color: white; font-weight: 500; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
+.nav-links a:hover, .nav-links a.router-link-active { opacity: 0.8; }
 .auth-dropdown { position: relative; }
 .btn-get-started { display: flex; align-items: center; gap: 5px; }
 .dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 10px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 150px; }
@@ -78,9 +84,11 @@ const handleLogout = () => {
 
 @media (max-width: 768px) {
   .nav-header { padding: 15px 20px; }
-  .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(30, 30, 30, 0.98); padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
   .nav-links.active { display: flex; }
+  .nav-links a { padding: 12px; border-radius: 6px; }
   .hamburger { display: block; }
   .auth-dropdown { display: none; }
+  .user-menu { display: none; }
 }
 </style>
