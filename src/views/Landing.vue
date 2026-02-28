@@ -94,7 +94,7 @@ const showSignup = ref(false)
 
 <style scoped>
 .landing { background: white; }
-.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo h1 { font-size: 24px; color: var(--primary); margin: 0; }
 .nav-links { display: flex; gap: 30px; }
