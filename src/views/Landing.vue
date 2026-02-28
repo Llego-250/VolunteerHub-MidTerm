@@ -129,7 +129,7 @@ const scrollTo = (id) => {
 
 <style scoped>
 .landing { background: rgb(255, 255, 255); margin: 0; padding: 0; }
-.nav-header { display:flex; justify-content: space-between; align-items: center; padding: 10px 60px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: absolute; top: 0; left: 0; right: 0; z-index: 100; }
+.nav-header { display:flex; justify-content: space-between; align-items: center; padding: 10px 60px; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo h1 { font-size: 24px; color: white; margin: 0; }
 .nav-links { display: flex; gap: 30px; }
