@@ -97,6 +97,10 @@ const openSignup = (role) => {
   signupRole.value = role
   showSignup.value = true
 }
+
+const scrollTo = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <style scoped>
