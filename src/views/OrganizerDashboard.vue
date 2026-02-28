@@ -37,7 +37,7 @@ const stats = computed(() => {
 </script>
 
 <style scoped>
-.dashboard { min-height: 100vh; background: var(--light-gray); }
+.dashboard { min-height: 100vh; background: var(--light-gray); padding-top: 80px; }
 .container { max-width: 1400px; margin: 0 auto; padding: 40px 60px; }
 .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
 .dashboard-header h1 { font-size: 32px; margin-bottom: 5px; }
