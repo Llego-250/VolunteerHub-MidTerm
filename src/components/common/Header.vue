@@ -37,7 +37,7 @@ const handleLogout = () => {
 </script>
 
 <style scoped>
-.header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
 .logo { display: flex; align-items: center; gap: 10px; }
 .logo h2 { font-size: 20px; color: var(--primary); margin: 0; }
 nav { display: flex; gap: 25px; align-items: center; }
