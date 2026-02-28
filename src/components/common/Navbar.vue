@@ -19,7 +19,7 @@
       </div>
     </div>
     <div v-else class="user-menu">
-      <img src="https://via.placeholder.com/40" alt="User" class="avatar" />
+      <div class="avatar">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
       <span>{{ authStore.currentUser?.name }}</span>
       <button @click="handleLogout" class="btn-logout">Logout</button>
     </div>
@@ -78,7 +78,7 @@ const handleLogout = () => {
 .dropdown-menu button:hover { background: var(--light-gray); }
 .hamburger { display: none; background: none; border: none; color: white; cursor: pointer; }
 .user-menu { display: flex; align-items: center; gap: 10px; }
-.avatar { width: 40px; height: 40px; border-radius: 50%; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; }
 .user-menu span { color: white; font-weight: 500; }
 .btn-logout { padding: 8px 16px; font-size: 14px; }
 
