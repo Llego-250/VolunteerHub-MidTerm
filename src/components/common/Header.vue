@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logo">
-      <span class="logo-icon">🤝</span>
+      <HandHeart :size="28" color="#10b981" />
       <h2>VolunteerHub</h2>
     </div>
     <nav>
@@ -21,6 +21,7 @@
 import { computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
+import { HandHeart } from 'lucide-vue-next'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -38,7 +39,6 @@ const handleLogout = () => {
 <style scoped>
 .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .logo { display: flex; align-items: center; gap: 10px; }
-.logo-icon { font-size: 28px; }
 .logo h2 { font-size: 20px; color: var(--primary); margin: 0; }
 nav { display: flex; gap: 25px; align-items: center; }
 a { color: var(--dark); font-weight: 500; padding: 8px 15px; border-radius: 6px; }
