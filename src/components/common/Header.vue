@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logo">
-      <HandHeart :size="28" color="#10b981" />
+      <HandHeart :size="28" color="white" />
       <h2>VolunteerHub</h2>
     </div>
     <nav>
