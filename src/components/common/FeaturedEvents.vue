@@ -1,7 +1,7 @@
 <template>
   <section class="featured">
     <div class="events-grid">
-      <div v-for="event in featuredEvents" :key="event.id" class="event-card">
+      <div v-for="event in events" :key="event.id" class="event-card">
         <div class="event-header" :style="{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))' }">
           <component :is="getIcon(event.category)" :size="64" color="white" />
         </div>
@@ -26,11 +26,9 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useEventsStore } from '../../stores/events'
 import { Calendar, Clock, MapPin, Leaf, Heart, BookOpen } from 'lucide-vue-next'
 
-const eventsStore = useEventsStore()
-const featuredEvents = computed(() => eventsStore.events.slice(0, 3))
+const props = defineProps(['events'])
 
 const getIcon = (category) => {
   const icons = { Environment: Leaf, Community: Heart, Education: BookOpen }
