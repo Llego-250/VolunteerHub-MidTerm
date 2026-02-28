@@ -1,28 +1,6 @@
 <template>
   <div class="landing">
-    <header class="nav-header">
-      <div class="logo">
-        <HandHeart :size="32" color="white" />
-        <h1>VolunteerHub</h1>
-      </div>
-      <nav class="nav-links" :class="{ active: mobileMenuOpen }">
-        <a href="#home" @click="scrollTo('home')">Home</a>
-        <router-link to="/events">Events</router-link>
-        <a href="#about" @click="scrollTo('about')">About</a>
-        <router-link to="/contact">Contact</router-link>
-      </nav>
-      <div class="auth-dropdown">
-        <button @click="dropdownOpen = !dropdownOpen" class="btn-get-started">Get Started <ChevronDown :size="16" /></button>
-        <div v-if="dropdownOpen" class="dropdown-menu">
-          <button @click="showLogin = true; dropdownOpen = false">Login</button>
-          <button @click="showSignup = true; dropdownOpen = false">Sign Up</button>
-        </div>
-      </div>
-      <button class="hamburger" @click="mobileMenuOpen = !mobileMenuOpen">
-        <Menu v-if="!mobileMenuOpen" :size="24" />
-        <X v-else :size="24" />
-      </button>
-    </header>
+    <Navbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
     
     <section id="home" class="hero">
       <video autoplay loop muted playsinline class="hero-video">
@@ -95,18 +73,17 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
+import Navbar from '../components/common/Navbar.vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
-import { HandHeart, Search, Calendar, Users, Heart, ChevronDown, Menu, X } from 'lucide-vue-next'
+import { Search, Calendar, Users, Heart } from 'lucide-vue-next'
 import heroVideo from '../assets/vovo.mp4'
 
 const eventsStore = useEventsStore()
 const showLogin = ref(false)
 const showSignup = ref(false)
 const signupRole = ref('')
-const dropdownOpen = ref(false)
-const mobileMenuOpen = ref(false)
 const eventsToShow = ref(3)
 
 const displayedEvents = computed(() => eventsStore.events.slice(0, eventsToShow.value))
@@ -120,26 +97,10 @@ const openSignup = (role) => {
   signupRole.value = role
   showSignup.value = true
 }
-
-const scrollTo = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  mobileMenuOpen.value = false
-}
 </script>
 
 <style scoped>
 .landing { background: rgb(255, 255, 255); margin: 0; padding: 0; }
-.nav-header { display:flex; justify-content: space-between; align-items: center; padding: 10px 60px; background: rgba(102, 102, 102, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: none; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo h1 { font-size: 24px; color: white; margin: 0; }
-.nav-links { display: flex; gap: 30px; }
-.nav-links a { color: white; font-weight: 500; cursor: pointer; }
-.auth-dropdown { position: relative; }
-.btn-get-started { display: flex; align-items: center; gap: 5px; }
-.dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 10px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 150px; }
-.dropdown-menu button { width: 100%; text-align: left; padding: 12px 20px; background: white; color: var(--dark); border-radius: 0; }
-.dropdown-menu button:hover { background: var(--light-gray); }
-.hamburger { display: none; background: none; border: none; color: white; cursor: pointer; }
 .hero { position: relative; color: white; padding: 120px 60px; text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
@@ -170,11 +131,6 @@ const scrollTo = (id) => {
 .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #374151; color: #9ca3af; }
 
 @media (max-width: 768px) {
-  .nav-header { padding: 15px 20px; }
-  .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-  .nav-links.active { display: flex; }
-  .hamburger { display: block; }
-  .auth-dropdown { display: none; }
   .hero-content h1 { font-size: 32px; }
   .features { grid-template-columns: 1fr; }
   .stats { flex-direction: column; gap: 30px; }
