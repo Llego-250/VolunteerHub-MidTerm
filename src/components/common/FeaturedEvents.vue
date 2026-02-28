@@ -25,13 +25,21 @@
 </template>
 
 <script setup>
-import { useEventsStore } from '../../stores/events'
+defineProps(['events'])
 
-const props = defineProps(['events'])
-const eventsStore = useEventsStore()
+const categoryIcons = {
+  'Environment': 'fas fa-leaf',
+  'Education': 'fas fa-book',
+  'Healthcare': 'fas fa-heartbeat',
+  'Community': 'fas fa-heart',
+  'Animals': 'fas fa-paw',
+  'Disaster Relief': 'fas fa-hands-helping',
+  'Elderly Care': 'fas fa-user-friends',
+  'Youth Programs': 'fas fa-child'
+}
 
 const getIcon = (category) => {
-  return eventsStore.categoryIcons[category] || 'fas fa-calendar'
+  return categoryIcons[category] || 'fas fa-calendar'
 }
 </script>
 
