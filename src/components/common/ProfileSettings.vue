@@ -2,7 +2,7 @@
   <div class="profile-settings">
     <div class="profile-container">
       <div class="profile-card">
-        <img src="https://via.placeholder.com/120" alt="Profile" />
+        <div class="avatar-large">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
         <h3>{{ authStore.currentUser?.name }}</h3>
         <p>{{ authStore.currentUser?.email }}</p>
         <span class="role-badge">{{ authStore.currentUser?.role }}</span>
@@ -62,7 +62,7 @@ const handleUpdate = () => {
 .profile-settings { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .profile-container { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
 .profile-card { text-align: center; padding: 20px; background: linear-gradient(135deg, var(--primary), #34d399); border-radius: 12px; color: white; }
-.profile-card img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; margin-bottom: 15px; }
+.avatar-large { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; margin: 0 auto 15px; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 600; }
 .profile-card h3 { margin: 10px 0; font-size: 20px; }
 .profile-card p { margin: 5px 0 15px; opacity: 0.9; font-size: 14px; }
 .role-badge { background: rgba(255,255,255,0.3); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: capitalize; }
