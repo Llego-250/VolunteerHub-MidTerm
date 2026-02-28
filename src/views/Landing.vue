@@ -27,17 +27,52 @@
     </section>
 
     <section id="about" class="about-section">
-      <h2>About VolunteerHub</h2>
-      <p>VolunteerHub is a comprehensive platform that bridges the gap between passionate volunteers and meaningful opportunities. We empower organizers to create impactful events while providing volunteers with easy access to causes they care about.</p>
-      <div class="stats">
-        <div class="stat"><h3>10,000+</h3><p>Active Volunteers</p></div>
-        <div class="stat"><h3>500+</h3><p>Events Organized</p></div>
-        <div class="stat"><h3>50+</h3><p>Partner Organizations</p></div>
-      </div>
-      <div class="features">
-        <div class="feature"><Search :size="40" color="#10b981" /><h4>Easy Discovery</h4><p>Find events by category, location, and date</p></div>
-        <div class="feature"><Calendar :size="40" color="#10b981" /><h4>Event Management</h4><p>Comprehensive tools for organizers</p></div>
-        <div class="feature"><Users :size="40" color="#10b981" /><h4>Community Building</h4><p>Connect with like-minded volunteers</p></div>
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="left-column">
+            <h2>About VolunteerHub</h2>
+            <p>VolunteerHub is a comprehensive platform that bridges the gap between passionate volunteers and meaningful opportunities. We empower organizers to create impactful events while providing volunteers with easy access to causes they care about.</p>
+            <div class="stats">
+              <div class="stat">
+                <h3>10,000+</h3>
+                <p>Active Volunteers</p>
+              </div>
+              <div class="stat">
+                <h3>500+</h3>
+                <p>Events Organized</p>
+              </div>
+              <div class="stat">
+                <h3>50+</h3>
+                <p>Partner Organizations</p>
+              </div>
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="features">
+              <div class="feature">
+                <Search :size="40" color="#10b981" />
+                <div>
+                  <h4>Easy Discovery</h4>
+                  <p>Find events by category, location, and date</p>
+                </div>
+              </div>
+              <div class="feature">
+                <Calendar :size="40" color="#10b981" />
+                <div>
+                  <h4>Event Management</h4>
+                  <p>Comprehensive tools for organizers</p>
+                </div>
+              </div>
+              <div class="feature">
+                <Users :size="40" color="#10b981" />
+                <div>
+                  <h4>Community Building</h4>
+                  <p>Connect with like-minded volunteers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -118,16 +153,20 @@ const scrollTo = (id) => {
 .featured-section { padding: 80px 60px; background: var(--light-gray); text-align: center; }
 .featured-section h2 { font-size: 36px; margin-bottom: 40px; }
 .cta-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
-.about-section { padding: 80px 60px; text-align: center; background: white; }
-.about-section h2 { font-size: 36px; margin-bottom: 20px; }
-.about-section > p { max-width: 800px; margin: 0 auto 60px; color: var(--gray); font-size: 16px; }
-.stats { display: flex; justify-content: center; gap: 80px; margin-bottom: 60px; }
-.stat h3 { font-size: 36px; color: var(--primary); margin-bottom: 10px; }
-.stat p { color: var(--gray); }
-.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
-.feature { text-align: left; }
-.feature h4 { margin: 15px 0 10px; font-size: 20px; }
-.feature p { color: var(--gray); }
+.about-section { padding: 80px 60px; background: white; }
+.container { max-width: 1400px; margin: 0 auto; }
+.content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.left-column { display: flex; flex-direction: column; gap: 30px; }
+.left-column h2 { font-size: 36px; margin: 0; text-align: left; }
+.left-column p { color: var(--gray); font-size: 16px; line-height: 1.8; text-align: left; max-width: none; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.stat h3 { font-size: 36px; color: var(--primary); margin-bottom: 5px; }
+.stat p { color: var(--gray); font-size: 14px; }
+.right-column { display: flex; flex-direction: column; justify-content: center; }
+.features { display: flex; flex-direction: column; gap: 30px; }
+.feature { display: flex; gap: 20px; align-items: flex-start; text-align: left; }
+.feature h4 { margin: 0 0 8px; font-size: 20px; }
+.feature p { color: var(--gray); margin: 0; font-size: 15px; line-height: 1.6; }
 .footer { background: #1f2937; color: white; padding: 60px 60px 20px; }
 .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
 .footer-col h3, .footer-col h4 { margin-bottom: 20px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
@@ -136,7 +175,7 @@ const scrollTo = (id) => {
 
 @media (max-width: 768px) {
   .hero-content h1 { font-size: 32px; }
-  .features { grid-template-columns: 1fr; }
-  .stats { flex-direction: column; gap: 30px; }
+  .content-wrapper { grid-template-columns: 1fr; gap: 40px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
