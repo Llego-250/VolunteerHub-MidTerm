@@ -12,7 +12,7 @@
       <div class="empty-icon"><i class="fas fa-calendar" style="font-size: 80px; color: #9ca3af;"></i></div>
       <h3>No Events Created</h3>
       <p>Start by creating your first event to connect with volunteers!</p>
-      <button @click="$router.push('/create-event')">Create Event</button>
+      <button @click="$emit('switchTab', 'create')">Create Event</button>
     </div>
     <div v-else class="events-list">
       <div v-for="event in myEvents" :key="event.id" class="event-item">
@@ -20,7 +20,7 @@
         <p>{{ event.date }} at {{ event.time }}</p>
         <p>Volunteers: {{ event.volunteers.length }}/{{ event.maxVolunteers }}</p>
         <div class="actions">
-          <button @click="$router.push('/manage-events')" class="btn-manage">Manage</button>
+          <button @click="$emit('switchTab', 'manage')" class="btn-manage">Manage</button>
           <button @click="deleteEvent(event.id)" class="btn-delete">Delete</button>
         </div>
       </div>
@@ -32,6 +32,8 @@
 import { computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useEventsStore } from '../../stores/events'
+
+defineEmits(['switchTab'])
 
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
