@@ -10,7 +10,6 @@
       <router-link to="/events">Events</router-link>
       <a v-if="!authStore.isAuthenticated" @click="scrollTo('about')">About</a>
       <router-link to="/contact">Contact</router-link>
-      <router-link v-if="authStore.isAuthenticated" to="/profile">Profile</router-link>
     </nav>
     <div v-if="!authStore.isAuthenticated" class="auth-dropdown">
       <button @click="dropdownOpen = !dropdownOpen" class="btn-get-started">Get Started <ChevronDown :size="16" /></button>
