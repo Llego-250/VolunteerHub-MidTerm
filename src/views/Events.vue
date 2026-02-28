@@ -143,7 +143,7 @@ const toggleRegistration = () => {
 
 <style scoped>
 .events { background: var(--light-gray); min-height: 100vh; }
-.hero-section { position: relative; color: white; padding: 150px 60px 100px; text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-section { position: relative; color: white; padding: 120px 60px 80px; text-align: center; min-height: 300px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
 .hero-content { position: relative; z-index: 2; }
