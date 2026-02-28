@@ -2,7 +2,7 @@
   <div class="landing">
     <header class="nav-header">
       <div class="logo">
-        <span class="logo-icon">🤝</span>
+        <HandHeart :size="32" color="#10b981" />
         <h1>VolunteerHub</h1>
       </div>
       <nav class="nav-links">
@@ -46,16 +46,16 @@
         <div class="stat"><h3>50+</h3><p>Partner Organizations</p></div>
       </div>
       <div class="features">
-        <div class="feature"><span>🔍</span><h4>Easy Discovery</h4><p>Find events by category, location, and date</p></div>
-        <div class="feature"><span>📅</span><h4>Event Management</h4><p>Comprehensive tools for organizers</p></div>
-        <div class="feature"><span>👥</span><h4>Community Building</h4><p>Connect with like-minded volunteers</p></div>
+        <div class="feature"><Search :size="40" color="#10b981" /><h4>Easy Discovery</h4><p>Find events by category, location, and date</p></div>
+        <div class="feature"><Calendar :size="40" color="#10b981" /><h4>Event Management</h4><p>Comprehensive tools for organizers</p></div>
+        <div class="feature"><Users :size="40" color="#10b981" /><h4>Community Building</h4><p>Connect with like-minded volunteers</p></div>
       </div>
     </section>
 
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-col">
-          <h3>❤️ VolunteerHub</h3>
+          <h3><Heart :size="20" /> VolunteerHub</h3>
           <p>Connecting volunteers with meaningful opportunities worldwide.</p>
         </div>
         <div class="footer-col">
@@ -86,6 +86,7 @@ import { ref } from 'vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
+import { HandHeart, Search, Calendar, Users, Heart } from 'lucide-vue-next'
 
 const showLogin = ref(false)
 const showSignup = ref(false)
@@ -95,7 +96,6 @@ const showSignup = ref(false)
 .landing { background: white; }
 .nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .logo { display: flex; align-items: center; gap: 10px; }
-.logo-icon { font-size: 32px; }
 .logo h1 { font-size: 24px; color: var(--primary); margin: 0; }
 .nav-links { display: flex; gap: 30px; }
 .nav-links a { color: var(--dark); font-weight: 500; }
@@ -120,12 +120,11 @@ const showSignup = ref(false)
 .stat p { color: var(--gray); }
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
 .feature { text-align: left; }
-.feature span { font-size: 40px; }
 .feature h4 { margin: 15px 0 10px; font-size: 20px; }
 .feature p { color: var(--gray); }
 .footer { background: #1f2937; color: white; padding: 60px 60px 20px; }
 .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
-.footer-col h3, .footer-col h4 { margin-bottom: 20px; color: var(--primary); }
+.footer-col h3, .footer-col h4 { margin-bottom: 20px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
 .footer-col a { display: block; color: #9ca3af; margin-bottom: 10px; }
 .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #374151; color: #9ca3af; }
 </style>
