@@ -30,6 +30,6 @@ const stats = computed(() => ({
 </script>
 
 <style scoped>
-.dashboard { padding: 20px; }
+.dashboard { padding: 20px; padding-top: 100px; }
 .sections { margin-top: 30px; }
 </style>
