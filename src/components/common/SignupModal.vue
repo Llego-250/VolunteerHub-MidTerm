@@ -77,16 +77,16 @@ const switchToLogin = () => {
 
 <style scoped>
 .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; overflow-y: auto; }
-.modal-content { background: white; padding: 40px; border-radius: 12px; width: 500px; max-width: 90%; margin: 20px; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.modal-header h2 { font-size: 28px; margin: 0; color: var(--dark); }
+.modal-content { background: white; padding: 30px; border-radius: 12px; width: 450px; max-width: 90%; margin: 20px; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.modal-header h2 { font-size: 24px; margin: 0; color: var(--dark); }
 .close-btn { background: none; border: none; color: var(--gray); cursor: pointer; padding: 0; }
 .close-btn:hover { color: var(--dark); }
-form { display: flex; flex-direction: column; gap: 18px; }
-.form-group { display: flex; flex-direction: column; gap: 8px; }
-.form-group label { font-weight: 500; color: var(--dark); font-size: 14px; }
-.form-group input, .form-group select { padding: 12px 15px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
-.btn-submit { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+form { display: flex; flex-direction: column; gap: 15px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-weight: 500; color: var(--dark); font-size: 13px; }
+.form-group input, .form-group select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+.btn-submit { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; }
 .btn-submit:hover { background: var(--primary-dark); }
 .error { color: #ef4444; margin: 0; font-size: 14px; }
 .footer-text { text-align: center; color: var(--gray); margin: 10px 0 0; font-size: 14px; }
