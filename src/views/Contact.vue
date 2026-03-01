@@ -42,7 +42,7 @@
       <div class="contact-info">
         <h2>Get in Touch</h2>
         <div class="info-item">
-          <span class="icon">📧</span>
+          <i class="fas fa-envelope icon"></i>
           <div>
             <h4>Email</h4>
             <p>support@volunteerhub.com</p>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="info-item">
-          <span class="icon">📞</span>
+          <i class="fas fa-phone icon"></i>
           <div>
             <h4>Phone</h4>
             <p>(+250) 796 606 714</p>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="info-item">
-          <span class="icon">📍</span>
+          <i class="fas fa-map-marker-alt icon"></i>
           <div>
             <h4>Address</h4>
             <p>Rwanda Kigali City</p>
@@ -68,10 +68,10 @@
         <div class="social">
           <h4>Follow Us</h4>
           <div class="social-icons">
-            <a href="#" aria-label="Facebook">📘</a>
-            <a href="#" aria-label="Twitter">🐦</a>
-            <a href="#" aria-label="Instagram">📷</a>
-            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
       </div>
@@ -153,13 +153,13 @@ textarea { min-height: 120px; resize: vertical; font-family: inherit; }
 .btn-submit { width: 100%; margin-top: 10px; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; }
 .btn-submit:hover { background: #059669; }
 .info-item { display: flex; gap: 20px; margin-bottom: 30px; }
-.info-item .icon { font-size: 40px; color: var(--primary); }
+.info-item .icon { font-size: 24px; color: var(--primary); width: 40px; display: flex; align-items: center; justify-content: center; }
 .info-item h4 { margin: 0 0 10px; font-size: 18px; }
 .info-item p { margin: 5px 0; color: var(--gray); }
 .social { margin-top: 40px; }
 .social h4 { margin-bottom: 15px; }
 .social-icons { display: flex; gap: 15px; }
-.social-icons a { font-size: 32px; text-decoration: none; transition: transform 0.2s; }
+.social-icons a { font-size: 24px; color: var(--primary); text-decoration: none; transition: transform 0.2s; }
 .social-icons a:hover { transform: scale(1.1); }
 .faq-section { max-width: 1200px; margin: 60px auto; padding: 60px; background: white; border-radius: 12px; }
 .faq-section h2 { text-align: center; font-size: 36px; margin-bottom: 40px; }
