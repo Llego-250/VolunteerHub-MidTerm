@@ -1,16 +1,19 @@
 <template>
   <div class="stats">
     <div class="stat-card">
+      <i class="fas fa-calendar-check"></i>
       <h3>{{ stats.registered }}</h3>
       <p>Registered Events</p>
     </div>
     <div class="stat-card">
-      <h3>{{ stats.hours }}</h3>
-      <p>Hours Volunteered</p>
+      <i class="fas fa-clock"></i>
+      <h3>{{ stats.upcoming }}</h3>
+      <p>Upcoming Events</p>
     </div>
     <div class="stat-card">
-      <h3>{{ stats.badges }}</h3>
-      <p>Badges Earned</p>
+      <i class="fas fa-check-circle"></i>
+      <h3>{{ stats.completed }}</h3>
+      <p>Completed Events</p>
     </div>
   </div>
 </template>
@@ -20,7 +23,9 @@ defineProps(['stats'])
 </script>
 
 <style scoped>
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
-.stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; }
-.stat-card h3 { font-size: 32px; margin: 0; color: #007bff; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+.stat-card { background: white; padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.stat-card i { font-size: 40px; color: var(--primary); margin-bottom: 15px; }
+.stat-card h3 { font-size: 36px; margin: 10px 0; color: var(--primary); }
+.stat-card p { color: var(--gray); margin: 0; }
 </style>
