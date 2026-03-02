@@ -30,7 +30,7 @@ defineEmits(['navigate'])
   position: fixed; 
   left: 0; 
   top: 150px; 
-  border-radius: 30px;
+  border-radius: 0 30px 30px 0;
   padding: 20px 0; 
   display: flex;
   flex-direction: column;
