@@ -26,10 +26,11 @@ defineEmits(['navigate'])
 .sidebar { 
   width: 70px; 
   background: linear-gradient(180deg, #d4f4dd 0%, #a8e6cf 50%, #56c596 100%); 
-  height: calc(100vh - 80px); 
+  height: calc(70vh - 50px); 
   position: fixed; 
   left: 0; 
-  top: 80px; 
+  top: 150px; 
+  border-radius: 30px;
   padding: 20px 0; 
   display: flex;
   flex-direction: column;
@@ -45,6 +46,7 @@ defineEmits(['navigate'])
 .sidebar button { 
   width: 50px;
   height: 50px;
+  top:20px;
   display: flex; 
   align-items: center; 
   justify-content: center;
