@@ -53,9 +53,9 @@ const unregister = (eventId) => {
 
 <style scoped>
 .my-events { margin-bottom: 40px; }
-.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.section-header h2 { margin: 0; font-size: 24px; }
-.section-header select { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.section-header h2 { margin: 0; font-size: 28px; color: #1f2937; font-weight: 700; }
+.section-header select { padding: 10px 16px; border: 1px solid #d1d5db; border-radius: 8px; background: white; font-size: 14px; cursor: pointer; }
 .empty { text-align: center; padding: 40px; color: var(--gray); }
 .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
 .event-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 15px; }
