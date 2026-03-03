@@ -6,14 +6,7 @@
       <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
 
       <main class="content">
-        <div v-if="activeTab === 'browse'" class="main-content">
-          <div class="page-header">
-            <h1>Volunteer Dashboard</h1>
-            <p>Manage your volunteer activities and discover new opportunities</p>
-          </div>
-          <DashboardStats :stats="stats" />
-          <MyEvents />
-        </div>
+        <BrowseEvents v-if="activeTab === 'browse'" />
         <div v-else-if="activeTab === 'registered'" class="main-content">
           <div class="page-header">
             <h1>My Registered Events</h1>
@@ -21,7 +14,6 @@
           </div>
           <MyEvents />
         </div>
-        <BrowseEvents v-else-if="activeTab === 'browse'" />
         <HoursBadgesTracker v-else-if="activeTab === 'hours'" />
         <NotificationsPanel v-else-if="activeTab === 'notifications'" />
         <ProfileSettings v-else-if="activeTab === 'profile'" />
