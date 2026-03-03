@@ -43,7 +43,7 @@ const filteredEvents = computed(() =>
   eventsStore.events.filter(e => {
     const matchesSearch = e.title.toLowerCase().includes(search.value.toLowerCase())
     const matchesCategory = !categoryFilter.value || e.category === categoryFilter.value
-    return matchesSearch && matchesCategory && !e.status
+    return matchesSearch && matchesCategory
   })
 )
 
