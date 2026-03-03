@@ -14,6 +14,13 @@
           <DashboardStats :stats="stats" />
           <MyEvents />
         </div>
+        <div v-else-if="activeTab === 'registered'" class="main-content">
+          <div class="page-header">
+            <h1>My Registered Events</h1>
+            <p>Events you've signed up for</p>
+          </div>
+          <MyEvents />
+        </div>
         <BrowseEvents v-else-if="activeTab === 'browse'" />
         <HoursBadgesTracker v-else-if="activeTab === 'hours'" />
         <NotificationsPanel v-else-if="activeTab === 'notifications'" />
