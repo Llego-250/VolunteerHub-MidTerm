@@ -28,7 +28,11 @@ const sidebarItems = computed(() => {
     return [
       { id: 'overview', icon: 'fas fa-calendar-check' },
       { id: 'create', icon: 'fas fa-plus-circle' },
+      { id: 'manage', icon: 'fas fa-tasks' },
       { id: 'message', icon: 'fas fa-envelope' },
+      { id: 'profile', icon: 'fas fa-user' },
+      { id: 'settings', icon: 'fas fa-cog' },
+      { id: 'notifications', icon: 'fas fa-bell' },
       { id: 'calendar', icon: 'fas fa-calendar' }
     ]
   }
@@ -54,6 +58,7 @@ const sidebarItems = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .sidebar nav { 
   display: flex; 
@@ -65,7 +70,6 @@ const sidebarItems = computed(() => {
 .sidebar button { 
   width: 50px;
   height: 50px;
-  top:20px;
   display: flex; 
   align-items: center; 
   justify-content: center;
