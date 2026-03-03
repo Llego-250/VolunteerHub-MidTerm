@@ -38,7 +38,8 @@ const sidebarItems = computed(() => {
     { id: 'browse', icon: 'fas fa-search' },
     { id: 'registered', icon: 'fas fa-calendar-check' },
     { id: 'profile', icon: 'fas fa-user' },
-    { id: 'notifications', icon: 'fas fa-bell' }
+    { id: 'notifications', icon: 'fas fa-bell' },
+    { id: 'calendar', icon: 'fas fa-calendar' }
   ]
 })
 </script>
