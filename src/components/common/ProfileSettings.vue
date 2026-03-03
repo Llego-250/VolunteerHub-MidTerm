@@ -98,9 +98,9 @@ const handleDeleteAccount = () => {
 </script>
 
 <style scoped>
-.profile-settings { display: flex; gap: 20px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-.profile-sidebar { width: 200px; display: flex; flex-direction: column; gap: 10px; }
-.profile-sidebar button { padding: 12px 20px; background: white; border: 1px solid var(--border); border-radius: 8px; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; }
+.profile-settings { display: flex; flex-direction: column; gap: 20px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.profile-sidebar { display: flex; flex-direction: row; gap: 10px; margin-bottom: 20px; }
+.profile-sidebar button { padding: 12px 20px; background: white; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; }
 .profile-sidebar button:hover { background: var(--light-gray); }
 .profile-sidebar button.active { background: var(--primary); color: white; border-color: var(--primary); }
 .profile-sidebar button i { width: 20px; }
