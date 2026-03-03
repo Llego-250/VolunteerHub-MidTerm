@@ -27,10 +27,10 @@ const sidebarItems = computed(() => {
   if (props.role === 'organizer') {
     return [
       { id: 'overview', icon: 'fas fa-calendar-check' },
+      { id: 'create', icon: 'fas fa-plus-circle' },
       { id: 'manage', icon: 'fas fa-tasks' },
       { id: 'message', icon: 'fas fa-envelope' },
       { id: 'profile', icon: 'fas fa-user' },
-      { id: 'settings', icon: 'fas fa-cog' },
       { id: 'notifications', icon: 'fas fa-bell' },
       { id: 'calendar', icon: 'fas fa-calendar' }
     ]
