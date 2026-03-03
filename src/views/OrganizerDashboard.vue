@@ -1,22 +1,7 @@
 <template>
   <div class="dashboard">
     <Navbar />
-    
-    <!-- Left Sidebar -->
-    <div class="sidebar">
-      <button @click="activeTab = 'overview'" :class="{ active: activeTab === 'overview' }" title="My Events">
-        <i class="fas fa-calendar-check"></i>
-      </button>
-      <button @click="activeTab = 'create'" :class="{ active: activeTab === 'create' }" title="Create Event">
-        <i class="fas fa-plus-circle"></i>
-      </button>
-      <button @click="activeTab = 'message'" :class="{ active: activeTab === 'message' }" title="Messages">
-        <i class="fas fa-envelope"></i>
-      </button>
-      <button @click="toggleCalendarSidebar" title="Calendar">
-        <i class="fas fa-calendar"></i>
-      </button>
-    </div>
+    <DashboardSidebar :items="sidebarItems" :activeTab="activeTab" @navigate="handleNavigate" />
 
     <!-- Calendar Sidebar -->
     <div class="calendar-sidebar" :class="{ open: calendarOpen }">
@@ -81,6 +66,7 @@ import { ref, computed } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useEventsStore } from '../stores/events'
 import Navbar from '../components/common/Navbar.vue'
+import DashboardSidebar from '../components/common/DashboardSidebar.vue'
 import MyEvents from '../components/organizer/MyEvents.vue'
 import CreateEventForm from '../components/organizer/CreateEventForm.vue'
 import ManageEventsPanel from '../components/organizer/ManageEventsPanel.vue'
@@ -94,6 +80,21 @@ const eventsStore = useEventsStore()
 const activeTab = ref('overview')
 const calendarOpen = ref(false)
 const currentDate = ref(new Date())
+
+const sidebarItems = [
+  { id: 'overview', icon: 'fas fa-calendar-check' },
+  { id: 'create', icon: 'fas fa-plus-circle' },
+  { id: 'message', icon: 'fas fa-envelope' },
+  { id: 'calendar', icon: 'fas fa-calendar' }
+]
+
+const handleNavigate = (id) => {
+  if (id === 'calendar') {
+    toggleCalendarSidebar()
+  } else {
+    activeTab.value = id
+  }
+}
 
 const stats = computed(() => {
   const myEvents = eventsStore.events.filter(e => e.organizerId === authStore.currentUser?.id)
@@ -148,11 +149,6 @@ const calendarDates = computed(() => {
 
 <style scoped>
 .dashboard { min-height: 100vh; background: var(--light-gray); padding-top: 80px; }
-
-.sidebar { position: fixed; left: 0; top: 80px; width: 70px; height: calc(100vh - 80px); background: white; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; padding: 20px 0; z-index: 100; }
-.sidebar button { width: 100%; padding: 15px; background: none; border: none; color: var(--gray); font-size: 20px; cursor: pointer; transition: all 0.3s; }
-.sidebar button:hover { background: var(--light-gray); color: var(--primary); }
-.sidebar button.active { color: var(--primary); border-left: 3px solid var(--primary); }
 
 .calendar-sidebar { position: fixed; left: 70px; top: 80px; width: 300px; height: calc(100vh - 80px); background: white; border-right: 1px solid var(--border); padding: 20px; transform: translateX(-100%); transition: transform 0.3s; z-index: 99; overflow-y: auto; }
 .calendar-sidebar.open { transform: translateX(0); }
