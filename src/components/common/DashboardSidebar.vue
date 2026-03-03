@@ -48,12 +48,13 @@ const sidebarItems = computed(() => {
 .sidebar { 
   width: 70px; 
   background: linear-gradient(180deg, #d4f4dd 0%, #a8e6cf 50%, #56c596 100%); 
-  height: calc(70vh - 50px); 
+  height: auto;
+  min-height: 400px;
   position: fixed; 
   left: 0; 
   top: 150px; 
   border-radius: 0 30px 30px 0;
-  padding: 20px 0; 
+  padding: 30px 0; 
   display: flex;
   flex-direction: column;
   align-items: center;
