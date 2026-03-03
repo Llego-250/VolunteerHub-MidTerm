@@ -1,39 +1,63 @@
 <template>
   <div class="profile-settings">
-    <div class="profile-container">
-      <div class="profile-card">
-        <div class="avatar-large">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
-        <h3>{{ authStore.currentUser?.name }}</h3>
-        <p>{{ authStore.currentUser?.email }}</p>
-        <span class="role-badge">{{ authStore.currentUser?.role }}</span>
+    <div class="profile-sidebar">
+      <button @click="activeSection = 'profile'" :class="{ active: activeSection === 'profile' }">
+        <i class="fas fa-user"></i> Profile
+      </button>
+      <button @click="activeSection = 'settings'" :class="{ active: activeSection === 'settings' }">
+        <i class="fas fa-cog"></i> Settings
+      </button>
+    </div>
+    <div class="profile-content">
+      <div v-if="activeSection === 'profile'" class="profile-container">
+        <div class="profile-card">
+          <div class="avatar-large">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
+          <h3>{{ authStore.currentUser?.name }}</h3>
+          <p>{{ authStore.currentUser?.email }}</p>
+          <span class="role-badge">{{ authStore.currentUser?.role }}</span>
+        </div>
+        <div class="profile-form">
+          <h2>Edit Profile</h2>
+          <form @submit.prevent="handleUpdate">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Name</label>
+                <input v-model="form.name" required />
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input v-model="form.phone" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input v-model="form.location" />
+            </div>
+            <div class="form-group">
+              <label>Website</label>
+              <input v-model="form.website" placeholder="https://" />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea v-model="form.description" placeholder="Describe yourself..."></textarea>
+            </div>
+            <button type="submit">Update Profile</button>
+          </form>
+        </div>
       </div>
-      <div class="profile-form">
-        <h2>Edit Profile</h2>
-        <form @submit.prevent="handleUpdate">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Name</label>
-              <input v-model="form.name" required />
-            </div>
-            <div class="form-group">
-              <label>Phone</label>
-              <input v-model="form.phone" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Location</label>
-            <input v-model="form.location" />
-          </div>
-          <div class="form-group">
-            <label>Website</label>
-            <input v-model="form.website" placeholder="https://" />
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea v-model="form.description" placeholder="Describe yourself..."></textarea>
-          </div>
-          <button type="submit">Update Profile</button>
-        </form>
+      <div v-else class="settings-section">
+        <h2>Settings</h2>
+        <div class="setting-group">
+          <h3>Notifications</h3>
+          <label><input type="checkbox" v-model="settings.emailNotifications" /> Email Notifications</label>
+          <label><input type="checkbox" v-model="settings.smsNotifications" /> SMS Notifications</label>
+        </div>
+        <div class="setting-group">
+          <h3>Privacy</h3>
+          <label><input type="checkbox" v-model="settings.profilePublic" /> Public Profile</label>
+        </div>
+        <button @click="handleSaveSettings">Save Settings</button>
+        <button @click="handleDeleteAccount" class="danger">Delete Account</button>
       </div>
     </div>
   </div>
@@ -42,9 +66,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../../stores/auth'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
+const router = useRouter()
+const activeSection = ref('profile')
 const form = ref({ name: '', email: '', phone: '', location: '', website: '', description: '' })
+const settings = ref({ emailNotifications: true, smsNotifications: false, profilePublic: true })
 
 onMounted(() => {
   if (authStore.currentUser) {
@@ -56,10 +84,27 @@ const handleUpdate = () => {
   authStore.updateProfile(form.value)
   alert('Profile updated!')
 }
+
+const handleSaveSettings = () => {
+  alert('Settings saved!')
+}
+
+const handleDeleteAccount = () => {
+  if (confirm('Are you sure you want to delete your account?')) {
+    authStore.logout()
+    router.push('/')
+  }
+}
 </script>
 
 <style scoped>
-.profile-settings { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.profile-settings { display: flex; gap: 20px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.profile-sidebar { width: 200px; display: flex; flex-direction: column; gap: 10px; }
+.profile-sidebar button { padding: 12px 20px; background: white; border: 1px solid var(--border); border-radius: 8px; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; }
+.profile-sidebar button:hover { background: var(--light-gray); }
+.profile-sidebar button.active { background: var(--primary); color: white; border-color: var(--primary); }
+.profile-sidebar button i { width: 20px; }
+.profile-content { flex: 1; }
 .profile-container { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
 .profile-card { text-align: center; padding: 20px; background: linear-gradient(135deg, var(--primary), #34d399); border-radius: 12px; color: white; }
 .avatar-large { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; margin: 0 auto 15px; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 600; }
@@ -71,4 +116,10 @@ const handleUpdate = () => {
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
 textarea { min-height: 80px; resize: vertical; }
+.settings-section h2 { margin-bottom: 20px; }
+.setting-group { margin: 25px 0; }
+.setting-group h3 { font-size: 18px; margin-bottom: 15px; }
+.settings-section label { display: block; margin: 10px 0; }
+.settings-section button { padding: 10px 20px; margin: 10px 10px 10px 0; }
+.danger { background: #dc3545; color: white; }
 </style>
