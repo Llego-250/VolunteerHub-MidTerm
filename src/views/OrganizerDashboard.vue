@@ -143,7 +143,7 @@ const calendarDates = computed(() => {
 <style scoped>
 .dashboard { min-height: 100vh; background: var(--light-gray); padding-top: 80px; }
 
-.calendar-sidebar { position: fixed; left: 1300px; top: 150px; width: 300px; height: calc(70vh - 50px); background: white; border: 1px solid var(--border); border-radius: 30px 0 0 30px; padding: 20px; transform: translateX(-370px); transition: transform 0.3s; z-index: 99; overflow-y: auto; }
+.calendar-sidebar { position: fixed; right: 0; top: 150px; width: 300px; height: calc(70vh - 50px); background: white; border: 1px solid var(--border); border-radius: 30px 0 0 30px; padding: 20px; transform: translateX(100%); transition: transform 0.3s; z-index: 99; overflow-y: auto; }
 .calendar-sidebar.open { transform: translateX(0); }
 .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .calendar-header h3 { margin: 0; }
@@ -156,8 +156,8 @@ const calendarDates = computed(() => {
 .calendar-day.other-month { color: var(--gray); opacity: 0.5; }
 .calendar-day.has-event { background: var(--primary); color: white; font-weight: bold; }
 
-.container { margin-left: 70px; max-width: 1400px; padding: 40px 60px; transition: margin-left 0.3s; }
-.container.calendar-open { margin-left: 370px; }
+.container { margin-left: 70px; max-width: 1400px; padding: 40px 60px; transition: margin-right 0.3s; }
+.container.calendar-open { margin-right: 300px; }
 
 .dashboard-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
 .dashboard-header h1 { font-size: 32px; margin-bottom: 5px; }
