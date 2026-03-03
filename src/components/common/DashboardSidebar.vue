@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <nav>
       <button 
-        v-for="item in items" 
+        v-for="item in sidebarItems" 
         :key="item.id"
         @click="$emit('navigate', item.id)" 
         :class="{ active: activeTab === item.id }"
@@ -15,11 +15,30 @@
 </template>
 
 <script setup>
-defineProps({
-  items: Array,
+import { computed } from 'vue'
+
+const props = defineProps({
+  role: String,
   activeTab: String
 })
 defineEmits(['navigate'])
+
+const sidebarItems = computed(() => {
+  if (props.role === 'organizer') {
+    return [
+      { id: 'overview', icon: 'fas fa-calendar-check' },
+      { id: 'create', icon: 'fas fa-plus-circle' },
+      { id: 'message', icon: 'fas fa-envelope' },
+      { id: 'calendar', icon: 'fas fa-calendar' }
+    ]
+  }
+  return [
+    { id: 'browse', icon: 'fas fa-search' },
+    { id: 'registered', icon: 'fas fa-calendar-check' },
+    { id: 'profile', icon: 'fas fa-user' },
+    { id: 'notifications', icon: 'fas fa-bell' }
+  ]
+})
 </script>
 
 <style scoped>
