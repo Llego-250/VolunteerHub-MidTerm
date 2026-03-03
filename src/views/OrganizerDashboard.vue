@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <Navbar />
-    <DashboardSidebar :items="sidebarItems" :activeTab="activeTab" @navigate="handleNavigate" />
+    <DashboardSidebar role="organizer" :activeTab="activeTab" @navigate="handleNavigate" />
 
     <!-- Calendar Sidebar -->
     <div class="calendar-sidebar" :class="{ open: calendarOpen }">
@@ -80,13 +80,6 @@ const eventsStore = useEventsStore()
 const activeTab = ref('overview')
 const calendarOpen = ref(false)
 const currentDate = ref(new Date())
-
-const sidebarItems = [
-  { id: 'overview', icon: 'fas fa-calendar-check' },
-  { id: 'create', icon: 'fas fa-plus-circle' },
-  { id: 'message', icon: 'fas fa-envelope' },
-  { id: 'calendar', icon: 'fas fa-calendar' }
-]
 
 const handleNavigate = (id) => {
   if (id === 'calendar') {
