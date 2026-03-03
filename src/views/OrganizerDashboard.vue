@@ -143,7 +143,7 @@ const calendarDates = computed(() => {
 <style scoped>
 .dashboard { min-height: 100vh; background: var(--light-gray); padding-top: 80px; }
 
-.calendar-sidebar { position: fixed; left: 70px; top: 80px; width: 300px; height: calc(100vh - 80px); background: white; border-right: 1px solid var(--border); padding: 20px; transform: translateX(-100%); transition: transform 0.3s; z-index: 99; overflow-y: auto; }
+.calendar-sidebar { position: fixed; left: 1300px; top: 150px; width: 300px; height: calc(70vh - 50px); background: white; border: 1px solid var(--border); border-radius: 30px 0 0 30px; padding: 20px; transform: translateX(-370px); transition: transform 0.3s; z-index: 99; overflow-y: auto; }
 .calendar-sidebar.open { transform: translateX(0); }
 .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .calendar-header h3 { margin: 0; }
