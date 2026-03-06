@@ -19,7 +19,7 @@
           <div class="radio-group">
             <label class="radio-label">
               <input type="radio" v-model="form.role" value="volunteer" required />
-              <span>Volunteer</span>
+              <span>Volunteers</span>
             </label>
             <label class="radio-label">
               <input type="radio" v-model="form.role" value="organizer" required />
