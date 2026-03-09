@@ -5,13 +5,7 @@
       <DashboardSidebar role="volunteer" :activeTab="activeTab" @navigate="handleNavigate" />
       <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
 
-      <div class="profile-upload" v-if="authStore.currentUser">
-        <img :src="authStore.currentUser.profilePic || 'https://via.placeholder.com/50'" alt="Profile" class="profile-pic" />
-        <input type="file" ref="fileInput" @change="handleProfileUpload" accept="image/*" style="display: none" />
-        <button @click="$refs.fileInput.click()" class="upload-btn">📷</button>
-      </div>
-
-      <main class="content">
+          <main class="content">
         <BrowseEvents v-if="activeTab === 'browse'" />
         <div v-else-if="activeTab === 'registered'" class="main-content">
           <div class="page-header">
