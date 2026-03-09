@@ -1,5 +1,9 @@
 <template>
   <aside class="sidebar">
+    <div class="profile-avatar" v-if="currentUser" 
+         :style="currentUser.profilePicture ? { backgroundImage: `url(${currentUser.profilePicture})` } : {}">
+      <span v-if="!currentUser.profilePicture">{{ currentUser.name?.charAt(0).toUpperCase() }}</span>
+    </div>
     <nav>
       <button 
         v-for="item in sidebarItems" 
@@ -16,6 +20,10 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useAuthStore } from '../../stores/auth'
+
+const authStore = useAuthStore()
+const currentUser = computed(() => authStore.currentUser)
 
 const props = defineProps({
   role: String,
@@ -54,11 +62,26 @@ const sidebarItems = computed(() => {
   left: 0; 
   top: 150px; 
   border-radius: 0 30px 30px 0;
-  padding: 30px 0; 
+  padding: 20px 0; 
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 15px;
+}
+.profile-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+  color: #1f2937;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid white;
 }
 .sidebar nav { 
   display: flex; 
