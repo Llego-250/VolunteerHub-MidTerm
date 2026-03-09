@@ -9,7 +9,9 @@
       <router-link to="/profile">Profile</router-link>
       <router-link to="/settings">Settings</router-link>
       <div class="user-menu">
-        <img src="https://via.placeholder.com/40" alt="User" class="avatar" />
+        <div class="avatar" :style="authStore.currentUser?.profilePicture ? `background-image: url(${authStore.currentUser.profilePicture})` : ''">
+          <span v-if="!authStore.currentUser?.profilePicture">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
+        </div>
         <span>{{ authStore.currentUser?.name }}</span>
         <button @click="handleLogout" class="btn-logout">Logout</button>
       </div>
@@ -44,6 +46,6 @@ nav { display: flex; gap: 25px; align-items: center; }
 a { color: white; font-weight: 500; padding: 8px 15px; border-radius: 6px; }
 a:hover, a.router-link-active { background: rgba(255,255,255,0.2); color: white; }
 .user-menu { display: flex; align-items: center; gap: 10px; margin-left: 20px; }
-.avatar { width: 40px; height: 40px; border-radius: 50%; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-weight: 600; color: white; background-size: cover; background-position: center; }
 .btn-logout { padding: 8px 16px; font-size: 14px; }
 </style>
