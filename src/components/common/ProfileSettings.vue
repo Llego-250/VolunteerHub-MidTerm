@@ -11,7 +11,11 @@
     <div class="profile-content">
       <div v-if="activeSection === 'profile'" class="profile-container">
         <div class="profile-card">
-          <div class="avatar-large">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
+          <div class="avatar-large" :style="authStore.currentUser?.profilePicture ? `background-image: url(${authStore.currentUser.profilePicture})` : ''">
+            <span v-if="!authStore.currentUser?.profilePicture">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
+          </div>
+          <input type="file" ref="fileInput" @change="handleFileUpload" accept="image/*" style="display: none" />
+          <button @click="$refs.fileInput.click()" class="upload-btn">Change Photo</button>
           <h3>{{ authStore.currentUser?.name }}</h3>
           <p>{{ authStore.currentUser?.email }}</p>
           <span class="role-badge">{{ authStore.currentUser?.role }}</span>
@@ -80,6 +84,17 @@ onMounted(() => {
   }
 })
 
+const handleFileUpload = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      authStore.updateProfile({ profilePicture: event.target.result })
+    }
+    reader.readAsDataURL(file)
+  }
+}
+
 const handleUpdate = () => {
   authStore.updateProfile(form.value)
   alert('Profile updated!')
@@ -107,7 +122,9 @@ const handleDeleteAccount = () => {
 .profile-content { flex: 1; }
 .profile-container { display: grid; grid-template-columns: 250px 1fr; gap: 30px; }
 .profile-card { text-align: center; padding: 20px; background: linear-gradient(135deg, var(--primary), #34d399); border-radius: 12px; color: white; }
-.avatar-large { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; margin: 0 auto 15px; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 600; }
+.avatar-large { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; margin: 0 auto 15px; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 600; background-size: cover; background-position: center; }
+.upload-btn { background: rgba(255,255,255,0.3); border: 1px solid white; color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-bottom: 10px; }
+.upload-btn:hover { background: rgba(255,255,255,0.5); }
 .profile-card h3 { margin: 10px 0; font-size: 20px; }
 .profile-card p { margin: 5px 0 15px; opacity: 0.9; font-size: 14px; }
 .role-badge { background: rgba(255,255,255,0.3); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: capitalize; }
