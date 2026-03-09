@@ -5,15 +5,8 @@
       <DashboardSidebar role="volunteer" :activeTab="activeTab" @navigate="handleNavigate" />
       <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
 
-      <main class="content">
-        <div v-if="activeTab === 'browse'" class="main-content">
-          <div class="page-header">
-            <h1>Volunteer Dashboard</h1>
-            <p>Manage your volunteer activities and discover new opportunities</p>
-          </div>
-          <DashboardStats :stats="stats" />
-          <MyEvents />
-        </div>
+          <main class="content">
+        <BrowseEvents v-if="activeTab === 'browse'" />
         <div v-else-if="activeTab === 'registered'" class="main-content">
           <div class="page-header">
             <h1>My Registered Events</h1>
@@ -21,7 +14,6 @@
           </div>
           <MyEvents />
         </div>
-        <BrowseEvents v-else-if="activeTab === 'browse'" />
         <HoursBadgesTracker v-else-if="activeTab === 'hours'" />
         <NotificationsPanel v-else-if="activeTab === 'notifications'" />
         <ProfileSettings v-else-if="activeTab === 'profile'" />
@@ -70,14 +62,29 @@ const handleNavigate = (id) => {
     activeTab.value = id
   }
 }
+
+const handleProfileUpload = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      authStore.updateProfile({ profilePic: event.target.result })
+    }
+    reader.readAsDataURL(file)
+  }
+}
 </script>
 
 <style scoped>
 .dashboard { min-height: 100vh; background: #f3f4f6; padding-top: 80px; }
-.layout { display: flex; }
+.layout { display: flex; position: relative; }
 .content { margin-left: 70px; padding: 0; flex: 1; transition: margin-right 0.3s; }
 .main-content { padding: 40px 60px; }
 .page-header { margin-bottom: 40px; text-align: center; }
 .page-header h1 { font-size: 42px; margin: 0 0 10px; color: #1f2937; font-weight: 700; }
 .page-header p { font-size: 18px; color: #6b7280; margin: 0; }
+.profile-upload { position: fixed; top: 100px; left: 90px; z-index: 100; }
+.profile-pic { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.upload-btn { position: absolute; bottom: -5px; right: -5px; width: 24px; height: 24px; border-radius: 50%; background: #3b82f6; color: white; border: 2px solid white; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+.upload-btn:hover { background: #2563eb; }
 </style>

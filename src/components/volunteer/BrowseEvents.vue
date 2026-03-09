@@ -58,7 +58,7 @@ const register = (eventId) => {
 </script>
 
 <style scoped>
-.browse-events { margin-bottom: 40px; }
+.browse-events { padding: 40px 60px; margin-bottom: 40px; }
 .section-header { margin-bottom: 20px; }
 .section-header h2 { margin: 0 0 15px; font-size: 24px; }
 .filters { display: flex; gap: 15px; }
