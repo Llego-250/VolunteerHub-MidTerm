@@ -11,8 +11,8 @@
     <div class="profile-content">
       <div v-if="activeSection === 'profile'" class="profile-container">
         <div class="profile-card">
-          <div class="avatar-large" :style="authStore.currentUser?.profilePicture ? `background-image: url(${authStore.currentUser.profilePicture})` : ''">
-            <span v-if="!authStore.currentUser?.profilePicture">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
+          <div class="avatar-large" :style="authStore.currentUser?.profilePic ? `background-image: url(${authStore.currentUser.profilePic})` : ''">
+            <span v-if="!authStore.currentUser?.profilePic">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
           </div>
           <input type="file" ref="fileInput" @change="handleFileUpload" accept="image/*" style="display: none" />
           <button @click="$refs.fileInput.click()" class="upload-btn">Change Photo</button>
@@ -109,7 +109,7 @@ const handleFileUpload = (e) => {
         canvas.width = width
         canvas.height = height
         canvas.getContext('2d').drawImage(img, 0, 0, width, height)
-        authStore.updateProfile({ profilePicture: canvas.toDataURL('image/jpeg', 0.7) })
+        authStore.updateProfile({ profilePic: canvas.toDataURL('image/jpeg', 0.7) })
       }
       img.src = event.target.result
     }
