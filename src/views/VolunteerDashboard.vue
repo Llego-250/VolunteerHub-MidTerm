@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <Navbar />
+    <DashboardNavbar />
     <div class="layout">
       <DashboardSidebar role="volunteer" :activeTab="activeTab" @navigate="handleNavigate" />
       <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
@@ -26,7 +26,7 @@
 import { ref, computed } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useEventsStore } from '../stores/events'
-import Navbar from '../components/common/Navbar.vue'
+import DashboardNavbar from '../components/common/DashboardNavbar.vue'
 import DashboardSidebar from '../components/common/DashboardSidebar.vue'
 import CalendarSidebar from '../components/common/CalendarSidebar.vue'
 import DashboardStats from '../components/volunteer/DashboardStats.vue'
