@@ -11,18 +11,16 @@
 
         <div class="nav-auth">
           <div class="user-dropdown">
-            <div class="user-avatar" @click="userDropdownOpen = !userDropdownOpen">
-              <div class="avatar-circle">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
-              <span>{{ authStore.currentUser?.name }}</span>
-              <i class="fas fa-chevron-down"></i>
+            <div class="avatar-circle" @click="userDropdownOpen = !userDropdownOpen">
+              <img v-if="authStore.currentUser?.profilePic" :src="authStore.currentUser.profilePic" alt="Profile" />
+              <span v-else>{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
             </div>
             <div v-if="userDropdownOpen" class="dropdown-menu">
-              <a href="#" @click.prevent="showProfile"><i class="fas fa-user"></i> Profile</a>
-              <a href="#" @click.prevent="showSettings"><i class="fas fa-cog"></i> Settings</a>
               <a href="#" @click.prevent="handleLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
           </div>
         </div>
+        <input type="file" ref="fileInput" @change="handleProfileUpload" accept="image/*" style="display: none" />
       </div>
     </nav>
   </header>
@@ -36,6 +34,23 @@ import { useRouter } from 'vue-router'
 const authStore = useAuthStore()
 const router = useRouter()
 const userDropdownOpen = ref(false)
+const fileInput = ref(null)
+
+const triggerUpload = () => {
+  userDropdownOpen.value = false
+  fileInput.value?.click()
+}
+
+const handleProfileUpload = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      authStore.updateProfile({ profilePic: event.target.result })
+    }
+    reader.readAsDataURL(file)
+  }
+}
 
 const handleLogout = () => {
   authStore.logout()
@@ -59,11 +74,9 @@ const showSettings = () => {
 .nav-logo a { display: flex; align-items: center; gap: 10px; color: white; text-decoration: none; font-size: 24px; font-weight: 600; }
 .nav-logo i { font-size: 28px; }
 .user-dropdown { position: relative; }
-.user-avatar { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 8px; transition: background 0.2s; }
-.user-avatar:hover { background: rgba(255, 255, 255, 0.1); }
-.avatar-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; }
-.user-avatar span { color: white; font-weight: 500; }
-.user-avatar i { color: white; font-size: 12px; }
+.avatar-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; overflow: hidden; cursor: pointer; transition: opacity 0.2s; }
+.avatar-circle:hover { opacity: 0.8; }
+.avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
 .dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 10px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 180px; overflow: hidden; }
 .dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: var(--dark); text-decoration: none; transition: background 0.2s; }
 .dropdown-menu a:hover { background: var(--light-gray); }
