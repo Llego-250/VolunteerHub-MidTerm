@@ -1,9 +1,5 @@
 <template>
   <aside class="sidebar">
-    <div class="profile-avatar" v-if="currentUser" 
-         :style="currentUser.profilePicture ? { backgroundImage: `url(${currentUser.profilePicture})` } : {}">
-      <span v-if="!currentUser.profilePicture">{{ currentUser.name?.charAt(0).toUpperCase() }}</span>
-    </div>
     <nav>
       <button 
         v-for="item in sidebarItems" 
