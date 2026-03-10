@@ -5,12 +5,6 @@
 
     <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
 
-    <div class="profile-upload" v-if="authStore.currentUser">
-      <img :src="authStore.currentUser.profilePic || 'https://via.placeholder.com/50'" alt="Profile" class="profile-pic" />
-      <input type="file" ref="fileInput" @change="handleProfileUpload" accept="image/*" style="display: none" />
-      <button @click="$refs.fileInput.click()" class="upload-btn">📷</button>
-    </div>
-
     <div class="container" :class="{ 'calendar-open': calendarOpen }">
       <div class="dashboard-header">
         <div>
@@ -91,17 +85,6 @@ const stats = computed(() => {
 const toggleCalendarSidebar = () => {
   calendarOpen.value = !calendarOpen.value
 }
-
-const handleProfileUpload = (e) => {
-  const file = e.target.files[0]
-  if (file) {
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      authStore.updateProfile({ profilePic: event.target.result })
-    }
-    reader.readAsDataURL(file)
-  }
-}
 </script>
 
 <style scoped>
@@ -124,9 +107,4 @@ const handleProfileUpload = (e) => {
 .profile-section { background: white; padding: 30px; border-radius: 12px; }
 .btn-back { padding: 10px 20px; background: white; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
 .btn-back:hover { background: var(--light-gray); }
-
-.profile-upload { position: fixed; top: 100px; left: 90px; z-index: 100; }
-.profile-pic { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.upload-btn { position: absolute; bottom: -5px; right: -5px; width: 24px; height: 24px; border-radius: 50%; background: #3b82f6; color: white; border: 2px solid white; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; }
-.upload-btn:hover { background: #2563eb; }
 </style>
