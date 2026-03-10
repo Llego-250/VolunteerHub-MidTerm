@@ -68,21 +68,6 @@ const sidebarItems = computed(() => {
   align-items: center;
   gap: 15px;
 }
-.profile-avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 18px;
-  color: #1f2937;
-  background-size: cover;
-  background-position: center;
-  border: 2px solid white;
-}
 .sidebar nav { 
   display: flex; 
   flex-direction: column; 
