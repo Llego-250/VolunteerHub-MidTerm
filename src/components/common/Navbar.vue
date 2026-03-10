@@ -18,10 +18,17 @@
         <button @click="$emit('showSignup'); dropdownOpen = false">Sign Up</button>
       </div>
     </div>
-    <div v-else class="user-menu">
-      <div class="avatar">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
-      <span>{{ authStore.currentUser?.name }}</span>
-      <button @click="handleLogout" class="btn-logout">Logout</button>
+    <div v-else class="user-dropdown">
+      <div class="user-avatar" @click="userDropdownOpen = !userDropdownOpen">
+        <div class="avatar-circle">{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</div>
+        <span>{{ authStore.currentUser?.name }}</span>
+        <ChevronDown :size="16" />
+      </div>
+      <div v-if="userDropdownOpen" class="dropdown-menu">
+        <a href="#" @click.prevent="showProfile"><i class="fas fa-user"></i> Profile</a>
+        <a href="#" @click.prevent="showSettings"><i class="fas fa-cog"></i> Settings</a>
+        <a href="#" @click.prevent="handleLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
     </div>
     <button class="hamburger" @click="mobileMenuOpen = !mobileMenuOpen">
       <Menu v-if="!mobileMenuOpen" :size="24" />
@@ -40,6 +47,7 @@ const authStore = useAuthStore()
 const router = useRouter()
 const dropdownOpen = ref(false)
 const mobileMenuOpen = ref(false)
+const userDropdownOpen = ref(false)
 
 defineEmits(['showLogin', 'showSignup'])
 
@@ -61,6 +69,17 @@ const handleLogout = () => {
   authStore.logout()
   router.push('/')
   mobileMenuOpen.value = false
+  userDropdownOpen.value = false
+}
+
+const showProfile = () => {
+  userDropdownOpen.value = false
+  // Navigate to profile or emit event
+}
+
+const showSettings = () => {
+  userDropdownOpen.value = false
+  // Navigate to settings or emit event
 }
 </script>
 
@@ -77,10 +96,15 @@ const handleLogout = () => {
 .dropdown-menu button { width: 100%; text-align: left; padding: 12px 20px; background: white; color: var(--dark); border-radius: 0; }
 .dropdown-menu button:hover { background: var(--light-gray); }
 .hamburger { display: none; background: none; border: none; color: white; cursor: pointer; }
-.user-menu { display: flex; align-items: center; gap: 10px; }
-.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; }
-.user-menu span { color: white; font-weight: 500; }
-.btn-logout { padding: 8px 16px; font-size: 14px; }
+.user-dropdown { position: relative; }
+.user-avatar { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px; border-radius: 8px; transition: background 0.2s; }
+.user-avatar:hover { background: rgba(255, 255, 255, 0.1); }
+.avatar-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; }
+.user-avatar span { color: white; font-weight: 500; }
+.user-dropdown .dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 10px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 180px; overflow: hidden; }
+.user-dropdown .dropdown-menu a { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: var(--dark); text-decoration: none; transition: background 0.2s; }
+.user-dropdown .dropdown-menu a:hover { background: var(--light-gray); }
+.user-dropdown .dropdown-menu i { width: 16px; }
 
 @media (max-width: 768px) {
   .nav-header { padding: 15px 20px; }
@@ -89,6 +113,6 @@ const handleLogout = () => {
   .nav-links a { padding: 12px; border-radius: 6px; }
   .hamburger { display: block; }
   .auth-dropdown { display: none; }
-  .user-menu { display: none; }
+  .user-dropdown { display: none; }
 }
 </style>
