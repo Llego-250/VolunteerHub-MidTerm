@@ -53,8 +53,8 @@ const getIcon = (category) => {
 }
 
 .event-card { 
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s;
@@ -64,9 +64,9 @@ const getIcon = (category) => {
 
 .event-card:hover { 
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-  border-color: rgba(16, 185, 129, 0.5);
-  background: rgba(16, 185, 129, 0.1);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
 }
 
 .event-header { 
@@ -75,7 +75,7 @@ const getIcon = (category) => {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3));
-  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+  border-bottom: 1px solid var(--border-primary);
   position: relative;
   overflow: hidden;
 }
@@ -92,7 +92,7 @@ const getIcon = (category) => {
 
 .event-icon { 
   font-size: 64px;
-  color: #10b981;
+  color: var(--accent-primary);
   filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
   position: relative;
   z-index: 1;
@@ -101,19 +101,19 @@ const getIcon = (category) => {
 .event-body { padding: 25px; }
 
 .category-badge { 
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  box-shadow: var(--shadow-glow);
 }
 
 .event-body h3 { 
   margin: 15px 0;
   font-size: 20px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .event-meta { 
@@ -121,7 +121,7 @@ const getIcon = (category) => {
   flex-direction: column;
   gap: 8px;
   margin: 15px 0;
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
@@ -133,11 +133,11 @@ const getIcon = (category) => {
 
 .event-meta i { 
   font-size: 14px;
-  color: #10b981;
+  color: var(--accent-primary);
 }
 
 .event-body p { 
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.6;
   margin: 15px 0;
@@ -149,18 +149,18 @@ const getIcon = (category) => {
   align-items: center;
   margin-top: 20px;
   padding-top: 15px;
-  border-top: 1px solid rgba(16, 185, 129, 0.2);
+  border-top: 1px solid var(--border-primary);
   font-size: 14px;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 .status-badge { 
-  background: rgba(16, 185, 129, 0.2);
-  color: #10b981;
+  background: var(--bg-card);
+  color: var(--accent-primary);
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 12px;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid var(--border-primary);
 }
 
 @media (max-width: 1024px) {
