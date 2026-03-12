@@ -260,7 +260,7 @@ const scrollTo = (id) => {
 <style scoped>
 /* Reset and Base */
 .landing {
-  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  background: var(--bg-primary);
   margin: 0;
   padding: 0;
   font-family: system-ui, -apple-system, sans-serif;
@@ -270,7 +270,7 @@ const scrollTo = (id) => {
 /* Hero Section */
 .hero {
   position: relative;
-  color: white;
+  color: var(--text-primary);
   padding: 180px 60px 120px;
   text-align: center;
   min-height: 700px;
@@ -278,7 +278,7 @@ const scrollTo = (id) => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(16, 185, 129, 0.2) 100%);
+  background: var(--overlay-gradient);
 }
 
 .hero-video {
@@ -403,14 +403,14 @@ const scrollTo = (id) => {
 /* Partners Section */
 .partners-section {
   padding: 40px 60px;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--bg-secondary);
   text-align: center;
   position: relative;
   z-index: 2;
 }
 
 .partners-title {
-  color: #9ca3af;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 14px;
@@ -425,7 +425,7 @@ const scrollTo = (id) => {
 }
 
 .partner-logo {
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-weight: 600;
   font-size: 18px;
   opacity: 0.8;
@@ -433,14 +433,14 @@ const scrollTo = (id) => {
 }
 
 .partner-logo:hover {
-  color: #10b981;
+  color: var(--accent-primary);
   opacity: 1;
 }
 
 /* Features Section */
 .features-section {
   padding: 100px 60px;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 2;
@@ -455,13 +455,13 @@ const scrollTo = (id) => {
   font-size: 42px;
   text-align: center;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: var(--text-primary);
   text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
 
 .section-subtitle {
   text-align: center;
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-size: 18px;
   max-width: 600px;
   margin: 0 auto 60px;
@@ -476,8 +476,8 @@ const scrollTo = (id) => {
 
 .feature-card {
   padding: 40px 30px;
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
   border-radius: 24px;
   text-align: left;
   transition: all 0.3s;
@@ -486,32 +486,32 @@ const scrollTo = (id) => {
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
-  border-color: rgba(16, 185, 129, 0.5);
-  background: rgba(16, 185, 129, 0.1);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
 }
 
 .feature-icon {
   width: 64px;
   height: 64px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  box-shadow: var(--shadow-glow);
 }
 
 .feature-card h3 {
   font-size: 24px;
   margin-bottom: 16px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .feature-card p {
-  color: #d1d5db;
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
