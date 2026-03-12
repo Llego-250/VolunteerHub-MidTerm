@@ -12,7 +12,7 @@
           <div class="primary-content">
             <!-- Featured Event Spotlight -->
             <div class="featured-spotlight" v-if="featuredEvent">
-              <div class="spotlight-banner" :style="{ background: `linear-gradient(135deg, ${featuredEvent.color1 || '#10b981'}, ${featuredEvent.color2 || '#059669'})` }">
+              <div class="spotlight-banner" :style="{ background: getCategoryGradient(featuredEvent.category) }">
                 <div class="spotlight-content">
                   <span class="spotlight-badge">✨ Featured Event</span>
                   <h2>{{ featuredEvent.title }}</h2>
@@ -186,7 +186,7 @@ const userGroups = ref([
     events: 12,
     category: 'Environment',
     description: 'Join us in making the planet greener, one tree at a time',
-    color: '#10b981' 
+    color: categoryColors['Environment'].primary
   },
   { 
     id: 2, 
@@ -197,7 +197,7 @@ const userGroups = ref([
     events: 24,
     category: 'Community',
     description: 'Building stronger communities through volunteer work',
-    color: '#3b82f6' 
+    color: categoryColors['Community'].primary
   },
   { 
     id: 3, 
@@ -208,7 +208,7 @@ const userGroups = ref([
     events: 8,
     category: 'Education',
     description: 'Empowering minds through education and mentorship',
-    color: '#f59e0b' 
+    color: categoryColors['Education'].primary
   },
   { 
     id: 4, 
@@ -219,7 +219,7 @@ const userGroups = ref([
     events: 16,
     category: 'Healthcare',
     description: 'Supporting health and wellness in our communities',
-    color: '#ef4444' 
+    color: categoryColors['Healthcare'].primary
   }
 ])
 
