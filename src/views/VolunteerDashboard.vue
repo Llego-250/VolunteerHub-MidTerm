@@ -92,14 +92,6 @@
                 />
               </div>
             </div>
-
-            <!-- Premium Feature Promotion -->
-            <div class="premium-promo">
-              <div class="promo-icon">⭐</div>
-              <h4>Find your people with Volunteer+</h4>
-              <p>Get personalized recommendations and exclusive access to premium events</p>
-              <button class="btn-premium">Learn More</button>
-            </div>
           </aside>
         </div>
       </main>
