@@ -29,18 +29,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Trust Signals - Partner Logos -->
-    <div class="partners-section">
-      <p class="partners-title">Trusted by leading organizations</p>
-      <div class="partner-logos">
-        <div class="partner-logo">Red Cross</div>
-        <div class="partner-logo">UNICEF</div>
-        <div class="partner-logo">Habitat for Humanity</div>
-        <div class="partner-logo">Feeding America</div>
-      </div>
-    </div>
-
     <!-- Features Section - What users gain -->
     <section id="features" class="features-section">
       <div class="container">
@@ -70,16 +58,6 @@
             </div>
             <h3>Build Your Community</h3>
             <p>Connect with passionate volunteers, share experiences, and build lasting relationships while making a difference.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
-                <path d="M12 2v20M17 5H9.5M17 12h-5M17 19h-5"/>
-              </svg>
-            </div>
-            <h3>Track Your Impact</h3>
-            <p>See the difference you're making with hours logged, events attended, and the communities you've helped.</p>
           </div>
         </div>
       </div>
