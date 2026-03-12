@@ -3,9 +3,9 @@
     <!-- Header Section -->
     <div class="card-header">
       <div class="event-visual">
-        <span class="event-emoji">{{ emoji }}</span>
+        <component :is="iconComponent" :size="48" :stroke-width="1.5" class="event-icon" />
       </div>
-      <span class="event-price" :class="{ free: isFree }">{{ price || 'FREE' }}</span>
+      <span v-if="price && !isFree" class="event-price">{{ price }}</span>
     </div>
 
     <!-- Middle Section -->
@@ -16,15 +16,15 @@
       
       <div class="event-metadata">
         <span class="meta-item">
-          <i class="fas fa-calendar"></i>
+          <Calendar :size="16" :stroke-width="2" />
           {{ formattedDate }}
         </span>
         <span class="meta-item">
-          <i class="fas fa-map-marker-alt"></i>
+          <MapPin :size="16" :stroke-width="2" />
           {{ location }}
         </span>
         <span class="meta-item" v-if="showAttendees">
-          <i class="fas fa-users"></i>
+          <Users :size="16" :stroke-width="2" />
           {{ attendeeCount }}/{{ maxAttendees }}
         </span>
       </div>
@@ -45,9 +45,22 @@
 
 <script setup>
 import { computed } from 'vue'
+import { 
+  Calendar, 
+  MapPin, 
+  Users,
+  Leaf,
+  BookOpen,
+  Heart,
+  Home,
+  Paw,
+  AlertCircle,
+  UserCheck,
+  Baby
+} from 'lucide-vue-next'
 
 const props = defineProps({
-  emoji: { type: String, default: '📅' },
+  icon: { type: String, default: 'Calendar' },
   price: { type: String, default: '' },
   category: { type: String, required: true },
   categoryColor: { type: String, default: '#e0f2fe' },
@@ -65,6 +78,20 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['action'])
+
+const iconMap = {
+  'Leaf': Leaf,
+  'BookOpen': BookOpen,
+  'Heart': Heart,
+  'Home': Home,
+  'Paw': Paw,
+  'AlertCircle': AlertCircle,
+  'UserCheck': UserCheck,
+  'Baby': Baby,
+  'Calendar': Calendar
+}
+
+const iconComponent = computed(() => iconMap[props.icon] || Calendar)
 
 const isFree = computed(() => !props.price || props.price.toUpperCase() === 'FREE')
 
@@ -125,12 +152,18 @@ const handleAction = () => {
 
 .event-visual {
   flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
-.event-emoji {
-  font-size: 48px;
-  line-height: 1;
-  display: block;
+.event-icon {
+  color: white;
 }
 
 .event-price {
