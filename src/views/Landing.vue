@@ -534,7 +534,7 @@ const scrollTo = (id) => {
 /* Testimonials Section */
 .testimonials-section {
   padding: 100px 60px;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 2;
@@ -548,24 +548,24 @@ const scrollTo = (id) => {
 }
 
 .testimonial-card {
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
   backdrop-filter: blur(10px);
   transition: all 0.3s;
 }
 
 .testimonial-card:hover {
-  border-color: rgba(16, 185, 129, 0.5);
-  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg);
 }
 
 .testimonial-content {
   font-size: 16px;
   line-height: 1.7;
-  color: #d1d5db;
+  color: var(--text-secondary);
   margin-bottom: 20px;
   font-style: italic;
 }
@@ -579,24 +579,24 @@ const scrollTo = (id) => {
 .author-avatar {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   color: white;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  box-shadow: var(--shadow-glow);
 }
 
 .author-info h4 {
   margin: 0 0 5px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .author-info p {
   margin: 0;
-  color: #9ca3af;
+  color: var(--text-muted);
   font-size: 14px;
 }
 
@@ -679,8 +679,8 @@ const scrollTo = (id) => {
   justify-content: center;
   gap: 40px;
   padding: 30px 60px;
-  background: rgba(0, 0, 0, 0.7);
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
   position: relative;
   z-index: 2;
 }
@@ -689,18 +689,18 @@ const scrollTo = (id) => {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 /* Footer */
 .footer {
-  background: #000000;
-  color: white;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   padding: 60px 60px 20px;
   position: relative;
   z-index: 2;
-  border-top: 1px solid rgba(16, 185, 129, 0.2);
+  border-top: 1px solid var(--border-primary);
 }
 
 .footer-content {
@@ -722,48 +722,49 @@ const scrollTo = (id) => {
 }
 
 .footer-col .logo span {
-  color: white;
+  color: var(--text-primary);
   font-size: 1.3rem;
 }
 
 .footer-col p {
-  color: #9ca3af;
+  color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
 .footer-col h4 {
-  color: white;
+  color: var(--text-primary);
   margin-bottom: 20px;
   font-size: 18px;
 }
 
 .footer-col a {
   display: block;
-  color: #9ca3af;
+  color: var(--text-muted);
   margin-bottom: 12px;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-col a:hover {
-  color: #10b981;
+  color: var(--accent-primary);
 }
 
 .footer-link-btn {
   background: transparent;
   border: none;
-  color: #9ca3af;
+  color: var(--text-muted);
   display: block;
   margin-bottom: 12px;
   cursor: pointer;
   padding: 0;
   font-size: 16px;
   transition: color 0.3s;
+  text-align: left;
 }
 
 .footer-link-btn:hover {
-  color: #10b981;
+  color: var(--accent-primary);
 }
 
 .social-links {
@@ -775,25 +776,28 @@ const scrollTo = (id) => {
 .social-link {
   width: 40px;
   height: 40px;
-  background: #374151;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white !important;
+  color: var(--text-primary) !important;
   font-size: 18px;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .social-link:hover {
-  background: #10b981;
+  background: var(--accent-primary);
+  color: white !important;
+  border-color: var(--accent-primary);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 30px;
-  border-top: 1px solid #374151;
-  color: #9ca3af;
+  border-top: 1px solid var(--border-primary);
+  color: var(--text-muted);
   max-width: 1400px;
   margin: 0 auto;
 }
