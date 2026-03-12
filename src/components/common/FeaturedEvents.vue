@@ -2,8 +2,8 @@
   <section class="featured">
     <div class="events-grid">
       <div v-for="event in events" :key="event.id" class="event-card">
-        <div class="event-header" :style="{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))' }">
-          <i :class="getIcon(event.category)" style="font-size: 64px; color: white;"></i>
+        <div class="event-header">
+          <i :class="getIcon(event.category)" class="event-icon"></i>
         </div>
         <div class="event-body">
           <span class="category-badge">{{ event.category }}</span>
@@ -44,17 +44,134 @@ const getIcon = (category) => {
 </script>
 
 <style scoped>
-.events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
-.event-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s; }
-.event-card:hover { transform: translateY(-5px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
-.event-header { height: 200px; display: flex; align-items: center; justify-content: center; }
+.events-grid { 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.event-card { 
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.event-card:hover { 
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.event-header { 
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3));
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent);
+}
+
+.event-icon { 
+  font-size: 64px;
+  color: #10b981;
+  filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+  position: relative;
+  z-index: 1;
+}
+
 .event-body { padding: 25px; }
-.category-badge { background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-.event-body h3 { margin: 15px 0; font-size: 20px; }
-.event-meta { display: flex; flex-direction: column; gap: 8px; margin: 15px 0; color: var(--gray); font-size: 14px; }
-.event-meta span { display: flex; align-items: center; gap: 6px; }
-.event-meta i { font-size: 14px; }
-.event-body p { color: var(--gray); font-size: 14px; line-height: 1.6; margin: 15px 0; }
-.event-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 14px; color: var(--gray); }
-.status-badge { background: var(--light-gray); padding: 5px 10px; border-radius: 5px; font-size: 12px; }
+
+.category-badge { 
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.event-body h3 { 
+  margin: 15px 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.event-meta { 
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 15px 0;
+  color: #d1d5db;
+  font-size: 14px;
+}
+
+.event-meta span { 
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.event-meta i { 
+  font-size: 14px;
+  color: #10b981;
+}
+
+.event-body p { 
+  color: #d1d5db;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.event-footer { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.status-badge { 
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
