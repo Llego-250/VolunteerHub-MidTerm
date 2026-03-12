@@ -23,11 +23,11 @@
               :member-count="group.members"
               :event-count="group.events"
               :category="group.category"
-              :button-text="isJoined(group.id) ? 'Joined' : 'Join Group'"
+              :button-text="isJoined(group.id) ? 'Leave Group' : 'Join Group'"
               :button-variant="isJoined(group.id) ? 'secondary' : 'primary'"
-              :is-disabled="isJoined(group.id)"
+              :is-disabled="false"
               :animation-delay="`${index * 0.05}s`"
-              @action="joinGroup(group.id)"
+              @action="toggleGroup(group.id)"
             />
           </div>
         </div>
@@ -130,8 +130,12 @@ const isJoined = (groupId) => {
   return joinedGroups.value.includes(groupId)
 }
 
-const joinGroup = (groupId) => {
-  if (!isJoined(groupId)) {
+const toggleGroup = (groupId) => {
+  if (isJoined(groupId)) {
+    // Leave group
+    joinedGroups.value = joinedGroups.value.filter(id => id !== groupId)
+  } else {
+    // Join group
     joinedGroups.value.push(groupId)
   }
 }
