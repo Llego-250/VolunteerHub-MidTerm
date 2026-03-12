@@ -4,10 +4,10 @@
       <div class="nav-content">
         <div class="nav-logo">VolunteerHub</div>
         
-        <!-- Not authenticated - show login/signup -->
-        <div v-if="!authStore.isAuthenticated" class="nav-actions">
-          <button @click="$emit('showLogin')" class="nav-link">Log in</button>
-          <button @click="$emit('showSignup')" class="nav-link nav-link-signup">Sign up</button>
+        <div class="nav-actions">
+          <ThemeToggle />
+          <button v-if="!authStore.isAuthenticated" @click="$emit('showLogin')" class="nav-link">Log in</button>
+          <button v-if="!authStore.isAuthenticated" @click="$emit('showSignup')" class="nav-link nav-link-signup">Sign up</button>
         </div>
         
         <!-- Authenticated - show user info -->
@@ -47,6 +47,7 @@
 import { ref, computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
+import ThemeToggle from './ThemeToggle.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
