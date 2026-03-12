@@ -33,7 +33,7 @@
         <div v-if="filteredEvents.length === 0" class="error">No events found</div>
         <div v-else class="events-grid">
           <div v-for="event in filteredEvents" :key="event.id" class="event-card" @click="openEventModal(event)">
-            <div class="event-header" :style="{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))' }">
+            <div class="event-header">
               <i :class="event.icon || 'fas fa-calendar'" class="event-icon"></i>
             </div>
             <div class="event-body">
@@ -298,8 +298,34 @@ const toggleRegistration = () => {
   border-color: rgba(16, 185, 129, 0.5);
   background: rgba(16, 185, 129, 0.1);
 }
-.event-header { height: 180px; display: flex; align-items: center; justify-content: center; }
-.event-icon { font-size: 70px; color: white; }
+.event-header { 
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3));
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent);
+}
+
+.event-icon { 
+  font-size: 70px;
+  color: #10b981;
+  filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+  position: relative;
+  z-index: 1;
+}
 .event-body { padding: 20px; }
 .category-badge { 
   background: linear-gradient(135deg, #10b981, #059669);
@@ -410,8 +436,40 @@ const toggleRegistration = () => {
   color: #ffffff;
   margin-right: 8px;
 }
-.btn-register, .btn-unregister { width: 100%; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 8px; }
-.btn-register { background: var(--primary); color: white; }
-.btn-unregister { background: #dc3545; color: white; }
-.btn-register:disabled { background: var(--gray); cursor: not-allowed; }
+.btn-register, .btn-unregister { 
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-register { 
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+.btn-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+.btn-unregister { 
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+.btn-unregister:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+.btn-register:disabled { 
+  background: #4b5563;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn-register:disabled:hover {
+  transform: none;
+}
 </style>
