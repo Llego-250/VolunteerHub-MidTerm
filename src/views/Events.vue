@@ -153,14 +153,14 @@ const toggleRegistration = () => {
 
 <style scoped>
 .events { 
-  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  background: var(--bg-primary);
   min-height: 100vh;
   position: relative;
 }
 
 .hero-section { 
   position: relative;
-  color: white;
+  color: var(--text-primary);
   padding: 120px 60px 60px;
   text-align: center;
   min-height: 300px;
@@ -168,7 +168,7 @@ const toggleRegistration = () => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(16, 185, 129, 0.2) 100%);
+  background: var(--overlay-gradient);
 }
 
 .hero-video { 
@@ -241,46 +241,47 @@ const toggleRegistration = () => {
 }
 
 .browse-section { 
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-primary);
 }
 
 .browse-section h2 { 
   font-size: 28px;
   margin-bottom: 25px;
-  color: #ffffff;
+  color: var(--text-primary);
   text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
+
 .filters { display: flex; gap: 20px; margin-bottom: 30px; }
 .filters select, .filters input { 
   flex: 1;
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #ffffff;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
   padding: 12px 16px;
   border-radius: 8px;
   font-size: 14px;
 }
 .filters select:focus, .filters input:focus {
   outline: none;
-  border-color: rgba(16, 185, 129, 0.6);
-  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
 }
 .filters input::placeholder {
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 .filters select option {
-  background: #1a1a1a;
-  color: #ffffff;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 .error { 
   text-align: center;
   padding: 40px;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
 .event-card { 
