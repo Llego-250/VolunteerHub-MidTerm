@@ -6,13 +6,6 @@
       <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
 
       <main class="content" v-if="activeTab === 'browse'">
-        <!-- Header Section -->
-        <div class="dashboard-header">
-          <div class="header-content">
-            <h1>For you</h1>
-          </div>
-        </div>
-
         <!-- Main Content Container -->
         <div class="main-container">
           <!-- Primary Content Area -->
@@ -259,23 +252,6 @@ const handleSearch = (query) => {
   margin-left: 70px; 
   flex: 1; 
   transition: margin-right 0.3s; 
-}
-
-/* Dashboard Header */
-.dashboard-header {
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 30px 60px;
-  position: sticky;
-  top: 80px;
-  z-index: 10;
-}
-
-.header-content h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0;
 }
 
 /* Main Container */
