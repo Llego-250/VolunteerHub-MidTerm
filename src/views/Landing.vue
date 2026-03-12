@@ -1,5 +1,8 @@
 <template>
   <div class="landing">
+    <!-- 3D Scroll Effect -->
+    <ScrollHeart3D />
+    
     <!-- Navigation with clear branding -->
     <MinimalNavbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
 
@@ -245,6 +248,7 @@ import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
 import MinimalNavbar from '../components/common/MinimalNavbar.vue'
+import ScrollHeart3D from '../components/common/ScrollHeart3D.vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
