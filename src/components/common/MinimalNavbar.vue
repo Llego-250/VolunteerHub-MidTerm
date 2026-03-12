@@ -12,32 +12,29 @@
         
         <!-- Authenticated - show user info -->
         <div v-else class="nav-actions">
-          <div class="user-info">
-            <span class="user-name">{{ authStore.currentUser?.name }}</span>
-            <div class="user-dropdown">
-              <div class="avatar-circle" @click="userDropdownOpen = !userDropdownOpen">
-                <img v-if="authStore.currentUser?.profilePic" :src="authStore.currentUser.profilePic" alt="Profile" />
-                <span v-else>{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
-              </div>
-              <div v-if="userDropdownOpen" class="dropdown-menu">
-                <button @click="goToDashboard" class="dropdown-item">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="7" height="7"/>
-                    <rect x="14" y="3" width="7" height="7"/>
-                    <rect x="14" y="14" width="7" height="7"/>
-                    <rect x="3" y="14" width="7" height="7"/>
-                  </svg>
-                  Dashboard
-                </button>
-                <button @click="handleLogout" class="dropdown-item">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                    <polyline points="16 17 21 12 16 7"/>
-                    <line x1="21" y1="12" x2="9" y2="12"/>
-                  </svg>
-                  Logout
-                </button>
-              </div>
+          <div class="user-dropdown">
+            <div class="avatar-circle" @click="userDropdownOpen = !userDropdownOpen">
+              <img v-if="authStore.currentUser?.profilePic" :src="authStore.currentUser.profilePic" alt="Profile" />
+              <span v-else>{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
+            </div>
+            <div v-if="userDropdownOpen" class="dropdown-menu">
+              <button @click="goToDashboard" class="dropdown-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                Dashboard
+              </button>
+              <button @click="handleLogout" class="dropdown-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16 17 21 12 16 7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                Logout
+              </button>
             </div>
           </div>
         </div>
