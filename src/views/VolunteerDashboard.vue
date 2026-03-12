@@ -39,6 +39,7 @@
                   v-for="(event, index) in filteredEvents" 
                   :key="event.id"
                   :icon="getIcon(event.category)"
+                  :icon-gradient="getCategoryGradient(event.category)"
                   :price="event.price"
                   :category="event.category"
                   :category-color="getCategoryColor(event.category)"
@@ -123,6 +124,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { useEventsStore } from '../stores/events'
 import DashboardNavbar from '../components/common/DashboardNavbar.vue'
@@ -148,6 +150,7 @@ import {
 
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
+const router = useRouter()
 const activeTab = ref('browse')
 const calendarOpen = ref(false)
 const searchQuery = ref('')
@@ -348,8 +351,7 @@ const register = (eventId) => {
 }
 
 const loadMoreEvents = () => {
-  // Implement load more functionality
-  console.log('Loading more events...')
+  router.push('/events')
 }
 
 const handleNavigate = (id) => {
