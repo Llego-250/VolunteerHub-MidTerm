@@ -76,6 +76,7 @@
                 <GroupCard
                   v-for="(group, index) in userGroups" 
                   :key="group.id"
+                  :icon="group.icon"
                   :emoji="group.emoji"
                   :icon-color="group.color"
                   :title="group.name"
@@ -179,6 +180,7 @@ const userGroups = ref([
   { 
     id: 1, 
     name: 'Environmental Warriors', 
+    icon: 'Leaf',
     emoji: '🌱', 
     members: 234, 
     events: 12,
@@ -189,6 +191,7 @@ const userGroups = ref([
   { 
     id: 2, 
     name: 'Community Builders', 
+    icon: 'Home',
     emoji: '🏘️', 
     members: 567, 
     events: 24,
@@ -199,6 +202,7 @@ const userGroups = ref([
   { 
     id: 3, 
     name: 'Education Champions', 
+    icon: 'BookOpen',
     emoji: '📚', 
     members: 189, 
     events: 8,
@@ -209,6 +213,7 @@ const userGroups = ref([
   { 
     id: 4, 
     name: 'Healthcare Heroes', 
+    icon: 'Heart',
     emoji: '❤️', 
     members: 423, 
     events: 16,
@@ -240,6 +245,58 @@ const categoryIcons = {
   'Youth Programs': 'Baby'
 }
 
+// Unified color scheme for categories
+const categoryColors = {
+  'Environment': {
+    primary: '#10b981',      // Green
+    secondary: '#059669',
+    light: '#dcfce7',
+    tag: '#10b981'
+  },
+  'Education': {
+    primary: '#f59e0b',      // Amber
+    secondary: '#d97706',
+    light: '#fef3c7',
+    tag: '#f59e0b'
+  },
+  'Healthcare': {
+    primary: '#ef4444',      // Red
+    secondary: '#dc2626',
+    light: '#fee2e2',
+    tag: '#ef4444'
+  },
+  'Community': {
+    primary: '#3b82f6',      // Blue
+    secondary: '#2563eb',
+    light: '#dbeafe',
+    tag: '#3b82f6'
+  },
+  'Animals': {
+    primary: '#ec4899',      // Pink
+    secondary: '#db2777',
+    light: '#fce7f3',
+    tag: '#ec4899'
+  },
+  'Disaster Relief': {
+    primary: '#f97316',      // Orange
+    secondary: '#ea580c',
+    light: '#ffedd5',
+    tag: '#f97316'
+  },
+  'Elderly Care': {
+    primary: '#8b5cf6',      // Purple
+    secondary: '#7c3aed',
+    light: '#e0e7ff',
+    tag: '#8b5cf6'
+  },
+  'Youth Programs': {
+    primary: '#a855f7',      // Violet
+    secondary: '#9333ea',
+    light: '#fae8ff',
+    tag: '#a855f7'
+  }
+}
+
 const getEmoji = (category) => categoryEmojis[category] || '📅'
 const getIcon = (category) => categoryIcons[category] || 'Calendar'
 
@@ -260,17 +317,16 @@ const getIconComponent = (category) => {
 }
 
 const getCategoryColor = (category) => {
-  const colors = {
-    'Environment': '#dcfce7',
-    'Education': '#fef3c7',
-    'Healthcare': '#fee2e2',
-    'Community': '#dbeafe',
-    'Animals': '#fce7f3',
-    'Disaster Relief': '#ffedd5',
-    'Elderly Care': '#e0e7ff',
-    'Youth Programs': '#fae8ff'
-  }
-  return colors[category] || '#e0f2fe'
+  return categoryColors[category]?.light || '#e0f2fe'
+}
+
+const getCategoryPrimaryColor = (category) => {
+  return categoryColors[category]?.primary || '#10b981'
+}
+
+const getCategoryGradient = (category) => {
+  const colors = categoryColors[category]
+  return colors ? `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` : 'linear-gradient(135deg, #10b981, #059669)'
 }
 
 const viewGroup = (groupId) => {
