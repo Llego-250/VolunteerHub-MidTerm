@@ -243,6 +243,22 @@ const categoryIcons = {
 const getEmoji = (category) => categoryEmojis[category] || '📅'
 const getIcon = (category) => categoryIcons[category] || 'Calendar'
 
+const getIconComponent = (category) => {
+  const iconMap = {
+    'Leaf': Leaf,
+    'BookOpen': BookOpen,
+    'Heart': Heart,
+    'Home': Home,
+    'Paw': Paw,
+    'AlertCircle': AlertCircle,
+    'UserCheck': UserCheck,
+    'Baby': Baby,
+    'Calendar': Calendar
+  }
+  const iconName = getIcon(category)
+  return iconMap[iconName] || Calendar
+}
+
 const getCategoryColor = (category) => {
   const colors = {
     'Environment': '#dcfce7',
