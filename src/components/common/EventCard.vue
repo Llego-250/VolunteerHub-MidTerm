@@ -54,7 +54,7 @@ import {
   BookOpen,
   Heart,
   Home,
-  Paw,
+  PawPrint,
   AlertCircle,
   UserCheck,
   Baby
@@ -85,7 +85,7 @@ const iconMap = {
   'BookOpen': BookOpen,
   'Heart': Heart,
   'Home': Home,
-  'Paw': Paw,
+  'PawPrint': PawPrint,
   'AlertCircle': AlertCircle,
   'UserCheck': UserCheck,
   'Baby': Baby,
