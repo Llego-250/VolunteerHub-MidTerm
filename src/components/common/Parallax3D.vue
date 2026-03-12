@@ -10,37 +10,72 @@ const container = ref(null)
 let scene, camera, renderer, layers = [], particles, rings
 let animationId = null
 
+const createHeartShape = () => {
+  const shape = new THREE.Shape()
+  const x = 0, y = 0
+  
+  shape.moveTo(x + 0.5, y + 0.5)
+  shape.bezierCurveTo(x + 0.5, y + 0.5, x + 0.4, y, x, y)
+  shape.bezierCurveTo(x - 0.6, y, x - 0.6, y + 0.7, x - 0.6, y + 0.7)
+  shape.bezierCurveTo(x - 0.6, y + 1.1, x - 0.3, y + 1.54, x + 0.5, y + 1.9)
+  shape.bezierCurveTo(x + 1.2, y + 1.54, x + 1.6, y + 1.1, x + 1.6, y + 0.7)
+  shape.bezierCurveTo(x + 1.6, y + 0.7, x + 1.6, y, x + 1, y)
+  shape.bezierCurveTo(x + 0.7, y, x + 0.5, y + 0.5, x + 0.5, y + 0.5)
+  
+  return shape
+}
+
 const createFloatingGeometry = (type, color, position, scale) => {
   let geometry
   
-  switch(type) {
-    case 'torus':
-      geometry = new THREE.TorusGeometry(1, 0.3, 16, 100)
-      break
-    case 'sphere':
-      geometry = new THREE.SphereGeometry(1, 32, 32)
-      break
-    case 'octahedron':
-      geometry = new THREE.OctahedronGeometry(1, 0)
-      break
-    case 'icosahedron':
-      geometry = new THREE.IcosahedronGeometry(1, 0)
-      break
-    default:
-      geometry = new THREE.BoxGeometry(1, 1, 1)
+  if (type === 'heart') {
+    const heartShape = createHeartShape()
+    const extrudeSettings = {
+      depth: 0.3,
+      bevelEnabled: true,
+      bevelThickness: 0.05,
+      bevelSize: 0.05,
+      bevelSegments: 3
+    }
+    geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings)
+    geometry.center()
+  } else if (type === 'heart-wireframe') {
+    const heartShape = createHeartShape()
+    const extrudeSettings = {
+      depth: 0.2,
+      bevelEnabled: false
+    }
+    geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings)
+    geometry.center()
+  } else if (type === 'heart-outline') {
+    const heartShape = createHeartShape()
+    const points = heartShape.getPoints(50)
+    geometry = new THREE.BufferGeometry().setFromPoints(points)
+  } else {
+    // Fallback to simple geometry
+    geometry = new THREE.IcosahedronGeometry(1, 0)
   }
   
   const material = new THREE.MeshPhongMaterial({
     color: color,
     emissive: color,
-    emissiveIntensity: 0.3,
+    emissiveIntensity: 0.4,
     shininess: 100,
     transparent: true,
-    opacity: 0.8,
-    wireframe: type === 'torus'
+    opacity: type === 'heart-wireframe' ? 0.6 : 0.8,
+    wireframe: type === 'heart-wireframe',
+    side: THREE.DoubleSide
   })
   
-  const mesh = new THREE.Mesh(geometry, material)
+  const mesh = type === 'heart-outline' 
+    ? new THREE.Line(geometry, new THREE.LineBasicMaterial({ 
+        color: color, 
+        transparent: true, 
+        opacity: 0.7,
+        linewidth: 2
+      }))
+    : new THREE.Mesh(geometry, material)
+  
   mesh.position.set(position.x, position.y, position.z)
   mesh.scale.set(scale, scale, scale)
   
@@ -122,14 +157,16 @@ onMounted(() => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   container.value.appendChild(renderer.domElement)
   
-  // Create floating geometries at different depths
+  // Create floating heart geometries at different depths
   const geometries = [
-    { type: 'icosahedron', color: 0x10b981, pos: { x: -8, y: 5, z: -5 }, scale: 1.5 },
-    { type: 'octahedron', color: 0x059669, pos: { x: 8, y: -4, z: -8 }, scale: 2 },
-    { type: 'sphere', color: 0x34d399, pos: { x: -6, y: -6, z: -3 }, scale: 1.2 },
-    { type: 'torus', color: 0x10b981, pos: { x: 10, y: 3, z: -10 }, scale: 1.8 },
-    { type: 'icosahedron', color: 0x6ee7b7, pos: { x: 0, y: 8, z: -6 }, scale: 1 },
-    { type: 'octahedron', color: 0x059669, pos: { x: -10, y: -2, z: -12 }, scale: 1.5 }
+    { type: 'heart', color: 0x10b981, pos: { x: -8, y: 5, z: -5 }, scale: 1.5 },
+    { type: 'heart-wireframe', color: 0x059669, pos: { x: 8, y: -4, z: -8 }, scale: 2 },
+    { type: 'heart', color: 0x34d399, pos: { x: -6, y: -6, z: -3 }, scale: 1.2 },
+    { type: 'heart-wireframe', color: 0x10b981, pos: { x: 10, y: 3, z: -10 }, scale: 1.8 },
+    { type: 'heart', color: 0x6ee7b7, pos: { x: 0, y: 8, z: -6 }, scale: 1 },
+    { type: 'heart', color: 0x059669, pos: { x: -10, y: -2, z: -12 }, scale: 1.5 },
+    { type: 'heart-wireframe', color: 0x34d399, pos: { x: 5, y: -8, z: -7 }, scale: 1.3 },
+    { type: 'heart', color: 0x10b981, pos: { x: -4, y: 10, z: -9 }, scale: 1.1 }
   ]
   
   geometries.forEach(geo => {
