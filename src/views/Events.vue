@@ -9,6 +9,12 @@
       <div class="hero-content">
         <h1>Volunteer Events</h1>
         <p>Discover meaningful opportunities to make a difference in your community</p>
+        <button @click="$router.push('/')" class="btn-home">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Return to Home
+        </button>
       </div>
     </div>
     <div class="container">
@@ -149,6 +155,30 @@ const toggleRegistration = () => {
 .hero-content { position: relative; z-index: 2; }
 .hero-section h1 { font-size: 42px; margin-bottom: 15px; }
 .hero-section p { color: white; font-size: 18px; }
+.btn-home { 
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-home:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-2px);
+}
+.btn-home svg {
+  flex-shrink: 0;
+}
 .container { max-width: 1400px; margin: 0 auto; padding: 40px 60px; }
 .browse-section { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .browse-section h2 { font-size: 28px; margin-bottom: 25px; }
