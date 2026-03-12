@@ -1,6 +1,6 @@
 <template>
   <div class="events">
-    <Navbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
+    <MinimalNavbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
     <div class="hero-section">
       <video autoplay loop muted playsinline class="hero-video">
         <source :src="heroVideo" type="video/mp4">
@@ -91,7 +91,7 @@
 import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
-import Navbar from '../components/common/Navbar.vue'
+import MinimalNavbar from '../components/common/MinimalNavbar.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
 import heroVideo from '../assets/vovo.mp4'
