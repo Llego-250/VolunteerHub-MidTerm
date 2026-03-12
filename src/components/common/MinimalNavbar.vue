@@ -83,22 +83,25 @@ const handleLogout = () => {
 }
 
 .minimal-nav {
-  max-width: 800px;
-  width: 90%;
-  background: rgba(255, 255, 255, 0.7);
+  max-width: 1200px;
+  width: 40%;
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   pointer-events: auto;
+  transition: all 0.3s ease;
 }
 
 .nav-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 10px 20px;
+  gap: 15px;
+  transition: all 0.3s ease;
 }
 
 .nav-logo {
