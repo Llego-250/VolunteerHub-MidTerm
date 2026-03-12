@@ -4,6 +4,15 @@
       <div class="nav-content">
         <router-link to="/" class="nav-logo">VolunteerHub</router-link>
         
+        <div class="nav-search">
+          <i class="fas fa-search"></i>
+          <input 
+            v-model="searchQuery" 
+            @input="handleSearch"
+            placeholder="Search events, categories, or locations..." 
+          />
+        </div>
+        
         <div class="nav-actions">
           <div class="user-dropdown">
             <div class="avatar-circle" @click="userDropdownOpen = !userDropdownOpen">
@@ -37,6 +46,13 @@ const authStore = useAuthStore()
 const router = useRouter()
 const userDropdownOpen = ref(false)
 const fileInput = ref(null)
+const searchQuery = ref('')
+
+const emit = defineEmits(['search'])
+
+const handleSearch = () => {
+  emit('search', searchQuery.value)
+}
 
 const triggerUpload = () => {
   userDropdownOpen.value = false
@@ -74,7 +90,7 @@ const handleLogout = () => {
 }
 
 .minimal-nav {
-  max-width: 800px;
+  max-width: 1200px;
   width: 90%;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
@@ -90,6 +106,45 @@ const handleLogout = () => {
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
+  gap: 20px;
+}
+
+.nav-search {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 10px 16px;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s;
+}
+
+.nav-search:focus-within {
+  background: white;
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.nav-search i {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.nav-search input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.nav-search input::placeholder {
+  color: #9ca3af;
 }
 
 .nav-logo {
@@ -201,10 +256,20 @@ const handleLogout = () => {
   
   .nav-content {
     padding: 10px 16px;
+    gap: 10px;
   }
   
   .nav-logo {
     font-size: 16px;
+  }
+  
+  .nav-search {
+    max-width: none;
+    flex: 1;
+  }
+  
+  .nav-search input::placeholder {
+    font-size: 13px;
   }
   
   .user-name {
