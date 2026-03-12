@@ -55,3 +55,68 @@ const authStore = useAuthStore()
 const router = useRouter()
 const userDropdownOpen = ref(false)
 const fileInput = ref(null)
+const searchQuery = ref('')
+const searchExpanded = ref(false)
+const searchInput = ref(null)
+
+const emit = defineEmits(['search'])
+
+const openSearch = async () => {
+  searchExpanded.value = true
+  await nextTick()
+  searchInput.value?.focus()
+}
+
+const closeSearch = () => {
+  searchExpanded.value = false
+  searchQuery.value = ''
+  emit('search', '')
+}
+
+const handleBlur = () => {
+  // Delay to allow click on close button
+  setTimeout(() => {
+    if (!searchQuery.value) {
+      searchExpanded.value = false
+    }
+  }, 200)
+}
+
+const handleSearch = () => {
+  emit('search', searchQuery.value)
+}
+
+const triggerUpload = () => {
+  userDropdownOpen.value = false
+  fileInput.value?.click()
+}
+
+const handleProfileUpload = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      authStore.updateProfile({ profilePic: event.target.result })
+    }
+    reader.readAsDataURL(file)
+  }
+}
+
+const handleLogout = () => {
+  authStore.logout()
+  router.push('/')
+  userDropdownOpen.value = false
+}
+</script>
+
+<style scoped>
+.minimal-nav-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
