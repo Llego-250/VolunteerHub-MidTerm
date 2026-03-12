@@ -14,15 +14,15 @@
       
       <div class="group-metadata">
         <span class="meta-item">
-          <i class="fas fa-users"></i>
+          <Users :size="14" :stroke-width="2" />
           {{ memberCount }} members
         </span>
         <span class="meta-item" v-if="eventCount">
-          <i class="fas fa-calendar"></i>
+          <Calendar :size="14" :stroke-width="2" />
           {{ eventCount }} events
         </span>
         <span class="meta-item" v-if="category">
-          <i class="fas fa-tag"></i>
+          <Tag :size="14" :stroke-width="2" />
           {{ category }}
         </span>
       </div>
@@ -43,6 +43,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { Users, Calendar, Tag } from 'lucide-vue-next'
 
 const props = defineProps({
   emoji: { type: String, default: '👥' },
@@ -169,10 +170,9 @@ const handleAction = () => {
   font-weight: 500;
 }
 
-.meta-item i {
+.meta-item :deep(svg) {
   color: #10b981;
-  width: 14px;
-  font-size: 13px;
+  flex-shrink: 0;
 }
 
 /* 4. FOOTER SECTION */
