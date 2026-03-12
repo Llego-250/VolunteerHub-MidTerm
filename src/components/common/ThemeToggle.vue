@@ -1,15 +1,17 @@
 <template>
   <button @click="themeStore.toggleTheme()" class="theme-toggle" :title="themeStore.isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-    <Sun v-if="themeStore.isDark" :size="20" />
-    <Moon v-else :size="20" />
+    <component :is="currentIcon" :size="20" :stroke-width="2" />
   </button>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useThemeStore } from '../../stores/theme'
 import { Sun, Moon } from 'lucide-vue-next'
 
 const themeStore = useThemeStore()
+
+const currentIcon = computed(() => themeStore.isDark ? Sun : Moon)
 </script>
 
 <style scoped>
