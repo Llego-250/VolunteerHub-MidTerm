@@ -270,7 +270,7 @@ const scrollTo = (id) => {
 /* Hero Section */
 .hero {
   position: relative;
-  color: var(--text-primary);
+  color: white;
   padding: 180px 60px 120px;
   text-align: center;
   min-height: 700px;
@@ -314,6 +314,7 @@ const scrollTo = (id) => {
   font-weight: 800;
   line-height: 1.2;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .highlight {
@@ -328,6 +329,7 @@ const scrollTo = (id) => {
   margin-bottom: 40px;
   opacity: 0.95;
   line-height: 1.6;
+  color: white;
 }
 
 .hero-buttons {
@@ -398,6 +400,30 @@ const scrollTo = (id) => {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  color: white;
+}
+
+/* Light theme hero overrides */
+.light-theme .hero {
+  background: var(--overlay-gradient);
+}
+
+.light-theme .hero-content h1 {
+  color: #064e3b;
+  text-shadow: 0 2px 20px rgba(16, 185, 129, 0.3);
+}
+
+.light-theme .hero-subtitle {
+  color: #065f46;
+  text-shadow: none;
+}
+
+.light-theme .trust-badge {
+  color: #065f46;
+}
+
+.light-theme .hero-video {
+  opacity: 0.25;
 }
 
 /* Partners Section */
