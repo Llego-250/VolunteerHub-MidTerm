@@ -147,6 +147,7 @@ const handleLogout = () => {
   padding: 10px 20px;
   gap: 15px;
   transition: all 0.3s ease;
+  height: 100%;
 }
 
 .nav-logo {
