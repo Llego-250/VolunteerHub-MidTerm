@@ -4,6 +4,7 @@ import { useAuthStore } from '../stores/auth'
 const routes = [
   { path: '/', name: 'Landing', component: () => import('../views/Landing.vue') },
   { path: '/events', name: 'Events', component: () => import('../views/Events.vue') },
+  { path: '/groups', name: 'Groups', component: () => import('../views/Groups.vue'), meta: { requiresAuth: true } },
   { path: '/volunteer-dashboard', name: 'VolunteerDashboard', component: () => import('../views/VolunteerDashboard.vue'), meta: { requiresAuth: true, role: 'volunteer' } },
   { path: '/organizer-dashboard', name: 'OrganizerDashboard', component: () => import('../views/OrganizerDashboard.vue'), meta: { requiresAuth: true, role: 'organizer' } }
 ]
