@@ -3,9 +3,7 @@ import { useAuthStore } from '../stores/auth'
 
 const routes = [
   { path: '/', name: 'Landing', component: () => import('../views/Landing.vue') },
-  { path: '/about', name: 'About', component: () => import('../views/About.vue') },
   { path: '/events', name: 'Events', component: () => import('../views/Events.vue') },
-  { path: '/contact', name: 'Contact', component: () => import('../views/Contact.vue') },
   { path: '/volunteer-dashboard', name: 'VolunteerDashboard', component: () => import('../views/VolunteerDashboard.vue'), meta: { requiresAuth: true, role: 'volunteer' } },
   { path: '/organizer-dashboard', name: 'OrganizerDashboard', component: () => import('../views/OrganizerDashboard.vue'), meta: { requiresAuth: true, role: 'organizer' } }
 ]
