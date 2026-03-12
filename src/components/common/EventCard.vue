@@ -233,10 +233,9 @@ const handleAction = () => {
   font-weight: 500;
 }
 
-.meta-item i {
+.meta-item :deep(svg) {
   color: #10b981;
-  width: 16px;
-  font-size: 14px;
+  flex-shrink: 0;
 }
 
 /* 4. FOOTER SECTION */
@@ -310,8 +309,14 @@ const handleAction = () => {
     padding-right: 20px;
   }
   
-  .event-emoji {
-    font-size: 42px;
+  .event-visual {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .event-icon {
+    width: 42px;
+    height: 42px;
   }
 }
 
