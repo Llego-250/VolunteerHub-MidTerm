@@ -7,11 +7,23 @@
         <div class="nav-actions">
           <ThemeToggle />
           
-          <!-- Not authenticated - show login/signup -->
-          <template v-if="!authStore.isAuthenticated">
-            <button @click="$emit('showLogin')" class="nav-link">Log in</button>
-            <button @click="$emit('showSignup')" class="nav-link nav-link-signup">Sign up</button>
-          </template>
+          <!-- Not authenticated - show auth dropdown -->
+          <div v-if="!authStore.isAuthenticated" class="auth-dropdown">
+            <button @click="authDropdownOpen = !authDropdownOpen" class="nav-link nav-link-auth">
+              Get Started
+              <i class="fas fa-chevron-down" :class="{ 'rotate': authDropdownOpen }"></i>
+            </button>
+            <div v-if="authDropdownOpen" class="dropdown-menu">
+              <button @click="handleShowLogin" class="dropdown-item">
+                <i class="fas fa-sign-in-alt"></i>
+                Log in
+              </button>
+              <button @click="handleShowSignup" class="dropdown-item">
+                <i class="fas fa-user-plus"></i>
+                Sign up
+              </button>
+            </div>
+          </div>
           
           <!-- Authenticated - show user dropdown -->
           <div v-else class="user-dropdown">
@@ -21,20 +33,11 @@
             </div>
             <div v-if="userDropdownOpen" class="dropdown-menu">
               <button @click="goToDashboard" class="dropdown-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                </svg>
+                <i class="fas fa-th-large"></i>
                 Dashboard
               </button>
               <button @click="handleLogout" class="dropdown-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                  <polyline points="16 17 21 12 16 7"/>
-                  <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
+                <i class="fas fa-sign-out-alt"></i>
                 Logout
               </button>
             </div>
@@ -54,8 +57,19 @@ import ThemeToggle from './ThemeToggle.vue'
 const authStore = useAuthStore()
 const router = useRouter()
 const userDropdownOpen = ref(false)
+const authDropdownOpen = ref(false)
 
-defineEmits(['showLogin', 'showSignup'])
+const emit = defineEmits(['showLogin', 'showSignup'])
+
+const handleShowLogin = () => {
+  authDropdownOpen.value = false
+  emit('showLogin')
+}
+
+const handleShowSignup = () => {
+  authDropdownOpen.value = false
+  emit('showSignup')
+}
 
 const dashboardLink = computed(() => 
   authStore.currentUser?.role === 'volunteer' ? '/volunteer-dashboard' : '/organizer-dashboard'
@@ -138,17 +152,25 @@ const handleLogout = () => {
   background: rgba(0, 0, 0, 0.05);
 }
 
-.nav-link-signup {
+.nav-link-auth {
   background: rgba(0, 0, 0, 0.85);
   color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.nav-link-signup:hover {
+.nav-link-auth:hover {
   background: rgba(0, 0, 0, 0.95);
 }
 
-.nav-link-signup:hover {
-  background: rgba(0, 0, 0, 0.95);
+.nav-link-auth i {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.nav-link-auth i.rotate {
+  transform: rotate(180deg);
 }
 
 .user-info {
@@ -164,6 +186,7 @@ const handleLogout = () => {
   color: #2c2c2c;
 }
 
+.auth-dropdown,
 .user-dropdown {
   position: relative;
 }
@@ -229,8 +252,10 @@ const handleLogout = () => {
   background: rgba(0, 0, 0, 0.04);
 }
 
-.dropdown-item svg {
+.dropdown-item i {
   flex-shrink: 0;
+  width: 16px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

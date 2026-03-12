@@ -26,6 +26,15 @@
   
   --glass-bg: rgba(0, 0, 0, 0.6);
   --glass-border: rgba(16, 185, 129, 0.2);
+  
+  /* Modal specific */
+  --card-bg: rgba(10, 10, 10, 0.95);
+  --border-color: rgba(16, 185, 129, 0.3);
+  --input-bg: rgba(0, 0, 0, 0.5);
+  --hover-bg: rgba(16, 185, 129, 0.1);
+  --primary-color: #10b981;
+  --primary-hover: #059669;
+  --primary-glow: rgba(16, 185, 129, 0.2);
 }
 
 /* Light Theme - Beautiful & Professional */
@@ -56,6 +65,15 @@
   
   --glass-bg: rgba(255, 255, 255, 0.9);
   --glass-border: rgba(16, 185, 129, 0.25);
+  
+  /* Modal specific */
+  --card-bg: #ffffff;
+  --border-color: #d1fae5;
+  --input-bg: #f9fafb;
+  --hover-bg: #f0fdf4;
+  --primary-color: #10b981;
+  --primary-hover: #059669;
+  --primary-glow: rgba(16, 185, 129, 0.15);
 }
 
 /* Base Transitions */
