@@ -3,7 +3,8 @@
     <!-- Header Section -->
     <div class="card-header">
       <div class="group-icon" :style="{ background: iconColor }">
-        {{ emoji }}
+        <component :is="iconComponent" :size="40" :stroke-width="2" class="icon" v-if="iconComponent" />
+        <span v-else>{{ emoji }}</span>
       </div>
     </div>
 
@@ -43,9 +44,22 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Users, Calendar, Tag } from 'lucide-vue-next'
+import { 
+  Users, 
+  Calendar, 
+  Tag,
+  Leaf,
+  BookOpen,
+  Heart,
+  Home,
+  Dog,
+  AlertCircle,
+  UserCheck,
+  Baby
+} from 'lucide-vue-next'
 
 const props = defineProps({
+  icon: { type: String, default: '' },
   emoji: { type: String, default: '👥' },
   iconColor: { type: String, default: '#10b981' },
   title: { type: String, required: true },
@@ -60,6 +74,27 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['action'])
+
+const iconMap = {
+  'Leaf': Leaf,
+  'BookOpen': BookOpen,
+  'Heart': Heart,
+  'Home': Home,
+  'Dog': Dog,
+  'AlertCircle': AlertCircle,
+  'UserCheck': UserCheck,
+  'Baby': Baby,
+  'Users': Users
+}
+
+const iconComponent = computed(() => {
+  try {
+    return props.icon ? iconMap[props.icon] || Users : null
+  } catch (error) {
+    console.error('Icon error:', error)
+    return null
+  }
+})
 
 const truncatedDescription = computed(() => {
   if (!props.description) return ''
@@ -120,6 +155,11 @@ const handleAction = () => {
   font-size: 40px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  color: white;
+}
+
+.group-icon .icon {
+  color: white;
 }
 
 .group-card:hover .group-icon {
