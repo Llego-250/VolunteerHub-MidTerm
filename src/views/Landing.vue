@@ -1,7 +1,7 @@
 <template>
   <div class="landing">
-    <!-- 3D Scroll Effect -->
-    <ScrollHeart3D />
+    <!-- 3D Parallax Background -->
+    <Parallax3D />
     
     <!-- Navigation with clear branding -->
     <MinimalNavbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
@@ -248,7 +248,7 @@ import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
 import MinimalNavbar from '../components/common/MinimalNavbar.vue'
-import ScrollHeart3D from '../components/common/ScrollHeart3D.vue'
+import Parallax3D from '../components/common/Parallax3D.vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
@@ -282,10 +282,11 @@ const scrollTo = (id) => {
 <style scoped>
 /* Reset and Base */
 .landing {
-  background: white;
+  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
   margin: 0;
   padding: 0;
   font-family: system-ui, -apple-system, sans-serif;
+  position: relative;
 }
 
 /* Hero Section */
@@ -299,6 +300,7 @@ const scrollTo = (id) => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(16, 185, 129, 0.2) 100%);
 }
 
 .hero-video {
@@ -309,6 +311,7 @@ const scrollTo = (id) => {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.3;
 }
 
 .hero-overlay {
@@ -317,7 +320,7 @@ const scrollTo = (id) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
   z-index: 1;
 }
 
@@ -332,12 +335,14 @@ const scrollTo = (id) => {
   margin-bottom: 20px;
   font-weight: 800;
   line-height: 1.2;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .highlight {
   color: #10b981;
   display: block;
   font-size: 48px;
+  text-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
 }
 
 .hero-subtitle {
@@ -420,12 +425,14 @@ const scrollTo = (id) => {
 /* Partners Section */
 .partners-section {
   padding: 40px 60px;
-  background: #f9fafb;
+  background: rgba(0, 0, 0, 0.5);
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .partners-title {
-  color: #6b7280;
+  color: #9ca3af;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 14px;
@@ -440,16 +447,25 @@ const scrollTo = (id) => {
 }
 
 .partner-logo {
-  color: #4b5563;
+  color: #d1d5db;
   font-weight: 600;
   font-size: 18px;
   opacity: 0.8;
+  transition: all 0.3s;
+}
+
+.partner-logo:hover {
+  color: #10b981;
+  opacity: 1;
 }
 
 /* Features Section */
 .features-section {
   padding: 100px 60px;
-  background: white;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
 }
 
 .container {
@@ -461,12 +477,13 @@ const scrollTo = (id) => {
   font-size: 42px;
   text-align: center;
   margin-bottom: 20px;
-  color: #1f2937;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
 
 .section-subtitle {
   text-align: center;
-  color: #6b7280;
+  color: #d1d5db;
   font-size: 18px;
   max-width: 600px;
   margin: 0 auto 60px;
@@ -481,44 +498,52 @@ const scrollTo = (id) => {
 
 .feature-card {
   padding: 40px 30px;
-  background: #f9fafb;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 24px;
   text-align: left;
   transition: all 0.3s;
+  backdrop-filter: blur(10px);
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .feature-icon {
   width: 64px;
   height: 64px;
-  background: white;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 
 .feature-card h3 {
   font-size: 24px;
   margin-bottom: 16px;
-  color: #1f2937;
+  color: #ffffff;
 }
 
 .feature-card p {
-  color: #6b7280;
+  color: #d1d5db;
   line-height: 1.7;
 }
 
 /* Featured Events Section */
 .featured-section {
   padding: 80px 60px;
-  background: #f9fafb;
+  background: rgba(0, 0, 0, 0.5);
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .cta-buttons {
@@ -531,7 +556,10 @@ const scrollTo = (id) => {
 /* Testimonials Section */
 .testimonials-section {
   padding: 100px 60px;
-  background: white;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 2;
 }
 
 .testimonials-grid {
@@ -542,16 +570,24 @@ const scrollTo = (id) => {
 }
 
 .testimonial-card {
-  background: #f9fafb;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+
+.testimonial-card:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.2);
 }
 
 .testimonial-content {
   font-size: 16px;
   line-height: 1.7;
-  color: #4b5563;
+  color: #d1d5db;
   margin-bottom: 20px;
   font-style: italic;
 }
@@ -565,31 +601,35 @@ const scrollTo = (id) => {
 .author-avatar {
   width: 48px;
   height: 48px;
-  background: #10b981;
+  background: linear-gradient(135deg, #10b981, #059669);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   color: white;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 .author-info h4 {
   margin: 0 0 5px;
-  color: #1f2937;
+  color: #ffffff;
 }
 
 .author-info p {
   margin: 0;
-  color: #6b7280;
+  color: #9ca3af;
   font-size: 14px;
 }
 
 /* About Section */
 .about-section {
   padding: 100px 60px;
-  background: #10b981;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(5, 150, 105, 0.9));
   color: white;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 -10px 50px rgba(16, 185, 129, 0.3);
 }
 
 .about-section .section-title {
@@ -630,10 +670,13 @@ const scrollTo = (id) => {
 }
 
 .about-cta {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   padding: 50px;
   border-radius: 30px;
   text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 .about-cta h3 {
@@ -658,23 +701,28 @@ const scrollTo = (id) => {
   justify-content: center;
   gap: 40px;
   padding: 30px 60px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
 .badge {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #4b5563;
+  color: #d1d5db;
   font-size: 14px;
 }
 
 /* Footer */
 .footer {
-  background: #1f2937;
+  background: #000000;
   color: white;
   padding: 60px 60px 20px;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .footer-content {
