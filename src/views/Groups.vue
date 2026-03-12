@@ -37,14 +37,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 import DashboardNavbar from '../components/common/DashboardNavbar.vue'
 import DashboardSidebar from '../components/common/DashboardSidebar.vue'
 import GroupCard from '../components/common/GroupCard.vue'
 
 const router = useRouter()
-const joinedGroups = ref([1, 2, 3, 4])
+const authStore = useAuthStore()
+const joinedGroups = ref([])
+
+// Load joined groups from localStorage on mount
+onMounted(() => {
+  const userId = authStore.currentUser?.id
+  if (userId) {
+    const stored = localStorage.getItem(`joinedGroups_${userId}`)
+    if (stored) {
+      joinedGroups.value = JSON.parse(stored)
+    } else {
+      // Default joined groups
+      joinedGroups.value = [1, 2, 3, 4]
+      saveToLocalStorage()
+    }
+  }
+})
 
 const categoryColors = {
   'Environment': { primary: '#10b981' },
@@ -130,6 +147,13 @@ const isJoined = (groupId) => {
   return joinedGroups.value.includes(groupId)
 }
 
+const saveToLocalStorage = () => {
+  const userId = authStore.currentUser?.id
+  if (userId) {
+    localStorage.setItem(`joinedGroups_${userId}`, JSON.stringify(joinedGroups.value))
+  }
+}
+
 const toggleGroup = (groupId) => {
   if (isJoined(groupId)) {
     // Leave group
@@ -138,6 +162,7 @@ const toggleGroup = (groupId) => {
     // Join group
     joinedGroups.value.push(groupId)
   }
+  saveToLocalStorage()
 }
 
 const handleNavigate = (id) => {
