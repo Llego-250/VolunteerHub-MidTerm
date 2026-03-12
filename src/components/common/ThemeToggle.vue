@@ -1,13 +1,11 @@
 <template>
   <button @click="themeStore.toggleTheme()" class="theme-toggle" :title="themeStore.isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-    <Sun v-if="themeStore.isDark" :size="20" :stroke-width="2" />
-    <Moon v-else :size="20" :stroke-width="2" />
+    <i :class="themeStore.isDark ? 'fas fa-sun' : 'fas fa-moon'"></i>
   </button>
 </template>
 
 <script setup>
 import { useThemeStore } from '../../stores/theme'
-import { Sun, Moon } from 'lucide-vue-next'
 
 const themeStore = useThemeStore()
 </script>
@@ -29,16 +27,17 @@ const themeStore = useThemeStore()
   color: currentColor;
 }
 
+.theme-toggle i {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
 .theme-toggle:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
 }
 
-.theme-toggle svg {
-  transition: transform 0.3s ease;
-}
-
-.theme-toggle:hover svg {
+.theme-toggle:hover i {
   transform: rotate(20deg);
 }
 
