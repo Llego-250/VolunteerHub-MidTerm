@@ -114,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { useEventsStore } from '../stores/events'
@@ -145,6 +145,21 @@ const router = useRouter()
 const activeTab = ref('browse')
 const calendarOpen = ref(false)
 const searchQuery = ref('')
+const joinedGroupIds = ref([])
+
+// Load joined groups from localStorage
+onMounted(() => {
+  const userId = authStore.currentUser?.id
+  if (userId) {
+    const stored = localStorage.getItem(`joinedGroups_${userId}`)
+    if (stored) {
+      joinedGroupIds.value = JSON.parse(stored)
+    } else {
+      // Default joined groups
+      joinedGroupIds.value = [1, 2, 3, 4]
+    }
+  }
+})
 
 const myEvents = computed(() => 
   eventsStore.events.filter(e => e.volunteers.includes(authStore.currentUser?.id))
@@ -244,52 +259,56 @@ const categoryColors = {
   }
 }
 
-const userGroups = ref([
-  { 
-    id: 1, 
-    name: 'Environmental Warriors', 
-    icon: 'Leaf',
-    emoji: '🌱', 
-    members: 234, 
-    events: 12,
-    category: 'Environment',
-    description: 'Join us in making the planet greener, one tree at a time',
-    color: categoryColors['Environment'].primary
-  },
-  { 
-    id: 2, 
-    name: 'Community Builders', 
-    icon: 'Home',
-    emoji: '🏘️', 
-    members: 567, 
-    events: 24,
-    category: 'Community',
-    description: 'Building stronger communities through volunteer work',
-    color: categoryColors['Community'].primary
-  },
-  { 
-    id: 3, 
-    name: 'Education Champions', 
-    icon: 'BookOpen',
-    emoji: '📚', 
-    members: 189, 
-    events: 8,
-    category: 'Education',
-    description: 'Empowering minds through education and mentorship',
-    color: categoryColors['Education'].primary
-  },
-  { 
-    id: 4, 
-    name: 'Healthcare Heroes', 
-    icon: 'Heart',
-    emoji: '❤️', 
-    members: 423, 
-    events: 16,
-    category: 'Healthcare',
-    description: 'Supporting health and wellness in our communities',
-    color: categoryColors['Healthcare'].primary
-  }
-])
+const userGroups = computed(() => {
+  const allGroups = [
+    { 
+      id: 1, 
+      name: 'Environmental Warriors', 
+      icon: 'Leaf',
+      emoji: '🌱', 
+      members: 234, 
+      events: 12,
+      category: 'Environment',
+      description: 'Join us in making the planet greener, one tree at a time',
+      color: categoryColors['Environment'].primary
+    },
+    { 
+      id: 2, 
+      name: 'Community Builders', 
+      icon: 'Home',
+      emoji: '🏘️', 
+      members: 567, 
+      events: 24,
+      category: 'Community',
+      description: 'Building stronger communities through volunteer work',
+      color: categoryColors['Community'].primary
+    },
+    { 
+      id: 3, 
+      name: 'Education Champions', 
+      icon: 'BookOpen',
+      emoji: '📚', 
+      members: 189, 
+      events: 8,
+      category: 'Education',
+      description: 'Empowering minds through education and mentorship',
+      color: categoryColors['Education'].primary
+    },
+    { 
+      id: 4, 
+      name: 'Healthcare Heroes', 
+      icon: 'Heart',
+      emoji: '❤️', 
+      members: 423, 
+      events: 16,
+      category: 'Healthcare',
+      description: 'Supporting health and wellness in our communities',
+      color: categoryColors['Healthcare'].primary
+    }
+  ]
+  
+  return allGroups.filter(group => joinedGroupIds.value.includes(group.id))
+})
 
 const getEmoji = (category) => categoryEmojis[category] || '📅'
 const getIcon = (category) => categoryIcons[category] || 'Calendar'
