@@ -35,35 +35,25 @@
             <div class="events-section">
               <h3>Discover Events</h3>
               <div class="events-grid">
-                <div 
+                <EventCard
                   v-for="(event, index) in filteredEvents" 
-                  :key="event.id" 
-                  class="event-card"
-                  :style="{ animationDelay: `${index * 0.05}s` }"
-                >
-                  <div class="card-header">
-                    <span class="event-emoji">{{ getEmoji(event.category) }}</span>
-                    <span class="event-price">{{ event.price || 'FREE' }}</span>
-                  </div>
-                  <div class="card-body">
-                    <span class="category-tag">{{ event.category }}</span>
-                    <h4>{{ event.title }}</h4>
-                    <p class="event-tagline">{{ event.tagline || event.description?.substring(0, 60) + '...' }}</p>
-                    <div class="event-details">
-                      <span><i class="fas fa-calendar"></i> {{ formatDate(event.date) }}</span>
-                      <span><i class="fas fa-users"></i> {{ event.volunteers.length }}/{{ event.maxVolunteers }}</span>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <button 
-                      @click="register(event.id)" 
-                      :disabled="isRegistered(event.id)"
-                      class="btn-card"
-                    >
-                      {{ isRegistered(event.id) ? '✓ Registered' : 'Join Event' }}
-                    </button>
-                  </div>
-                </div>
+                  :key="event.id"
+                  :emoji="getEmoji(event.category)"
+                  :price="event.price"
+                  :category="event.category"
+                  :category-color="getCategoryColor(event.category)"
+                  :title="event.title"
+                  :description="event.description"
+                  :date="event.date"
+                  :location="event.location"
+                  :attendee-count="event.volunteers.length"
+                  :max-attendees="event.maxVolunteers"
+                  :button-text="isRegistered(event.id) ? '✓ Registered' : 'Join Event'"
+                  :button-variant="isRegistered(event.id) ? 'secondary' : 'primary'"
+                  :is-disabled="isRegistered(event.id)"
+                  :animation-delay="`${index * 0.05}s`"
+                  @action="register(event.id)"
+                />
               </div>
             </div>
 
@@ -82,21 +72,22 @@
             <!-- Your Groups Section -->
             <div class="groups-section">
               <h3>Your groups</h3>
-              <div class="groups-list">
-                <div 
+              <div class="groups-grid">
+                <GroupCard
                   v-for="(group, index) in userGroups" 
                   :key="group.id"
-                  class="group-item"
-                  :style="{ animationDelay: `${index * 0.1}s` }"
-                >
-                  <div class="group-icon" :style="{ background: group.color }">
-                    {{ group.emoji }}
-                  </div>
-                  <div class="group-info">
-                    <h4>{{ group.name }}</h4>
-                    <p>{{ group.members }} members</p>
-                  </div>
-                </div>
+                  :emoji="group.emoji"
+                  :icon-color="group.color"
+                  :title="group.name"
+                  :description="group.description"
+                  :member-count="group.members"
+                  :event-count="group.events"
+                  :category="group.category"
+                  :button-text="'View Group'"
+                  :button-variant="'secondary'"
+                  :animation-delay="`${index * 0.1}s`"
+                  @action="viewGroup(group.id)"
+                />
               </div>
               <button class="btn-discover-groups">+ Discover new groups</button>
             </div>
@@ -140,6 +131,8 @@ import MyEvents from '../components/volunteer/MyEvents.vue'
 import HoursBadgesTracker from '../components/volunteer/HoursBadgesTracker.vue'
 import NotificationsPanel from '../components/common/NotificationsPanel.vue'
 import ProfileSettings from '../components/common/ProfileSettings.vue'
+import EventCard from '../components/common/EventCard.vue'
+import GroupCard from '../components/common/GroupCard.vue'
 
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
@@ -172,10 +165,46 @@ const filteredEvents = computed(() => {
 })
 
 const userGroups = ref([
-  { id: 1, name: 'Environmental Warriors', emoji: '🌱', members: 234, color: '#10b981' },
-  { id: 2, name: 'Community Builders', emoji: '🏘️', members: 567, color: '#3b82f6' },
-  { id: 3, name: 'Education Champions', emoji: '📚', members: 189, color: '#f59e0b' },
-  { id: 4, name: 'Healthcare Heroes', emoji: '❤️', members: 423, color: '#ef4444' }
+  { 
+    id: 1, 
+    name: 'Environmental Warriors', 
+    emoji: '🌱', 
+    members: 234, 
+    events: 12,
+    category: 'Environment',
+    description: 'Join us in making the planet greener, one tree at a time',
+    color: '#10b981' 
+  },
+  { 
+    id: 2, 
+    name: 'Community Builders', 
+    emoji: '🏘️', 
+    members: 567, 
+    events: 24,
+    category: 'Community',
+    description: 'Building stronger communities through volunteer work',
+    color: '#3b82f6' 
+  },
+  { 
+    id: 3, 
+    name: 'Education Champions', 
+    emoji: '📚', 
+    members: 189, 
+    events: 8,
+    category: 'Education',
+    description: 'Empowering minds through education and mentorship',
+    color: '#f59e0b' 
+  },
+  { 
+    id: 4, 
+    name: 'Healthcare Heroes', 
+    emoji: '❤️', 
+    members: 423, 
+    events: 16,
+    category: 'Healthcare',
+    description: 'Supporting health and wellness in our communities',
+    color: '#ef4444' 
+  }
 ])
 
 const categoryEmojis = {
@@ -202,6 +231,24 @@ const categoryIcons = {
 
 const getEmoji = (category) => categoryEmojis[category] || '📅'
 const getIcon = (category) => categoryIcons[category] || 'fas fa-calendar'
+
+const getCategoryColor = (category) => {
+  const colors = {
+    'Environment': '#dcfce7',
+    'Education': '#fef3c7',
+    'Healthcare': '#fee2e2',
+    'Community': '#dbeafe',
+    'Animals': '#fce7f3',
+    'Disaster Relief': '#ffedd5',
+    'Elderly Care': '#e0e7ff',
+    'Youth Programs': '#fae8ff'
+  }
+  return colors[category] || '#e0f2fe'
+}
+
+const viewGroup = (groupId) => {
+  console.log('Viewing group:', groupId)
+}
 
 const formatDate = (dateStr) => {
   const date = new Date(dateStr)
@@ -387,116 +434,6 @@ const handleSearch = (query) => {
   }
 }
 
-.event-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: fadeInUp 0.6s ease-out backwards;
-  cursor: pointer;
-}
-
-.event-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 20px 0;
-}
-
-.event-emoji {
-  font-size: 40px;
-}
-
-.event-price {
-  background: #10b981;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.card-body {
-  padding: 15px 20px;
-}
-
-.category-tag {
-  display: inline-block;
-  background: #e0f2fe;
-  color: #0284c7;
-  padding: 5px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.card-body h4 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0 0 10px;
-  line-height: 1.3;
-}
-
-.event-tagline {
-  color: #6b7280;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 0 0 15px;
-}
-
-.event-details {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.event-details span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.event-details i {
-  color: #10b981;
-  width: 14px;
-}
-
-.card-footer {
-  padding: 0 20px 20px;
-}
-
-.btn-card {
-  width: 100%;
-  padding: 12px;
-  background: #10b981;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-card:hover {
-  background: #059669;
-}
-
-.btn-card:disabled {
-  background: #9ca3af;
-  cursor: not-allowed;
-}
-
 /* Discovery CTA */
 .discovery-cta {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
@@ -558,49 +495,10 @@ const handleSearch = (query) => {
   margin: 0 0 20px;
 }
 
-.groups-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.groups-grid {
+  display: grid;
+  gap: 16px;
   margin-bottom: 20px;
-}
-
-.group-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  transition: background 0.2s;
-  cursor: pointer;
-  animation: fadeInUp 0.6s ease-out backwards;
-}
-
-.group-item:hover {
-  background: #f9fafb;
-}
-
-.group-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-}
-
-.group-info h4 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #1f2937;
-  margin: 0 0 4px;
-}
-
-.group-info p {
-  font-size: 12px;
-  color: #6b7280;
-  margin: 0;
 }
 
 .btn-discover-groups {
