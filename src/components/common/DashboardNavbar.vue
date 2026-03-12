@@ -23,6 +23,8 @@
             <i class="fas fa-search"></i>
           </button>
           
+          <ThemeToggle />
+          
           <div class="user-dropdown">
             <div class="avatar-circle" @click="userDropdownOpen = !userDropdownOpen">
               <img v-if="authStore.currentUser?.profilePic" :src="authStore.currentUser.profilePic" alt="Profile" />
@@ -50,6 +52,7 @@
 import { ref, nextTick } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
+import ThemeToggle from './ThemeToggle.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
