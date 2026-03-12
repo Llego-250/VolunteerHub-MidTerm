@@ -176,53 +176,6 @@ const filteredEvents = computed(() => {
   return events
 })
 
-const userGroups = ref([
-  { 
-    id: 1, 
-    name: 'Environmental Warriors', 
-    icon: 'Leaf',
-    emoji: '🌱', 
-    members: 234, 
-    events: 12,
-    category: 'Environment',
-    description: 'Join us in making the planet greener, one tree at a time',
-    color: categoryColors['Environment'].primary
-  },
-  { 
-    id: 2, 
-    name: 'Community Builders', 
-    icon: 'Home',
-    emoji: '🏘️', 
-    members: 567, 
-    events: 24,
-    category: 'Community',
-    description: 'Building stronger communities through volunteer work',
-    color: categoryColors['Community'].primary
-  },
-  { 
-    id: 3, 
-    name: 'Education Champions', 
-    icon: 'BookOpen',
-    emoji: '📚', 
-    members: 189, 
-    events: 8,
-    category: 'Education',
-    description: 'Empowering minds through education and mentorship',
-    color: categoryColors['Education'].primary
-  },
-  { 
-    id: 4, 
-    name: 'Healthcare Heroes', 
-    icon: 'Heart',
-    emoji: '❤️', 
-    members: 423, 
-    events: 16,
-    category: 'Healthcare',
-    description: 'Supporting health and wellness in our communities',
-    color: categoryColors['Healthcare'].primary
-  }
-])
-
 const categoryEmojis = {
   'Environment': '🌱',
   'Education': '📚',
@@ -296,6 +249,53 @@ const categoryColors = {
     tag: '#a855f7'
   }
 }
+
+const userGroups = ref([
+  { 
+    id: 1, 
+    name: 'Environmental Warriors', 
+    icon: 'Leaf',
+    emoji: '🌱', 
+    members: 234, 
+    events: 12,
+    category: 'Environment',
+    description: 'Join us in making the planet greener, one tree at a time',
+    color: categoryColors['Environment'].primary
+  },
+  { 
+    id: 2, 
+    name: 'Community Builders', 
+    icon: 'Home',
+    emoji: '🏘️', 
+    members: 567, 
+    events: 24,
+    category: 'Community',
+    description: 'Building stronger communities through volunteer work',
+    color: categoryColors['Community'].primary
+  },
+  { 
+    id: 3, 
+    name: 'Education Champions', 
+    icon: 'BookOpen',
+    emoji: '📚', 
+    members: 189, 
+    events: 8,
+    category: 'Education',
+    description: 'Empowering minds through education and mentorship',
+    color: categoryColors['Education'].primary
+  },
+  { 
+    id: 4, 
+    name: 'Healthcare Heroes', 
+    icon: 'Heart',
+    emoji: '❤️', 
+    members: 423, 
+    events: 16,
+    category: 'Healthcare',
+    description: 'Supporting health and wellness in our communities',
+    color: categoryColors['Healthcare'].primary
+  }
+])
 
 const getEmoji = (category) => categoryEmojis[category] || '📅'
 const getIcon = (category) => categoryIcons[category] || 'Calendar'
