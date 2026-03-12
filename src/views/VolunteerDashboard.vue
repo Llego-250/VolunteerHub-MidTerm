@@ -1,35 +1,35 @@
 <template>
   <div class="dashboard">
     <DashboardNavbar />
-    <div class="layout">
-      <DashboardSidebar role="volunteer" :activeTab="activeTab" @navigate="handleNavigate" />
-      <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
+    
+    <div class="dashboard-container">
+      <!-- Header Section -->
+      <header class="dashboard-header">
+        <h1>Welcome back, {{ authStore.currentUser?.name }}! 👋</h1>
+        <p>Discover events and connect with your community</p>
+      </header>
 
-          <main class="content">
-        <BrowseEvents v-if="activeTab === 'browse'" />
-        <div v-else-if="activeTab === 'registered'" class="main-content">
-          <div class="page-header">
-            <h1>My Registered Events</h1>
-            <p>Events you've signed up for</p>
-          </div>
-          <MyEvents />
-        </div>
-        <HoursBadgesTracker v-else-if="activeTab === 'hours'" />
-        <NotificationsPanel v-else-if="activeTab === 'notifications'" />
-        <ProfileSettings v-else-if="activeTab === 'profile'" />
-      </main>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { ref, computed } from 'vue'
-import { useAuthStore } from '../stores/auth'
-import { useEventsStore } from '../stores/events'
-import DashboardNavbar from '../components/common/DashboardNavbar.vue'
-import DashboardSidebar from '../components/common/DashboardSidebar.vue'
-import CalendarSidebar from '../components/common/CalendarSidebar.vue'
-import DashboardStats from '../components/volunteer/DashboardStats.vue'
+      <!-- For You Section -->
+      <section class="for-you-section">
+        <h2>For You</h2>
+        <div class="personalized-content">
+          <div class="quick-stats">
+            <div class="stat-card">
+              <div class="stat-icon">📅</div>
+              <div class="stat-info">
+                <h3>{{ stats.upcoming }}</h3>
+                <p>Upcoming Events</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⏱️</div>
+              <div class="stat-info">
+                <h3>{{ stats.totalHours }}</h3>
+                <p>Hours Volunteered</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🏆ts/volunteer/DashboardStats.vue'
 import MyEvents from '../components/volunteer/MyEvents.vue'
 import BrowseEvents from '../components/volunteer/BrowseEvents.vue'
 import HoursBadgesTracker from '../components/volunteer/HoursBadgesTracker.vue'
