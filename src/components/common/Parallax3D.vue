@@ -60,10 +60,10 @@ const createFloatingGeometry = (type, color, position, scale) => {
   const material = new THREE.MeshPhongMaterial({
     color: 0xffffff,
     emissive: 0xadd8e6,
-    emissiveIntensity: 0.2,
+    emissiveIntensity: 0.4,
     shininess: 100,
     transparent: true,
-    opacity: 0.4,
+    opacity: 0.7,
     side: THREE.DoubleSide
   })
   
@@ -96,9 +96,9 @@ const createParticleField = () => {
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
   
   const material = new THREE.PointsMaterial({
-    size: 0.08,
+    size: 0.12,
     transparent: true,
-    opacity: 0.3,
+    opacity: 0.5,
     vertexColors: true,
     blending: THREE.AdditiveBlending,
     sizeAttenuation: true
@@ -115,7 +115,7 @@ const createGlowingRings = () => {
     const material = new THREE.MeshBasicMaterial({
       color: 0x10b981,
       transparent: true,
-      opacity: 0.1 - i * 0.03,
+      opacity: 0.2 - i * 0.05,
       blending: THREE.AdditiveBlending
     })
     
@@ -184,14 +184,14 @@ onMounted(() => {
   scene.add(rings)
   
   // Lights for snow
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6)
   scene.add(ambientLight)
   
-  const pointLight1 = new THREE.PointLight(0xadd8e6, 0.6, 50)
+  const pointLight1 = new THREE.PointLight(0xadd8e6, 1.2, 50)
   pointLight1.position.set(10, 10, 10)
   scene.add(pointLight1)
   
-  const pointLight2 = new THREE.PointLight(0xffffff, 0.4, 50)
+  const pointLight2 = new THREE.PointLight(0xffffff, 0.8, 50)
   pointLight2.position.set(-10, -10, 5)
   scene.add(pointLight2)
   
@@ -302,12 +302,14 @@ onMounted(() => {
   height: 100vh;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.5;
+  opacity: 0.8;
+  filter: blur(2px);
 }
 
 @media (max-width: 768px) {
   .parallax-3d-container {
-    opacity: 0.3;
+    opacity: 0.5;
+    filter: blur(3px);
   }
 }
 </style>
