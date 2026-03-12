@@ -65,6 +65,7 @@ const props = defineProps({
   price: { type: String, default: '' },
   category: { type: String, required: true },
   categoryColor: { type: String, default: '#e0f2fe' },
+  iconGradient: { type: String, default: '' },
   title: { type: String, required: true },
   description: { type: String, default: '' },
   date: { type: String, required: true },
@@ -165,7 +166,6 @@ const handleAction = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #10b981, #059669);
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
