@@ -132,10 +132,12 @@ const handleLogout = () => {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   pointer-events: auto;
   transition: all 0.3s ease;
+  height: 56px;
 }
 
 .minimal-nav.search-expanded {
-  max-width: 800px;
+  width: 70%;
+  max-width: 900px;
 }
 
 .nav-content {
@@ -166,20 +168,21 @@ const handleLogout = () => {
   flex: 1;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  padding: 6px 12px;
-  gap: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  transition: all 0.2s;
+  background: white;
+  border-radius: 12px;
+  padding: 8px 16px;
+  gap: 12px;
+  border: 2px solid rgba(16, 185, 129, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation: expandSearch 0.3s ease-out;
-  height: 36px;
+  height: 40px;
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 @keyframes expandSearch {
   from {
     opacity: 0;
-    transform: scaleX(0.8);
+    transform: scaleX(0.9);
   }
   to {
     opacity: 1;
@@ -188,48 +191,72 @@ const handleLogout = () => {
 }
 
 .nav-search:focus-within {
+  border-color: #10b981;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25), 0 0 0 4px rgba(16, 185, 129, 0.08);
   background: white;
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  transform: translateY(-1px);
 }
 
 .nav-search i {
-  color: #9ca3af;
-  font-size: 13px;
+  color: #10b981;
+  font-size: 15px;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.nav-search:focus-within i {
+  transform: scale(1.1);
 }
 
 .nav-search input {
   flex: 1;
   border: none;
   background: transparent;
-  font-size: 13px;
+  font-size: 14px;
   outline: none;
-  color: #1a1a1a;
+  color: #111827;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   height: 100%;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 .nav-search input::placeholder {
   color: #9ca3af;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.nav-search input:focus::placeholder {
+  color: #d1d5db;
 }
 
 .btn-close-search {
-  background: none;
+  background: rgba(16, 185, 129, 0.08);
   border: none;
-  color: #9ca3af;
+  color: #10b981;
   cursor: pointer;
-  padding: 2px;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   font-size: 12px;
+  border-radius: 8px;
+  width: 26px;
+  height: 26px;
 }
 
 .btn-close-search:hover {
-  color: #1a1a1a;
+  background: #10b981;
+  color: white;
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-close-search:active {
+  transform: rotate(90deg) scale(0.95);
 }
 
 .nav-actions {
