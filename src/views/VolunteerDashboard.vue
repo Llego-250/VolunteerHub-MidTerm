@@ -333,7 +333,7 @@ const getCategoryGradient = (category) => {
 }
 
 const viewGroup = (groupId) => {
-  console.log('Viewing group:', groupId)
+  router.push('/groups')
 }
 
 const formatDate = (dateStr) => {
