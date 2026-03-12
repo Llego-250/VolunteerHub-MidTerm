@@ -91,7 +91,6 @@
                   @action="viewGroup(group.id)"
                 />
               </div>
-              <button class="btn-discover-groups">+ Discover new groups</button>
             </div>
 
             <!-- Premium Feature Promotion -->
@@ -583,24 +582,6 @@ const handleSearch = (query) => {
 .groups-grid {
   display: grid;
   gap: 16px;
-  margin-bottom: 20px;
-}
-
-.btn-discover-groups {
-  width: 100%;
-  padding: 12px;
-  background: #f3f4f6;
-  color: #1f2937;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-discover-groups:hover {
-  background: #e5e7eb;
 }
 
 /* Premium Promo */
