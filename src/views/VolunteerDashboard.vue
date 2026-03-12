@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <DashboardNavbar />
+    <DashboardNavbar @search="handleSearch" />
     <div class="layout">
       <DashboardSidebar role="volunteer" :activeTab="activeTab" @navigate="handleNavigate" />
       <CalendarSidebar :isOpen="calendarOpen" :events="myEvents" @close="calendarOpen = false" />
@@ -10,10 +10,6 @@
         <div class="dashboard-header">
           <div class="header-content">
             <h1>For you</h1>
-            <div class="search-bar">
-              <i class="fas fa-search"></i>
-              <input v-model="searchQuery" placeholder="Search events, categories, or locations..." />
-            </div>
           </div>
         </div>
 
@@ -240,6 +236,10 @@ const handleNavigate = (id) => {
     activeTab.value = id
   }
 }
+
+const handleSearch = (query) => {
+  searchQuery.value = query
+}
 </script>
 
 <style scoped>
@@ -275,29 +275,7 @@ const handleNavigate = (id) => {
   font-size: 32px;
   font-weight: 700;
   color: #1f2937;
-  margin: 0 0 20px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background: #f3f4f6;
-  border-radius: 12px;
-  padding: 12px 20px;
-  max-width: 600px;
-}
-
-.search-bar i {
-  color: #9ca3af;
-  margin-right: 12px;
-}
-
-.search-bar input {
-  border: none;
-  background: transparent;
-  flex: 1;
-  font-size: 16px;
-  outline: none;
+  margin: 0;
 }
 
 /* Main Container */
