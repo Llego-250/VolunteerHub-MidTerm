@@ -2,7 +2,7 @@
   <div class="event-card" :style="{ animationDelay: animationDelay }">
     <!-- Header Section -->
     <div class="card-header">
-      <div class="event-visual">
+      <div class="event-visual" :style="{ background: iconGradient }">
         <component :is="iconComponent" :size="48" :stroke-width="1.5" class="event-icon" v-if="iconComponent" />
         <span v-else class="event-emoji">📅</span>
       </div>
