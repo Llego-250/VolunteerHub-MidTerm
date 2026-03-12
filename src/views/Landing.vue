@@ -12,7 +12,7 @@
       <div class="hero-content">
         <h1>Make a Difference, <span class="highlight">One Hour at a Time</span></h1>
         <p class="hero-subtitle">Join thousands of volunteers finding meaningful opportunities or organize events that create real impact in your community.</p>
-        <div class="hero-buttons">
+        <div v-if="!authStore.isAuthenticated" class="hero-buttons">
           <button @click="openSignup('volunteer')" class="btn-primary">
             <span>Start Volunteering →</span>
           </button>
@@ -171,7 +171,7 @@
               </div>
             </div>
           </div>
-          <div class="about-cta">
+          <div v-if="!authStore.isAuthenticated" class="about-cta">
             <h3>Ready to make a difference?</h3>
             <button @click="showSignup = true" class="btn-primary btn-large">Join VolunteerHub Today</button>
             <p class="small-text">Free for volunteers. Tools for organizers.</p>
@@ -222,7 +222,7 @@
           <a href="#">Terms of Service</a>
           <a href="#">Contact</a>
         </div>
-        <div class="footer-col">
+        <div v-if="!authStore.isAuthenticated" class="footer-col">
           <h4>Get Started</h4>
           <button @click="openSignup('volunteer')" class="footer-link-btn">Sign up as Volunteer</button>
           <button @click="openSignup('organizer')" class="footer-link-btn">Sign up as Organizer</button>
@@ -243,6 +243,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
+import { useAuthStore } from '../stores/auth'
 import MinimalNavbar from '../components/common/MinimalNavbar.vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
@@ -251,6 +252,7 @@ import { Search, Calendar, Users, Heart } from 'lucide-vue-next'
 import heroVideo from '../assets/vovo.mp4'
 
 const eventsStore = useEventsStore()
+const authStore = useAuthStore()
 const showLogin = ref(false)
 const showSignup = ref(false)
 const signupRole = ref('')
@@ -678,6 +680,11 @@ const scrollTo = (id) => {
   margin-bottom: 40px;
   max-width: 1400px;
   margin: 0 auto 40px;
+}
+
+.footer-content:has(.footer-col:nth-child(4):empty),
+.footer-content:not(:has(.footer-col:nth-child(4))) {
+  grid-template-columns: 2fr 1fr 1fr;
 }
 
 .footer-col .logo {
