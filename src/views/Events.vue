@@ -1,5 +1,8 @@
 <template>
   <div class="events">
+    <!-- 3D Snowfall Effect -->
+    <Parallax3D />
+    
     <MinimalNavbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
     <div class="hero-section">
       <video autoplay loop muted playsinline class="hero-video">
@@ -98,6 +101,7 @@ import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
 import MinimalNavbar from '../components/common/MinimalNavbar.vue'
+import Parallax3D from '../components/common/Parallax3D.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
 import heroVideo from '../assets/vovo.mp4'
@@ -148,13 +152,62 @@ const toggleRegistration = () => {
 </script>
 
 <style scoped>
-.events { background: var(--light-gray); min-height: 100vh; }
-.hero-section { position: relative; color: white; padding: 120px 60px 60px; text-align: center; min-height: 300px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
-.hero-content { position: relative; z-index: 2; }
-.hero-section h1 { font-size: 42px; margin-bottom: 15px; }
-.hero-section p { color: white; font-size: 18px; }
+.events { 
+  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.hero-section { 
+  position: relative;
+  color: white;
+  padding: 120px 60px 60px;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(16, 185, 129, 0.2) 100%);
+}
+
+.hero-video { 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.hero-overlay { 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 1;
+}
+
+.hero-content { 
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section h1 { 
+  font-size: 42px;
+  margin-bottom: 15px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section p { 
+  color: white;
+  font-size: 18px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
 .btn-home { 
   margin-top: 20px;
   display: inline-flex;
@@ -179,12 +232,56 @@ const toggleRegistration = () => {
 .btn-home svg {
   flex-shrink: 0;
 }
-.container { max-width: 1400px; margin: 0 auto; padding: 40px 60px; }
-.browse-section { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-.browse-section h2 { font-size: 28px; margin-bottom: 25px; }
+.container { 
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.browse-section { 
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.browse-section h2 { 
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
 .filters { display: flex; gap: 20px; margin-bottom: 30px; }
-.filters select, .filters input { flex: 1; }
-.error { text-align: center; padding: 40px; color: var(--gray); }
+.filters select, .filters input { 
+  flex: 1;
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.filters select:focus, .filters input:focus {
+  outline: none;
+  border-color: rgba(16, 185, 129, 0.6);
+  background: rgba(16, 185, 129, 0.1);
+}
+.filters input::placeholder {
+  color: #9ca3af;
+}
+.filters select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+.error { 
+  text-align: center;
+  padding: 40px;
+  color: #9ca3af;
+}
 .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
 .event-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s; }
 .event-card:hover { transform: translateY(-5px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
