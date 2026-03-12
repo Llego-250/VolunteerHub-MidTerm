@@ -285,8 +285,8 @@ const toggleRegistration = () => {
 }
 .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
 .event-card { 
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s;
@@ -295,9 +295,9 @@ const toggleRegistration = () => {
 }
 .event-card:hover { 
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-  border-color: rgba(16, 185, 129, 0.5);
-  background: rgba(16, 185, 129, 0.1);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
 }
 .event-header { 
   height: 180px;
@@ -305,7 +305,7 @@ const toggleRegistration = () => {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3));
-  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+  border-bottom: 1px solid var(--border-primary);
   position: relative;
   overflow: hidden;
 }
@@ -322,47 +322,47 @@ const toggleRegistration = () => {
 
 .event-icon { 
   font-size: 70px;
-  color: #10b981;
+  color: var(--accent-primary);
   filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
   position: relative;
   z-index: 1;
 }
 .event-body { padding: 20px; }
 .category-badge { 
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  box-shadow: var(--shadow-glow);
 }
 .event-body h3 { 
   margin: 12px 0;
   font-size: 18px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 .event-meta { 
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin: 12px 0;
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-size: 13px;
 }
 .event-meta span { display: flex; align-items: center; gap: 6px; }
-.event-meta i { font-size: 14px; color: #10b981; }
+.event-meta i { font-size: 14px; color: var(--accent-primary); }
 .event-body p { 
-  color: #d1d5db;
+  color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.5;
 }
 .event-footer { 
   margin-top: 15px;
   padding-top: 15px;
-  border-top: 1px solid rgba(16, 185, 129, 0.2);
+  border-top: 1px solid var(--border-primary);
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
 .modal { 
