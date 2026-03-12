@@ -366,9 +366,9 @@ const toggleRegistration = () => {
 }
 .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
 .modal { 
-  background: rgba(0, 0, 0, 0.95);
+  background: var(--overlay-dark);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid var(--border-primary);
   border-radius: 16px;
   max-width: 600px;
   width: 90%;
@@ -384,20 +384,20 @@ const toggleRegistration = () => {
   border: none;
   font-size: 32px;
   cursor: pointer;
-  color: #9ca3af;
+  color: var(--text-muted);
   transition: color 0.2s;
 }
 .modal-close:hover {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 .modal-header { 
   text-align: center;
   padding: 40px 40px 20px;
-  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  border-bottom: 1px solid var(--border-primary);
 }
 .modal-icon { 
   font-size: 60px;
-  color: #10b981;
+  color: var(--accent-primary);
   display: block;
   margin-bottom: 15px;
   filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
@@ -405,18 +405,18 @@ const toggleRegistration = () => {
 .modal-header h2 { 
   margin: 10px 0;
   font-size: 28px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 .modal-body { padding: 30px 40px; }
 .description { 
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 25px;
-  color: #d1d5db;
+  color: var(--text-secondary);
 }
 .modal-info { 
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 25px;
@@ -427,14 +427,14 @@ const toggleRegistration = () => {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #d1d5db;
+  color: var(--text-secondary);
 }
 .info-item i { 
   font-size: 16px;
-  color: #10b981;
+  color: var(--accent-primary);
 }
 .info-item strong { 
-  color: #ffffff;
+  color: var(--text-primary);
   margin-right: 8px;
 }
 .btn-register, .btn-unregister { 
@@ -448,9 +448,9 @@ const toggleRegistration = () => {
   transition: all 0.3s;
 }
 .btn-register { 
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  box-shadow: var(--shadow-glow);
 }
 .btn-register:hover {
   transform: translateY(-2px);
@@ -466,7 +466,7 @@ const toggleRegistration = () => {
   box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
 }
 .btn-register:disabled { 
-  background: #4b5563;
+  background: var(--text-muted);
   cursor: not-allowed;
   box-shadow: none;
 }
