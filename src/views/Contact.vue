@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <Navbar />
+    <MinimalNavbar />
     
     <div class="page-header">
       <h1>Contact Us</h1>
@@ -128,7 +128,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Navbar from '../components/common/Navbar.vue'
+import MinimalNavbar from '../components/common/MinimalNavbar.vue'
 
 const form = ref({ name: '', email: '', subject: '', message: '' })
 
