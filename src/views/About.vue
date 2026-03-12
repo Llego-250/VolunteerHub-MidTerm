@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <Navbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
+    <MinimalNavbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
     
     <section class="hero">
       <video autoplay loop muted playsinline class="hero-video">
@@ -123,7 +123,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Navbar from '../components/common/Navbar.vue'
+import MinimalNavbar from '../components/common/MinimalNavbar.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
 import { Search, Calendar, Users, TrendingUp, Heart } from 'lucide-vue-next'
