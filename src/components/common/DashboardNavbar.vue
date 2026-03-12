@@ -86,11 +86,6 @@ const handleSearch = () => {
   emit('search', searchQuery.value)
 }
 
-const triggerUpload = () => {
-  userDropdownOpen.value = false
-  fileInput.value?.click()
-}
-
 const handleProfileUpload = (e) => {
   const file = e.target.files[0]
   if (file) {
