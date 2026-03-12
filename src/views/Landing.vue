@@ -1,23 +1,7 @@
 <template>
   <div class="landing">
     <!-- Navigation with clear branding -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="logo">
-          <Heart :size="28" color="#10b981" />
-          <span class="logo-text">VolunteerHub</span>
-        </div>
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <a href="#testimonials">Testimonials</a>
-        </div>
-        <div class="nav-buttons">
-          <button @click="showLogin = true" class="btn-login">Log in</button>
-          <button @click="showSignup = true" class="btn-signup">Sign up</button>
-        </div>
-      </div>
-    </nav>
+    <MinimalNavbar @showLogin="showLogin = true" @showSignup="showSignup = true" />
 
     <!-- Hero Section with clear value proposition -->
     <section class="hero">
@@ -259,6 +243,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
+import MinimalNavbar from '../components/common/MinimalNavbar.vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
 import LoginModal from '../components/common/LoginModal.vue'
 import SignupModal from '../components/common/SignupModal.vue'
@@ -295,88 +280,6 @@ const scrollTo = (id) => {
   margin: 0;
   padding: 0;
   font-family: system-ui, -apple-system, sans-serif;
-}
-
-/* Navigation */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1f2937;
-}
-
-.nav-links {
-  display: flex;
-  gap: 40px;
-}
-
-.nav-links a {
-  color: #4b5563;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #10b981;
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.btn-login {
-  padding: 10px 20px;
-  background: transparent;
-  border: none;
-  color: #4b5563;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.btn-login:hover {
-  color: #10b981;
-}
-
-.btn-signup {
-  padding: 10px 24px;
-  background: #10b981;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-signup:hover {
-  background: #059669;
 }
 
 /* Hero Section */
