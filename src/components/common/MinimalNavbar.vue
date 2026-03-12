@@ -6,13 +6,15 @@
         
         <div class="nav-actions">
           <ThemeToggle />
-          <button v-if="!authStore.isAuthenticated" @click="$emit('showLogin')" class="nav-link">Log in</button>
-          <button v-if="!authStore.isAuthenticated" @click="$emit('showSignup')" class="nav-link nav-link-signup">Sign up</button>
-        </div>
-        
-        <!-- Authenticated - show user info -->
-        <div v-else class="nav-actions">
-          <div class="user-dropdown">
+          
+          <!-- Not authenticated - show login/signup -->
+          <template v-if="!authStore.isAuthenticated">
+            <button @click="$emit('showLogin')" class="nav-link">Log in</button>
+            <button @click="$emit('showSignup')" class="nav-link nav-link-signup">Sign up</button>
+          </template>
+          
+          <!-- Authenticated - show user dropdown -->
+          <div v-else class="user-dropdown">
             <div class="avatar-circle" @click="userDropdownOpen = !userDropdownOpen">
               <img v-if="authStore.currentUser?.profilePic" :src="authStore.currentUser.profilePic" alt="Profile" />
               <span v-else>{{ authStore.currentUser?.name?.charAt(0).toUpperCase() }}</span>
