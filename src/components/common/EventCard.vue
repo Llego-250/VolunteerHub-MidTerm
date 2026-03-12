@@ -3,7 +3,8 @@
     <!-- Header Section -->
     <div class="card-header">
       <div class="event-visual">
-        <component :is="iconComponent" :size="48" :stroke-width="1.5" class="event-icon" />
+        <component :is="iconComponent" :size="48" :stroke-width="1.5" class="event-icon" v-if="iconComponent" />
+        <span v-else class="event-emoji">📅</span>
       </div>
       <span v-if="price && !isFree" class="event-price">{{ price }}</span>
     </div>
@@ -91,7 +92,14 @@ const iconMap = {
   'Calendar': Calendar
 }
 
-const iconComponent = computed(() => iconMap[props.icon] || Calendar)
+const iconComponent = computed(() => {
+  try {
+    return iconMap[props.icon] || Calendar
+  } catch (error) {
+    console.error('Icon error:', error)
+    return null
+  }
+})
 
 const isFree = computed(() => !props.price || props.price.toUpperCase() === 'FREE')
 
@@ -164,6 +172,11 @@ const handleAction = () => {
 
 .event-icon {
   color: white;
+}
+
+.event-emoji {
+  font-size: 48px;
+  line-height: 1;
 }
 
 .event-price {
