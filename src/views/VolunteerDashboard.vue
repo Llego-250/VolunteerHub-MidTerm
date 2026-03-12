@@ -26,7 +26,7 @@
                   </button>
                 </div>
                 <div class="spotlight-icon">
-                  <i :class="getIcon(featuredEvent.category)"></i>
+                  <component :is="getIconComponent(featuredEvent.category)" :size="120" :stroke-width="1.5" />
                 </div>
               </div>
             </div>
@@ -38,7 +38,7 @@
                 <EventCard
                   v-for="(event, index) in filteredEvents" 
                   :key="event.id"
-                  :emoji="getEmoji(event.category)"
+                  :icon="getIcon(event.category)"
                   :price="event.price"
                   :category="event.category"
                   :category-color="getCategoryColor(event.category)"
@@ -133,6 +133,17 @@ import NotificationsPanel from '../components/common/NotificationsPanel.vue'
 import ProfileSettings from '../components/common/ProfileSettings.vue'
 import EventCard from '../components/common/EventCard.vue'
 import GroupCard from '../components/common/GroupCard.vue'
+import { 
+  Leaf,
+  BookOpen,
+  Heart,
+  Home,
+  Paw,
+  AlertCircle,
+  UserCheck,
+  Baby,
+  Calendar
+} from 'lucide-vue-next'
 
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
@@ -219,18 +230,18 @@ const categoryEmojis = {
 }
 
 const categoryIcons = {
-  'Environment': 'fas fa-leaf',
-  'Education': 'fas fa-book',
-  'Healthcare': 'fas fa-heartbeat',
-  'Community': 'fas fa-heart',
-  'Animals': 'fas fa-paw',
-  'Disaster Relief': 'fas fa-hands-helping',
-  'Elderly Care': 'fas fa-user-friends',
-  'Youth Programs': 'fas fa-child'
+  'Environment': 'Leaf',
+  'Education': 'BookOpen',
+  'Healthcare': 'Heart',
+  'Community': 'Home',
+  'Animals': 'Paw',
+  'Disaster Relief': 'AlertCircle',
+  'Elderly Care': 'UserCheck',
+  'Youth Programs': 'Baby'
 }
 
 const getEmoji = (category) => categoryEmojis[category] || '📅'
-const getIcon = (category) => categoryIcons[category] || 'fas fa-calendar'
+const getIcon = (category) => categoryIcons[category] || 'Calendar'
 
 const getCategoryColor = (category) => {
   const colors = {
