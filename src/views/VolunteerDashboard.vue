@@ -604,6 +604,15 @@ const handleSearch = (query) => {
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   animation: fadeInUp 0.6s ease-out 0.2s backwards;
+  transition: all 0.3s ease;
+}
+
+/* Dark Theme Groups Section */
+.dark-theme .groups-section {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .groups-section h3 {
@@ -611,6 +620,13 @@ const handleSearch = (query) => {
   font-weight: 700;
   color: #1f2937;
   margin: 0 0 20px;
+  transition: color 0.3s ease;
+}
+
+/* Dark Theme Groups Title */
+.dark-theme .groups-section h3 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
 
 .groups-grid {
@@ -676,13 +692,25 @@ const handleSearch = (query) => {
   font-size: 42px; 
   margin: 0 0 10px; 
   color: #1f2937; 
-  font-weight: 700; 
+  font-weight: 700;
+  transition: color 0.3s ease;
 }
 
 .page-header p { 
   font-size: 18px; 
   color: #6b7280; 
-  margin: 0; 
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* Dark Theme Page Header */
+.dark-theme .page-header h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .page-header p {
+  color: #d1d5db;
 }
 
 /* Responsive */
