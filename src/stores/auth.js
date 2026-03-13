@@ -1,3 +1,4 @@
+//stores/auth.js used to manage user authentication and profile data
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
