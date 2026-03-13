@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 
+//defined routes for application, with aunthentication,role based access
 const routes = [
   { path: '/', name: 'Landing', component: () => import('../views/Landing.vue') },
   { path: '/events', name: 'Events', component: () => import('../views/Events.vue') },
