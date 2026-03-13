@@ -292,6 +292,12 @@ form {
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
+.form-group input:focus-visible,
+.form-group select:focus-visible {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
 .form-group select {
   cursor: pointer;
 }
@@ -310,10 +316,28 @@ form {
   transition: all 0.2s ease;
 }
 
-.btn-submit:hover { 
+.btn-submit:hover,
+.btn-submit:focus { 
   background: var(--primary-hover);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px var(--primary-glow);
+  outline: none;
+}
+
+.btn-submit:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit:disabled:hover {
+  background: var(--primary-color);
+  box-shadow: none;
 }
 
 .error { 
@@ -338,10 +362,20 @@ form {
   cursor: pointer; 
   text-decoration: none;
   font-weight: 600;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: all 0.2s ease;
 }
 
-.footer-text a:hover { 
-  text-decoration: underline; 
+.footer-text a:hover,
+.footer-text a:focus { 
+  text-decoration: underline;
+  outline: none;
+}
+
+.footer-text a:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 /* Fallback for browsers without backdrop-filter */
