@@ -8,11 +8,7 @@
         <h3>{{ stats.events }}</h3>
         <p>Total Events</p>
       </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
-        <Users :size="32" />
-      </div>
+      
       <div class="stat-content">
         <h3>{{ stats.volunteers }}</h3>
         <p>Total Volunteers</p>
