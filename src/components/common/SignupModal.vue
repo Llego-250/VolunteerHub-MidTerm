@@ -320,6 +320,7 @@ const handleSignup = () => {
   error.value = ''
   
   if (authStore.signup(form.value)) {
+    emit('signupSuccess')
     emit('close')
     router.push(form.value.role === 'volunteer' ? '/volunteer-dashboard' : '/organizer-dashboard')
   } else {

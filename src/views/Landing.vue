@@ -203,8 +203,19 @@
     </footer>
 
     <!-- Modals -->
-    <LoginModal v-if="showLogin" @close="showLogin = false" @switchToSignup="showLogin = false; showSignup = true" />
-    <SignupModal v-if="showSignup" @close="showSignup = false" :defaultRole="signupRole" @switchToLogin="showSignup = false; showLogin = true" />
+    <LoginModal 
+      v-if="showLogin" 
+      @close="showLogin = false" 
+      @switchToSignup="showLogin = false; showSignup = true"
+      @loginSuccess="handleLoginSuccess"
+    />
+    <SignupModal 
+      v-if="showSignup" 
+      @close="showSignup = false" 
+      :defaultRole="signupRole" 
+      @switchToLogin="showSignup = false; showLogin = true"
+      @signupSuccess="handleSignupSuccess"
+    />
   </div>
 </template>
 
