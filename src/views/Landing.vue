@@ -65,7 +65,7 @@
 
     <!-- Featured Events Preview -->
     <section class="featured-section">
-      <h2 class="section-title">Upcoming Opportunities</h2>
+      <h2 class="section-titles">Upcoming Opportunities</h2>
       <p class="section-subtitle">Join these featured events and start making an impact today</p>
       
       <FeaturedEvents :events="displayedEvents" />
@@ -464,6 +464,13 @@ const scrollTo = (id) => {
   margin: 0 auto;
 }
 
+.section-titles {
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
 .section-title {
   font-size: 42px;
   text-align: center;

@@ -600,3 +600,310 @@ input, select, textarea {
               box-shadow 0.3s ease,
               text-shadow 0.3s ease;
 }
+
+/* ============================================
+   COMMON COMPONENTS DARK MODE ENHANCEMENTS
+   ============================================ */
+
+/* Profile Settings Dark Mode */
+.dark-theme .profile-settings {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.dark-theme .profile-sidebar button {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #d1d5db;
+}
+
+.dark-theme .profile-sidebar button:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .profile-sidebar button.active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5);
+}
+
+.dark-theme .profile-card {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .profile-form h2,
+.dark-theme .profile-form label {
+  color: #ffffff;
+}
+
+.dark-theme .profile-form input,
+.dark-theme .profile-form textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+.dark-theme .profile-form input:focus,
+.dark-theme .profile-form textarea:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* Notifications Panel Dark Mode */
+.dark-theme .notifications-panel {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.dark-theme .notifications-panel h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .notification {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+}
+
+.dark-theme .notification:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateX(5px);
+}
+
+.dark-theme .notification p {
+  color: #d1d5db;
+}
+
+.dark-theme .notification small {
+  color: #9ca3af;
+}
+
+.dark-theme .empty {
+  color: #9ca3af;
+}
+
+/* Settings Panel Dark Mode */
+.dark-theme .settings-panel {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.dark-theme .settings-panel h2,
+.dark-theme .settings-panel h3 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+}
+
+.dark-theme .settings-panel label {
+  color: #d1d5db;
+}
+
+.dark-theme .settings-panel input[type="checkbox"] {
+  accent-color: #10b981;
+}
+
+.dark-theme .settings-panel button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .settings-panel button:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  transform: translateY(-2px);
+}
+
+.dark-theme .settings-panel button.danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.dark-theme .settings-panel button.danger:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+/* Featured Events Dark Mode */
+.dark-theme .featured-events {
+  background: transparent;
+}
+
+.dark-theme .featured-events h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Header Dark Mode */
+.dark-theme .header {
+  background: rgba(0, 0, 0, 0.98);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.dark-theme .header h1,
+.dark-theme .header a {
+  color: #ffffff;
+}
+
+.dark-theme .header a:hover {
+  color: #10b981;
+}
+
+/* Form Elements Global Dark Mode */
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+  color: #9ca3af;
+}
+
+.dark-theme input:focus,
+.dark-theme select:focus,
+.dark-theme textarea:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Button Global Dark Mode */
+.dark-theme button:not(.theme-toggle):not(.close-btn):not(.btn-search):not(.btn-close-search) {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme button:not(.theme-toggle):not(.close-btn):not(.btn-search):not(.btn-close-search):hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Select Dropdown Dark Mode */
+.dark-theme select {
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Checkbox and Radio Dark Mode */
+.dark-theme input[type="checkbox"],
+.dark-theme input[type="radio"] {
+  accent-color: #10b981;
+}
+
+/* Link Dark Mode */
+.dark-theme a:not(.nav-link):not(.nav-logo) {
+  color: #10b981;
+}
+
+.dark-theme a:not(.nav-link):not(.nav-logo):hover {
+  color: #34d399;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* Divider Dark Mode */
+.dark-theme hr {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Badge Dark Mode */
+.dark-theme .badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Alert Dark Mode */
+.dark-theme .alert {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #d1d5db;
+}
+
+/* Error Message Dark Mode */
+.dark-theme .error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+/* Success Message Dark Mode */
+.dark-theme .success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+/* Loading Spinner Dark Mode */
+.dark-theme .spinner {
+  border-color: rgba(16, 185, 129, 0.2);
+  border-top-color: #10b981;
+}
+
+/* Tooltip Dark Mode */
+.dark-theme .tooltip {
+  background: rgba(0, 0, 0, 0.95);
+  color: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Dropdown Menu Dark Mode */
+.dark-theme .dropdown-menu {
+  background: rgba(10, 10, 10, 0.98);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.dark-theme .dropdown-item {
+  color: #d1d5db;
+}
+
+.dark-theme .dropdown-item:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+/* Avatar Dark Mode */
+.dark-theme .avatar-circle {
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .avatar-circle:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Smooth Transitions for All Elements */
+* {
+  transition: background 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease,
+              transform 0.3s ease;
+}

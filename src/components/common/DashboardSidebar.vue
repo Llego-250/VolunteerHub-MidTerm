@@ -63,7 +63,19 @@ const sidebarItems = computed(() => {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 98;
 }
+
+/* Dark Theme Sidebar */
+.dark-theme .sidebar {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(0, 0, 0, 0.95) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
 .sidebar nav { 
   display: flex; 
   flex-direction: column; 
@@ -71,6 +83,7 @@ const sidebarItems = computed(() => {
   width: 100%;
   align-items: center;
 }
+
 .sidebar button { 
   width: 50px;
   height: 50px;
@@ -82,25 +95,61 @@ const sidebarItems = computed(() => {
   border-radius: 12px;
   cursor: pointer; 
   position: relative;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
+
 .sidebar button:hover { 
   background: rgba(255, 255, 255, 0.5);
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
+
 .sidebar button.active { 
   background: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+/* Dark Theme Buttons */
+.dark-theme .sidebar button {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dark-theme .sidebar button:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .sidebar button.active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-color: #10b981;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5);
+}
+
 .sidebar button i { 
   font-size: 22px; 
   color: #1f2937;
+  transition: all 0.3s ease;
 }
+
+.sidebar button:hover i {
+  transform: scale(1.1);
+}
+
+.dark-theme .sidebar button i {
+  color: #10b981;
+}
+
+.dark-theme .sidebar button.active i {
+  color: white;
+}
+
 .sidebar button .badge { 
   position: absolute; 
   top: -5px;
   right: -5px; 
-  background: #ef4444; 
+  background: linear-gradient(135deg, #ef4444, #dc2626); 
   color: white; 
   border-radius: 50%; 
   width: 20px;
@@ -110,5 +159,15 @@ const sidebarItems = computed(() => {
   justify-content: center;
   font-size: 11px;
   font-weight: bold;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+  transition: all 0.3s ease;
+}
+
+.sidebar button:hover .badge {
+  transform: scale(1.1);
+}
+
+.dark-theme .sidebar button .badge {
+  box-shadow: 0 2px 12px rgba(239, 68, 68, 0.6);
 }
 </style>
