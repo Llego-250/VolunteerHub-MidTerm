@@ -28,9 +28,11 @@
 import { ref } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useEventsStore } from '../../stores/events'
+import { useNotificationsStore } from '../../stores/notifications'
 
 const authStore = useAuthStore()
 const eventsStore = useEventsStore()
+const notificationsStore = useNotificationsStore()
 const emit = defineEmits(['created'])
 
 const form = ref({
@@ -44,11 +46,32 @@ const form = ref({
 })
 
 const handleCreate = () => {
-  eventsStore.createEvent({
+  // Create the event
+  const eventData = {
     ...form.value,
     organizerId: authStore.currentUser.id
+  }
+  eventsStore.createEvent(eventData)
+  
+  // Get the newly created event (it will be the last one)
+  const newEvent = eventsStore.events[eventsStore.events.length - 1]
+  
+  // Format date for notification
+  const formattedDate = new Date(form.value.date).toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric',
+    year: 'numeric'
   })
-  alert('Event created!')
+  
+  // Notify all volunteers about the new event
+  notificationsStore.notifyNewEvent(
+    newEvent.id,
+    form.value.title,
+    formattedDate,
+    form.value.category
+  )
+  
+  alert('Event created and volunteers notified!')
   emit('created')
 }
 </script>

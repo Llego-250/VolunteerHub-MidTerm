@@ -17,8 +17,10 @@
 <script setup>
 import { computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
+import { useNotificationsStore } from '../../stores/notifications'
 
 const authStore = useAuthStore()
+const notificationsStore = useNotificationsStore()
 const currentUser = computed(() => authStore.currentUser)
 
 const props = defineProps({
@@ -27,6 +29,10 @@ const props = defineProps({
 })
 defineEmits(['navigate'])
 
+const unreadCount = computed(() => 
+  notificationsStore.getUnreadCount(authStore.currentUser?.id)
+)
+
 const sidebarItems = computed(() => {
   if (props.role === 'organizer') {
     return [
@@ -34,7 +40,7 @@ const sidebarItems = computed(() => {
       { id: 'manage', icon: 'fas fa-tasks' },
       { id: 'message', icon: 'fas fa-envelope' },
       { id: 'profile', icon: 'fas fa-user' },
-      { id: 'notifications', icon: 'fas fa-bell' },
+      { id: 'notifications', icon: 'fas fa-bell', badge: unreadCount.value },
       { id: 'calendar', icon: 'fas fa-calendar' }
     ]
   }
@@ -42,7 +48,7 @@ const sidebarItems = computed(() => {
     { id: 'browse', icon: 'fas fa-search' },
     { id: 'registered', icon: 'fas fa-calendar-check' },
     { id: 'profile', icon: 'fas fa-user' },
-    { id: 'notifications', icon: 'fas fa-bell' },
+    { id: 'notifications', icon: 'fas fa-bell', badge: unreadCount.value },
     { id: 'calendar', icon: 'fas fa-calendar' }
   ]
 })
