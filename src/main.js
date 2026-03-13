@@ -17,4 +17,3 @@ app.mount('#app')
 // Initialize theme on app startup
 const themeStore = useThemeStore()
 themeStore.initTheme()
-

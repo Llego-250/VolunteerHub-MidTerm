@@ -23,6 +23,7 @@
         <CheckCircle :size="32" />
       </div>
       <div class="stat-content">
+        //ongoing and upcoming events
         <h3>{{ stats.active }}</h3>
         <p>Active Events</p>
       </div>
