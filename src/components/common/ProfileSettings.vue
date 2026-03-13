@@ -162,3 +162,130 @@ textarea { min-height: 80px; resize: vertical; }
 .settings-section button { padding: 10px 20px; margin: 10px 10px 10px 0; }
 .danger { background: #dc3545; color: white; }
 </style>
+
+
+/* Responsive Profile Settings */
+@media (max-width: 1024px) {
+  .profile-container {
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+  }
+  
+  .avatar-large {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-settings {
+    padding: 20px;
+  }
+  
+  .profile-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .profile-sidebar button {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .profile-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .profile-card {
+    padding: 20px;
+  }
+  
+  .avatar-large {
+    width: 90px;
+    height: 90px;
+    font-size: 36px;
+  }
+  
+  .profile-card h3 {
+    font-size: 18px;
+  }
+  
+  .profile-card p {
+    font-size: 13px;
+  }
+  
+  .profile-form h2 {
+    font-size: 20px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .settings-section h2 {
+    font-size: 20px;
+  }
+  
+  .settings-section h3 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-settings {
+    padding: 15px;
+  }
+  
+  .profile-sidebar {
+    flex-direction: column;
+  }
+  
+  .profile-sidebar button {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .profile-card {
+    padding: 15px;
+  }
+  
+  .avatar-large {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+  }
+  
+  .upload-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .profile-card h3 {
+    font-size: 16px;
+  }
+  
+  .profile-form h2 {
+    font-size: 18px;
+  }
+  
+  .form-group label {
+    font-size: 13px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  
+  .settings-section button {
+    width: 100%;
+    margin: 8px 0;
+  }
+}

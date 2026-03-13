@@ -452,3 +452,107 @@ const formatEventDate = (dateStr) => {
   background: rgba(16, 185, 129, 0.6);
 }
 </style>
+
+
+/* Responsive Calendar Sidebar */
+@media (max-width: 1024px) {
+  .calendar-sidebar {
+    width: 280px;
+    top: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-sidebar {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 70vh;
+    top: auto;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark-theme .calendar-sidebar {
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
+  }
+  
+  .calendar-sidebar.open {
+    transform: translateY(0);
+  }
+  
+  .calendar-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  }
+  
+  .calendar-controls {
+    margin-top: 15px;
+  }
+  
+  .upcoming-events {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-sidebar {
+    padding: 15px;
+    max-height: 60vh;
+  }
+  
+  .calendar-header h3 {
+    font-size: 18px;
+  }
+  
+  .close-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 20px;
+  }
+  
+  .calendar-controls {
+    padding: 8px;
+  }
+  
+  .calendar-controls span {
+    font-size: 14px;
+  }
+  
+  .calendar-controls button {
+    padding: 4px 10px;
+    font-size: 14px;
+  }
+  
+  .calendar-day {
+    padding: 6px 2px;
+    font-size: 12px;
+  }
+  
+  .day-header {
+    font-size: 11px;
+    padding: 4px;
+  }
+  
+  .upcoming-events h4 {
+    font-size: 13px;
+  }
+  
+  .event-item {
+    padding: 8px;
+  }
+  
+  .event-date {
+    font-size: 11px;
+    min-width: 45px;
+  }
+  
+  .event-title {
+    font-size: 12px;
+  }
+}
