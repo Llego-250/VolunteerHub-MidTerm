@@ -18,7 +18,7 @@ const mockEvents = [
   { id: 4, title: 'Animal Shelter Support', category: 'Animals', date: 'Oct 5', time: '11:00', location: 'City Animal Shelter', description: 'Help care for animals and assist with shelter operations.', organizerId: 1, volunteers: [], maxVolunteers: 15, icon: 'fas fa-paw' },
   { id: 5, title: 'Tree Planting Initiative', category: 'Environment', date: 'Oct 12', time: '08:00', location: 'City Park', description: 'Join our tree planting campaign to create a greener community.', organizerId: 1, volunteers: [], maxVolunteers: 40, icon: 'fas fa-leaf' }
 ]
-
+//manage event data
 export const useEventsStore = defineStore('events', {
   state: () => {
     const stored = localStorage.getItem('volunteerHubEvents')
