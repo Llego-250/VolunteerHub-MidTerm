@@ -11,8 +11,22 @@
     </div>
     <div class="calendar-grid">
       <div class="day-header" v-for="day in ['S','M','T','W','T','F','S']" :key="day">{{ day }}</div>
-      <div v-for="date in calendarDates" :key="date.key" class="calendar-day" :class="{ 'other-month': !date.current, 'has-event': date.hasEvent }">
+      <div 
+        v-for="date in calendarDates" 
+        :key="date.key" 
+        class="calendar-day" 
+        :class="{ 'other-month': !date.current, 'has-event': date.hasEvent }"
+        :title="date.eventTitle || ''"
+      >
         {{ date.day }}
+        <span v-if="date.hasEvent" class="event-dot"></span>
+      </div>
+    </div>
+    <div v-if="upcomingEvents.length > 0" class="upcoming-events">
+      <h4>Upcoming Events</h4>
+      <div v-for="event in upcomingEvents" :key="event.id" class="event-item">
+        <div class="event-date">{{ formatEventDate(event.date) }}</div>
+        <div class="event-title">{{ event.title }}</div>
       </div>
     </div>
   </div>
@@ -49,22 +63,76 @@ const calendarDates = computed(() => {
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const prevMonthDays = new Date(year, month, 0).getDate()
   
-  const eventDates = new Set((props.events || []).map(e => new Date(e.date).toDateString()))
+  // Parse event dates - handle formats like "Oct 15, 2026" or full dates
+  const eventsByDate = new Map()
+  if (props.events && props.events.length > 0) {
+    props.events.forEach(e => {
+      if (e.date) {
+        try {
+          // Parse the date
+          const eventDate = new Date(e.date)
+          
+          if (!isNaN(eventDate.getTime())) {
+            const dateStr = eventDate.toDateString()
+            if (!eventsByDate.has(dateStr)) {
+              eventsByDate.set(dateStr, [])
+            }
+            eventsByDate.get(dateStr).push(e.title)
+          }
+        } catch (err) {
+          console.warn('Could not parse event date:', e.date)
+        }
+      }
+    })
+  }
   
   const dates = []
   for (let i = firstDay - 1; i >= 0; i--) {
-    dates.push({ day: prevMonthDays - i, current: false, key: `prev-${i}` })
+    dates.push({ day: prevMonthDays - i, current: false, key: `prev-${i}`, hasEvent: false })
   }
   for (let i = 1; i <= daysInMonth; i++) {
     const dateStr = new Date(year, month, i).toDateString()
-    dates.push({ day: i, current: true, hasEvent: eventDates.has(dateStr), key: `curr-${i}` })
+    const events = eventsByDate.get(dateStr) || []
+    dates.push({ 
+      day: i, 
+      current: true, 
+      hasEvent: events.length > 0, 
+      eventTitle: events.join(', '),
+      key: `curr-${i}` 
+    })
   }
   const remaining = 42 - dates.length
   for (let i = 1; i <= remaining; i++) {
-    dates.push({ day: i, current: false, key: `next-${i}` })
+    dates.push({ day: i, current: false, key: `next-${i}`, hasEvent: false })
   }
   return dates
 })
+
+const upcomingEvents = computed(() => {
+  if (!props.events || props.events.length === 0) return []
+  
+  const now = new Date()
+  return props.events
+    .filter(e => {
+      try {
+        const eventDate = new Date(e.date)
+        return eventDate >= now
+      } catch {
+        return false
+      }
+    })
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .slice(0, 5)
+})
+
+const formatEventDate = (dateStr) => {
+  try {
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  } catch {
+    return dateStr
+  }
+}
 </script>
 
 <style scoped>
@@ -72,8 +140,8 @@ const calendarDates = computed(() => {
   position: fixed; 
   right: 0; 
   top: 150px; 
-  width: 300px; 
-  height: calc(70vh - 50px); 
+  width: 320px; 
+  max-height: calc(100vh - 180px); 
   background: white; 
   border: 1px solid var(--border); 
   border-radius: 30px 0 0 30px; 
@@ -251,6 +319,19 @@ const calendarDates = computed(() => {
   color: white; 
   font-weight: bold;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  position: relative;
+}
+
+.event-dot {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
 }
 
 .dark-theme .calendar-day.has-event {
@@ -264,6 +345,80 @@ const calendarDates = computed(() => {
 
 .dark-theme .calendar-day.has-event:hover {
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
+}
+
+/* Upcoming Events Section */
+.upcoming-events {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.upcoming-events h4 {
+  margin: 0 0 15px 0;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.dark-theme .upcoming-events h4 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.event-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #10b981;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.event-item:hover {
+  background: rgba(16, 185, 129, 0.1);
+  transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.dark-theme .event-item {
+  background: rgba(16, 185, 129, 0.1);
+  border-left-color: #34d399;
+}
+
+.dark-theme .event-item:hover {
+  background: rgba(16, 185, 129, 0.15);
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.3);
+}
+
+.event-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #10b981;
+  min-width: 50px;
+  transition: color 0.3s ease;
+}
+
+.dark-theme .event-date {
+  color: #34d399;
+}
+
+.event-title {
+  font-size: 13px;
+  color: #1f2937;
+  font-weight: 500;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.dark-theme .event-title {
+  color: #d1d5db;
 }
 
 /* Custom Scrollbar */

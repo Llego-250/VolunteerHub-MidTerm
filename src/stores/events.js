@@ -12,11 +12,11 @@ const categoryIcons = {
 }
 
 const mockEvents = [
-  { id: 1, title: 'Beach Cleanup Drive', category: 'Environment', date: 'Oct 15', time: '09:00', location: 'Santa Monica Beach', description: 'Join us for a community beach cleanup to protect marine life and keep our beaches beautiful.', organizerId: 1, volunteers: [], maxVolunteers: 30, icon: 'fas fa-leaf' },
-  { id: 2, title: 'Food Bank Volunteer', category: 'Community', date: 'Sep 20', time: '10:00', location: 'Downtown Community Center', description: 'Help sort and distribute food to families in need in our community.', organizerId: 1, volunteers: [], maxVolunteers: 25, icon: 'fas fa-heart' },
-  { id: 3, title: 'Reading Program for Kids', category: 'Education', date: 'Sep 25', time: '14:00', location: 'Central Library', description: 'Volunteer to read stories and help children develop their reading skills.', organizerId: 1, volunteers: [], maxVolunteers: 20, icon: 'fas fa-book' },
-  { id: 4, title: 'Animal Shelter Support', category: 'Animals', date: 'Oct 5', time: '11:00', location: 'City Animal Shelter', description: 'Help care for animals and assist with shelter operations.', organizerId: 1, volunteers: [], maxVolunteers: 15, icon: 'fas fa-paw' },
-  { id: 5, title: 'Tree Planting Initiative', category: 'Environment', date: 'Oct 12', time: '08:00', location: 'City Park', description: 'Join our tree planting campaign to create a greener community.', organizerId: 1, volunteers: [], maxVolunteers: 40, icon: 'fas fa-leaf' }
+  { id: 1, title: 'Beach Cleanup Drive', category: 'Environment', date: 'Oct 15, 2026', time: '09:00', location: 'Santa Monica Beach', description: 'Join us for a community beach cleanup to protect marine life and keep our beaches beautiful.', organizerId: 1, volunteers: [], maxVolunteers: 30, icon: 'fas fa-leaf' },
+  { id: 2, title: 'Food Bank Volunteer', category: 'Community', date: 'Sep 20, 2026', time: '10:00', location: 'Downtown Community Center', description: 'Help sort and distribute food to families in need in our community.', organizerId: 1, volunteers: [], maxVolunteers: 25, icon: 'fas fa-heart' },
+  { id: 3, title: 'Reading Program for Kids', category: 'Education', date: 'Sep 25, 2026', time: '14:00', location: 'Central Library', description: 'Volunteer to read stories and help children develop their reading skills.', organizerId: 1, volunteers: [], maxVolunteers: 20, icon: 'fas fa-book' },
+  { id: 4, title: 'Animal Shelter Support', category: 'Animals', date: 'Oct 5, 2026', time: '11:00', location: 'City Animal Shelter', description: 'Help care for animals and assist with shelter operations.', organizerId: 1, volunteers: [], maxVolunteers: 15, icon: 'fas fa-paw' },
+  { id: 5, title: 'Tree Planting Initiative', category: 'Environment', date: 'Oct 12, 2026', time: '08:00', location: 'City Park', description: 'Join our tree planting campaign to create a greener community.', organizerId: 1, volunteers: [], maxVolunteers: 40, icon: 'fas fa-leaf' }
 ]
 //manage event data
 export const useEventsStore = defineStore('events', {
