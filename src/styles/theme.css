@@ -1,4 +1,4 @@
-/* Dark Theme (Default) */
+/* Dark Theme (Default) - Enhanced Dashboard Effects */
 .dark-theme {
   --bg-primary: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
   --bg-secondary: rgba(0, 0, 0, 0.6);
@@ -35,6 +35,12 @@
   --primary-color: #10b981;
   --primary-hover: #059669;
   --primary-glow: rgba(16, 185, 129, 0.2);
+  
+  /* Dashboard specific */
+  --dashboard-bg: #0a0a0a;
+  --dashboard-card-bg: rgba(16, 185, 129, 0.08);
+  --dashboard-sidebar-bg: rgba(0, 0, 0, 0.95);
+  --dashboard-navbar-bg: rgba(0, 0, 0, 0.98);
 }
 
 /* Light Theme - Beautiful & Professional */
