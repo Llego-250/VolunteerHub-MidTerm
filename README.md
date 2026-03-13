@@ -23,6 +23,7 @@ A volunteer management platform connecting volunteers with organizations.
 
 ```bash
 npm install
+npm install three
 npm run dev
 ```
 
