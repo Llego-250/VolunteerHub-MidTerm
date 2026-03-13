@@ -171,3 +171,78 @@ const sidebarItems = computed(() => {
   box-shadow: 0 2px 12px rgba(239, 68, 68, 0.6);
 }
 </style>
+
+
+/* Responsive Sidebar */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 70px;
+    top: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    min-height: auto;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 20px 20px 0 0;
+    padding: 10px 0;
+    flex-direction: row;
+    justify-content: center;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  .dark-theme .sidebar {
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
+  }
+  
+  .sidebar nav {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sidebar button {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .sidebar button i {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    height: 55px;
+    padding: 8px 0;
+  }
+  
+  .sidebar nav {
+    gap: 8px;
+  }
+  
+  .sidebar button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sidebar button i {
+    font-size: 18px;
+  }
+  
+  .sidebar button .badge {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    top: -3px;
+    right: -3px;
+  }
+}

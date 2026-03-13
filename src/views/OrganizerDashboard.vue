@@ -278,18 +278,125 @@ const toggleCalendarSidebar = () => {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .container {
-    padding: 20px 30px;
+    margin-left: 70px;
+    padding: 30px 40px;
+  }
+  
+  .container.calendar-open {
+    margin-right: 280px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    margin-left: 70px;
+    padding: 25px 30px;
+  }
+  
+  .container.calendar-open {
+    margin-right: 0;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding-top: 70px;
+  }
+  
+  .container {
+    margin-left: 0;
+    padding: 20px 20px;
+    width: 100%;
+  }
+  
+  .container.calendar-open {
+    margin-right: 0;
   }
   
   .dashboard-header {
     flex-direction: column;
     gap: 15px;
+    align-items: stretch;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+  
+  .dashboard-header p {
+    font-size: 14px;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    padding: 14px 20px;
   }
   
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .stat-card {
+    padding: 20px;
+  }
+  
+  .stat-card h3 {
+    font-size: 32px;
+  }
+  
+  .profile-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding-top: 60px;
+  }
+  
+  .container {
+    padding: 15px 15px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+  
+  .dashboard-header p {
+    font-size: 13px;
+  }
+  
+  .btn-primary {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .stat-card {
+    padding: 16px;
+  }
+  
+  .stat-card h3 {
+    font-size: 28px;
+  }
+  
+  .stat-card p {
+    font-size: 13px;
+  }
+  
+  .btn-back {
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

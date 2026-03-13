@@ -90,7 +90,7 @@
             <div class="testimonial-author">
               <div class="author-avatar">👤</div>
               <div class="author-info">
-                <h4>Sarah Johnson</h4>
+                <h4>Solide AZE</h4>
                 <p>Volunteer, 50+ hours</p>
               </div>
             </div>
@@ -103,7 +103,7 @@
             <div class="testimonial-author">
               <div class="author-avatar">👤</div>
               <div class="author-info">
-                <h4>Michael Chen</h4>
+                <h4>Kubwimana Jean Nicolas</h4>
                 <p>Community Organizer</p>
               </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="testimonial-author">
               <div class="author-avatar">👤</div>
               <div class="author-info">
-                <h4>Emily Rodriguez</h4>
+                <h4>Emyline Nyamugisha</h4>
                 <p>Regular Volunteer</p>
               </div>
             </div>
