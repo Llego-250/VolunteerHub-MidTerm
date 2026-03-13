@@ -161,19 +161,6 @@
       </div>
     </section>
 
-    <!-- Security Badges -->
-    <div class="security-badges">
-      <div class="badge">
-        <span>🔒 256-bit SSL Encryption</span>
-      </div>
-      <div class="badge">
-        <span>✓ GDPR Compliant</span>
-      </div>
-      <div class="badge">
-        <span>🛡️ Verified Organizations</span>
-      </div>
-    </div>
-
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-content">
