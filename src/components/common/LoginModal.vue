@@ -24,7 +24,18 @@
             tabindex="0"
             autocomplete="email"
             aria-required="true"
+            :aria-invalid="!!validationErrors.email"
+            :aria-describedby="validationErrors.email ? 'email-error' : undefined"
+            @blur="markTouched('email')"
+            @input="validateEmail"
+            :class="{ 'input-error': validationErrors.email, 'input-success': touched.email && !validationErrors.email && form.email }"
           />
+          <span v-if="validationErrors.email" id="email-error" class="validation-error">
+            <i class="fas fa-exclamation-circle"></i> {{ validationErrors.email }}
+          </span>
+          <span v-else-if="touched.email && form.email" class="validation-success">
+            <i class="fas fa-check-circle"></i> Valid email
+          </span>
         </div>
         <div class="form-group">
           <label for="login-password">Password</label>
@@ -36,7 +47,18 @@
             tabindex="0"
             autocomplete="current-password"
             aria-required="true"
+            :aria-invalid="!!validationErrors.password"
+            :aria-describedby="validationErrors.password ? 'password-error' : undefined"
+            @blur="markTouched('password')"
+            @input="validatePassword"
+            :class="{ 'input-error': validationErrors.password, 'input-success': touched.password && !validationErrors.password && form.password }"
           />
+          <span v-if="validationErrors.password" id="password-error" class="validation-error">
+            <i class="fas fa-exclamation-circle"></i> {{ validationErrors.password }}
+          </span>
+          <span v-else-if="touched.password && form.password" class="validation-success">
+            <i class="fas fa-check-circle"></i> Valid password
+          </span>
         </div>
         <div class="form-group">
           <label id="role-label">Login as:</label>
@@ -69,7 +91,7 @@
           type="submit" 
           class="btn-submit" 
           tabindex="0"
-          :disabled="!form.email || !form.password"
+          :disabled="!isFormValid"
         >
           Login
         </button>
@@ -92,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 import { X } from 'lucide-vue-next'
@@ -103,6 +125,51 @@ const router = useRouter()
 const form = ref({ email: '', password: '', role: 'volunteer' })
 const error = ref('')
 const emailInput = ref(null)
+const touched = ref({ email: false, password: false })
+
+// Validation rules
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const validationErrors = ref({ email: '', password: '' })
+
+// Real-time validation
+const validateEmail = () => {
+  if (!touched.value.email) return
+  
+  if (!form.value.email) {
+    validationErrors.value.email = 'Email is required'
+  } else if (!emailRegex.test(form.value.email)) {
+    validationErrors.value.email = 'Please enter a valid email address'
+  } else {
+    validationErrors.value.email = ''
+  }
+}
+
+const validatePassword = () => {
+  if (!touched.value.password) return
+  
+  if (!form.value.password) {
+    validationErrors.value.password = 'Password is required'
+  } else if (form.value.password.length < 6) {
+    validationErrors.value.password = 'Password must be at least 6 characters'
+  } else {
+    validationErrors.value.password = ''
+  }
+}
+
+// Mark field as touched
+const markTouched = (field) => {
+  touched.value[field] = true
+  if (field === 'email') validateEmail()
+  if (field === 'password') validatePassword()
+}
+
+// Check if form is valid
+const isFormValid = computed(() => {
+  return form.value.email && 
+         form.value.password && 
+         emailRegex.test(form.value.email) &&
+         form.value.password.length >= 6
+})
 
 // Focus management
 onMounted(() => {
@@ -153,6 +220,20 @@ const handleKeyDown = (e) => {
 }
 
 const handleLogin = () => {
+  // Mark all fields as touched
+  touched.value.email = true
+  touched.value.password = true
+  
+  // Validate all fields
+  validateEmail()
+  validatePassword()
+  
+  // Check if there are validation errors
+  if (validationErrors.value.email || validationErrors.value.password) {
+    error.value = 'Please fix the errors above'
+    return
+  }
+  
   error.value = ''
   
   if (authStore.login(form.value.email, form.value.password)) {
@@ -160,10 +241,10 @@ const handleLogin = () => {
       emit('close')
       router.push(form.value.role === 'volunteer' ? '/volunteer-dashboard' : '/organizer-dashboard')
     } else {
-      error.value = 'Role mismatch'
+      error.value = 'Role mismatch. Please select the correct role.'
     }
   } else {
-    error.value = 'Invalid credentials'
+    error.value = 'Invalid email or password. Please try again.'
   }
 }
 
@@ -388,3 +469,73 @@ form {
   }
 }
 </style>
+
+
+/* Validation Styles */
+.input-error {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.input-error:focus {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.input-success {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.input-success:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+.validation-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 4px;
+  animation: slideDown 0.2s ease;
+}
+
+.validation-error i {
+  font-size: 12px;
+}
+
+.validation-success {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #10b981;
+  font-size: 13px;
+  margin-top: 4px;
+  animation: slideDown 0.2s ease;
+}
+
+.validation-success i {
+  font-size: 12px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark theme validation */
+.dark-theme .input-error {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.dark-theme .input-success {
+  background: rgba(16, 185, 129, 0.1);
+}

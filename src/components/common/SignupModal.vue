@@ -23,7 +23,18 @@
             tabindex="0"
             autocomplete="name"
             aria-required="true"
+            :aria-invalid="!!validationErrors.name"
+            :aria-describedby="validationErrors.name ? 'name-error' : undefined"
+            @blur="markTouched('name')"
+            @input="validateName"
+            :class="{ 'input-error': validationErrors.name, 'input-success': touched.name && !validationErrors.name && form.name }"
           />
+          <span v-if="validationErrors.name" id="name-error" class="validation-error">
+            <i class="fas fa-exclamation-circle"></i> {{ validationErrors.name }}
+          </span>
+          <span v-else-if="touched.name && form.name" class="validation-success">
+            <i class="fas fa-check-circle"></i> Valid name
+          </span>
         </div>
         <div class="form-group">
           <label for="signup-email">Email</label>
@@ -35,7 +46,18 @@
             tabindex="0"
             autocomplete="email"
             aria-required="true"
+            :aria-invalid="!!validationErrors.email"
+            :aria-describedby="validationErrors.email ? 'email-error' : undefined"
+            @blur="markTouched('email')"
+            @input="validateEmail"
+            :class="{ 'input-error': validationErrors.email, 'input-success': touched.email && !validationErrors.email && form.email }"
           />
+          <span v-if="validationErrors.email" id="email-error" class="validation-error">
+            <i class="fas fa-exclamation-circle"></i> {{ validationErrors.email }}
+          </span>
+          <span v-else-if="touched.email && form.email" class="validation-success">
+            <i class="fas fa-check-circle"></i> Valid email
+          </span>
         </div>
         <div class="form-group">
           <label for="signup-password">Password</label>
@@ -47,7 +69,18 @@
             tabindex="0"
             autocomplete="new-password"
             aria-required="true"
+            :aria-invalid="!!validationErrors.password"
+            :aria-describedby="validationErrors.password ? 'password-error' : undefined"
+            @blur="markTouched('password')"
+            @input="validatePassword"
+            :class="{ 'input-error': validationErrors.password, 'input-success': touched.password && !validationErrors.password && form.password }"
           />
+          <span v-if="validationErrors.password" id="password-error" class="validation-error">
+            <i class="fas fa-exclamation-circle"></i> {{ validationErrors.password }}
+          </span>
+          <span v-else-if="touched.password && form.password" class="validation-success">
+            <i class="fas fa-check-circle"></i> Strong password
+          </span>
         </div>
         <div class="form-group">
           <label for="signup-role">I want to</label>
@@ -63,17 +96,29 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="signup-phone">Phone Number</label>
+          <label for="signup-phone">Phone Number (optional)</label>
           <input 
             id="signup-phone"
             v-model="form.phone" 
             type="tel" 
             tabindex="0"
             autocomplete="tel"
+            placeholder="(123) 456-7890"
+            :aria-invalid="!!validationErrors.phone"
+            :aria-describedby="validationErrors.phone ? 'phone-error' : undefined"
+            @blur="markTouched('phone')"
+            @input="validatePhone"
+            :class="{ 'input-error': validationErrors.phone, 'input-success': touched.phone && !validationErrors.phone && form.phone }"
           />
+          <span v-if="validationErrors.phone" id="phone-error" class="validation-error">
+            <i class="fas fa-exclamation-circle"></i> {{ validationErrors.phone }}
+          </span>
+          <span v-else-if="touched.phone && form.phone && !validationErrors.phone" class="validation-success">
+            <i class="fas fa-check-circle"></i> Valid phone number
+          </span>
         </div>
         <div class="form-group">
-          <label for="signup-location">Location</label>
+          <label for="signup-location">Location (optional)</label>
           <input 
             id="signup-location"
             v-model="form.location" 
@@ -86,7 +131,7 @@
           type="submit" 
           class="btn-submit" 
           tabindex="0"
-          :disabled="!form.name || !form.email || !form.password"
+          :disabled="!isFormValid"
         >
           Create Account
         </button>
@@ -109,7 +154,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 import { X } from 'lucide-vue-next'
@@ -121,6 +166,85 @@ const router = useRouter()
 const form = ref({ name: '', email: '', password: '', phone: '', location: '', role: 'volunteer' })
 const error = ref('')
 const nameInput = ref(null)
+const touched = ref({ name: false, email: false, password: false, phone: false })
+
+// Validation rules
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const phoneRegex = /^[\d\s\-\+\(\)]+$/
+const validationErrors = ref({ name: '', email: '', password: '', phone: '' })
+
+// Real-time validation
+const validateName = () => {
+  if (!touched.value.name) return
+  
+  if (!form.value.name) {
+    validationErrors.value.name = 'Name is required'
+  } else if (form.value.name.length < 2) {
+    validationErrors.value.name = 'Name must be at least 2 characters'
+  } else if (form.value.name.length > 50) {
+    validationErrors.value.name = 'Name must be less than 50 characters'
+  } else {
+    validationErrors.value.name = ''
+  }
+}
+
+const validateEmail = () => {
+  if (!touched.value.email) return
+  
+  if (!form.value.email) {
+    validationErrors.value.email = 'Email is required'
+  } else if (!emailRegex.test(form.value.email)) {
+    validationErrors.value.email = 'Please enter a valid email address'
+  } else {
+    validationErrors.value.email = ''
+  }
+}
+
+const validatePassword = () => {
+  if (!touched.value.password) return
+  
+  if (!form.value.password) {
+    validationErrors.value.password = 'Password is required'
+  } else if (form.value.password.length < 6) {
+    validationErrors.value.password = 'Password must be at least 6 characters'
+  } else if (form.value.password.length > 50) {
+    validationErrors.value.password = 'Password must be less than 50 characters'
+  } else {
+    validationErrors.value.password = ''
+  }
+}
+
+const validatePhone = () => {
+  if (!touched.value.phone) return
+  
+  if (form.value.phone && !phoneRegex.test(form.value.phone)) {
+    validationErrors.value.phone = 'Please enter a valid phone number'
+  } else if (form.value.phone && form.value.phone.replace(/\D/g, '').length < 10) {
+    validationErrors.value.phone = 'Phone number must be at least 10 digits'
+  } else {
+    validationErrors.value.phone = ''
+  }
+}
+
+// Mark field as touched
+const markTouched = (field) => {
+  touched.value[field] = true
+  if (field === 'name') validateName()
+  if (field === 'email') validateEmail()
+  if (field === 'password') validatePassword()
+  if (field === 'phone') validatePhone()
+}
+
+// Check if form is valid
+const isFormValid = computed(() => {
+  return form.value.name && 
+         form.value.email && 
+         form.value.password && 
+         form.value.name.length >= 2 &&
+         emailRegex.test(form.value.email) &&
+         form.value.password.length >= 6 &&
+         (!form.value.phone || (phoneRegex.test(form.value.phone) && form.value.phone.replace(/\D/g, '').length >= 10))
+})
 
 onMounted(() => {
   if (props.defaultRole) {
@@ -174,13 +298,32 @@ const handleKeyDown = (e) => {
 }
 
 const handleSignup = () => {
+  // Mark all fields as touched
+  touched.value.name = true
+  touched.value.email = true
+  touched.value.password = true
+  if (form.value.phone) touched.value.phone = true
+  
+  // Validate all fields
+  validateName()
+  validateEmail()
+  validatePassword()
+  if (form.value.phone) validatePhone()
+  
+  // Check if there are validation errors
+  if (validationErrors.value.name || validationErrors.value.email || 
+      validationErrors.value.password || validationErrors.value.phone) {
+    error.value = 'Please fix the errors above'
+    return
+  }
+  
   error.value = ''
   
   if (authStore.signup(form.value)) {
     emit('close')
     router.push(form.value.role === 'volunteer' ? '/volunteer-dashboard' : '/organizer-dashboard')
   } else {
-    error.value = 'Email already exists'
+    error.value = 'Email already exists. Please use a different email or login.'
   }
 }
 
@@ -385,3 +528,73 @@ form {
   }
 }
 </style>
+
+
+/* Validation Styles */
+.input-error {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.input-error:focus {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.input-success {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.input-success:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+.validation-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+  animation: slideDown 0.2s ease;
+}
+
+.validation-error i {
+  font-size: 11px;
+}
+
+.validation-success {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #10b981;
+  font-size: 12px;
+  margin-top: 4px;
+  animation: slideDown 0.2s ease;
+}
+
+.validation-success i {
+  font-size: 11px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark theme validation */
+.dark-theme .input-error {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.dark-theme .input-success {
+  background: rgba(16, 185, 129, 0.1);
+}
