@@ -352,9 +352,17 @@ const handleLogout = () => {
   flex-shrink: 0;
 }
 
+@media (max-width: 1024px) {
+  .minimal-nav {
+    width: 92%;
+    padding: 12px 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .minimal-nav {
     width: 95%;
+    padding: 10px 15px;
   }
   
   .minimal-nav.search-expanded {
@@ -362,12 +370,26 @@ const handleLogout = () => {
   }
   
   .nav-content {
-    padding: 8px 16px;
-    gap: 10px;
+    padding: 8px 12px;
+    gap: 8px;
   }
   
   .nav-logo {
     font-size: 16px;
+  }
+  
+  .nav-logo svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .nav-search {
+    max-width: 200px;
+  }
+  
+  .nav-search input {
+    font-size: 13px;
+    padding: 8px 12px;
   }
   
   .nav-search input::placeholder {
@@ -383,6 +405,70 @@ const handleLogout = () => {
   .btn-search {
     width: 32px;
     height: 32px;
+  }
+  
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .minimal-nav {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 0;
+  }
+  
+  .nav-content {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  
+  .nav-logo {
+    font-size: 14px;
+  }
+  
+  .nav-logo svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .nav-search {
+    max-width: 150px;
+  }
+  
+  .nav-search input {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  .avatar-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .btn-search {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .btn-search svg,
+  .btn-close-search svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .dropdown-menu {
+    min-width: 180px;
+    padding: 8px;
+  }
+  
+  .dropdown-item {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }
 </style>
