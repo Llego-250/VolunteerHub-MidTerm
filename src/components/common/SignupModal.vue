@@ -1,48 +1,115 @@
 <template>
-  <div class="modal" @click.self="$emit('close')">
-    <div class="modal-content">
+  <div class="modal" @click.self="$emit('close')" @keydown.esc="$emit('close')">
+    <div class="modal-content" role="dialog" aria-labelledby="signup-title" aria-modal="true">
       <div class="modal-header">
-        <h2>Join VolunteerHub</h2>
-        <button @click="$emit('close')" class="close-btn"><X :size="24" /></button>
+        <h2 id="signup-title">Join VolunteerHub</h2>
+        <button 
+          @click="$emit('close')" 
+          class="close-btn"
+          aria-label="Close signup modal"
+          tabindex="0"
+        >
+          <X :size="24" />
+        </button>
       </div>
       <form @submit.prevent="handleSignup">
         <div class="form-group">
-          <label>Full Name</label>
-          <input v-model="form.name" required />
+          <label for="signup-name">Full Name</label>
+          <input 
+            id="signup-name"
+            ref="nameInput"
+            v-model="form.name" 
+            required 
+            tabindex="0"
+            autocomplete="name"
+            aria-required="true"
+          />
         </div>
         <div class="form-group">
-          <label>Email</label>
-          <input v-model="form.email" type="email" required />
+          <label for="signup-email">Email</label>
+          <input 
+            id="signup-email"
+            v-model="form.email" 
+            type="email" 
+            required 
+            tabindex="0"
+            autocomplete="email"
+            aria-required="true"
+          />
         </div>
         <div class="form-group">
-          <label>Password</label>
-          <input v-model="form.password" type="password" required />
+          <label for="signup-password">Password</label>
+          <input 
+            id="signup-password"
+            v-model="form.password" 
+            type="password" 
+            required 
+            tabindex="0"
+            autocomplete="new-password"
+            aria-required="true"
+          />
         </div>
         <div class="form-group">
-          <label>I want to</label>
-          <select v-model="form.role" required>
+          <label for="signup-role">I want to</label>
+          <select 
+            id="signup-role"
+            v-model="form.role" 
+            required 
+            tabindex="0"
+            aria-required="true"
+          >
             <option value="volunteer">Volunteer for events</option>
             <option value="organizer">Organize events</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Phone Number</label>
-          <input v-model="form.phone" type="tel" />
+          <label for="signup-phone">Phone Number</label>
+          <input 
+            id="signup-phone"
+            v-model="form.phone" 
+            type="tel" 
+            tabindex="0"
+            autocomplete="tel"
+          />
         </div>
         <div class="form-group">
-          <label>Location</label>
-          <input v-model="form.location" placeholder="City, State" />
+          <label for="signup-location">Location</label>
+          <input 
+            id="signup-location"
+            v-model="form.location" 
+            placeholder="City, State" 
+            tabindex="0"
+            autocomplete="address-level2"
+          />
         </div>
-        <button type="submit" class="btn-submit">Create Account</button>
-        <p v-if="error" class="error">{{ error }}</p>
-        <p class="footer-text">Already have an account? <a @click="switchToLogin">Login here</a></p>
+        <button 
+          type="submit" 
+          class="btn-submit" 
+          tabindex="0"
+          :disabled="!form.name || !form.email || !form.password"
+        >
+          Create Account
+        </button>
+        <p v-if="error" class="error" role="alert">{{ error }}</p>
+        <p class="footer-text">
+          Already have an account? 
+          <a 
+            @click="switchToLogin"
+            @keydown.enter="switchToLogin"
+            @keydown.space.prevent="switchToLogin"
+            tabindex="0"
+            role="button"
+          >
+            Login here
+          </a>
+        </p>
       </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 import { X } from 'lucide-vue-next'
@@ -53,14 +120,62 @@ const authStore = useAuthStore()
 const router = useRouter()
 const form = ref({ name: '', email: '', password: '', phone: '', location: '', role: 'volunteer' })
 const error = ref('')
+const nameInput = ref(null)
 
 onMounted(() => {
   if (props.defaultRole) {
     form.value.role = props.defaultRole
   }
+  
+  // Focus the name input when modal opens
+  setTimeout(() => {
+    nameInput.value?.focus()
+  }, 100)
+  
+  // Trap focus within modal
+  document.addEventListener('keydown', handleKeyDown)
 })
 
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeyDown)
+})
+
+const handleKeyDown = (e) => {
+  // Handle Escape key
+  if (e.key === 'Escape') {
+    emit('close')
+  }
+  
+  // Trap Tab key within modal
+  if (e.key === 'Tab') {
+    const modal = document.querySelector('.modal-content')
+    if (!modal) return
+    
+    const focusableElements = modal.querySelectorAll(
+      'button:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+    
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (document.activeElement === firstElement) {
+        e.preventDefault()
+        lastElement.focus()
+      }
+    } else {
+      // Tab
+      if (document.activeElement === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
+    }
+  }
+}
+
 const handleSignup = () => {
+  error.value = ''
+  
   if (authStore.signup(form.value)) {
     emit('close')
     router.push(form.value.role === 'volunteer' ? '/volunteer-dashboard' : '/organizer-dashboard')
@@ -129,9 +244,16 @@ const switchToLogin = () => {
   justify-content: center;
 }
 
-.close-btn:hover { 
+.close-btn:hover,
+.close-btn:focus { 
   background: var(--hover-bg);
   color: var(--text-primary);
+  outline: none;
+}
+
+.close-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 form { 

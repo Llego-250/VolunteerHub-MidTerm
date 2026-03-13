@@ -1,42 +1,98 @@
 <template>
-  <div class="modal" @click.self="$emit('close')">
-    <div class="modal-content">
+  <div class="modal" @click.self="$emit('close')" @keydown.esc="$emit('close')">
+    <div class="modal-content" role="dialog" aria-labelledby="login-title" aria-modal="true">
       <div class="modal-header">
-        <h2>Login to VolunteerHub</h2>
-        <button @click="$emit('close')" class="close-btn"><X :size="24" /></button>
+        <h2 id="login-title">Login to VolunteerHub</h2>
+        <button 
+          @click="$emit('close')" 
+          class="close-btn" 
+          aria-label="Close login modal"
+          tabindex="0"
+        >
+          <X :size="24" />
+        </button>
       </div>
       <form @submit.prevent="handleLogin">
         <div class="form-group">
-          <label>Email</label>
-          <input v-model="form.email" type="email" required />
+          <label for="login-email">Email</label>
+          <input 
+            id="login-email"
+            ref="emailInput"
+            v-model="form.email" 
+            type="email" 
+            required 
+            tabindex="0"
+            autocomplete="email"
+            aria-required="true"
+          />
         </div>
         <div class="form-group">
-          <label>Password</label>
-          <input v-model="form.password" type="password" required />
+          <label for="login-password">Password</label>
+          <input 
+            id="login-password"
+            v-model="form.password" 
+            type="password" 
+            required 
+            tabindex="0"
+            autocomplete="current-password"
+            aria-required="true"
+          />
         </div>
         <div class="form-group">
-          <label>Login as:</label>
-          <div class="radio-group">
+          <label id="role-label">Login as:</label>
+          <div class="radio-group" role="radiogroup" aria-labelledby="role-label">
             <label class="radio-label">
-              <input type="radio" v-model="form.role" value="volunteer" required />
+              <input 
+                type="radio" 
+                v-model="form.role" 
+                value="volunteer" 
+                required 
+                tabindex="0"
+                aria-label="Login as volunteer"
+              />
               <span>Volunteer</span>
             </label>
             <label class="radio-label">
-              <input type="radio" v-model="form.role" value="organizer" required />
+              <input 
+                type="radio" 
+                v-model="form.role" 
+                value="organizer" 
+                required 
+                tabindex="0"
+                aria-label="Login as organizer"
+              />
               <span>Organizer</span>
             </label>
           </div>
         </div>
-        <button type="submit" class="btn-submit">Login</button>
-        <p v-if="error" class="error">{{ error }}</p>
-        <p class="footer-text">Don't have an account? <a @click="switchToSignup">Sign up here</a></p>
+        <button 
+          type="submit" 
+          class="btn-submit" 
+          tabindex="0"
+          :disabled="!form.email || !form.password"
+        >
+          Login
+        </button>
+        <p v-if="error" class="error" role="alert">{{ error }}</p>
+        <p class="footer-text">
+          Don't have an account? 
+          <a 
+            @click="switchToSignup" 
+            @keydown.enter="switchToSignup"
+            @keydown.space.prevent="switchToSignup"
+            tabindex="0"
+            role="button"
+          >
+            Sign up here
+          </a>
+        </p>
       </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 import { X } from 'lucide-vue-next'
@@ -46,8 +102,59 @@ const authStore = useAuthStore()
 const router = useRouter()
 const form = ref({ email: '', password: '', role: 'volunteer' })
 const error = ref('')
+const emailInput = ref(null)
+
+// Focus management
+onMounted(() => {
+  // Focus the email input when modal opens
+  setTimeout(() => {
+    emailInput.value?.focus()
+  }, 100)
+  
+  // Trap focus within modal
+  document.addEventListener('keydown', handleKeyDown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeyDown)
+})
+
+const handleKeyDown = (e) => {
+  // Handle Escape key
+  if (e.key === 'Escape') {
+    emit('close')
+  }
+  
+  // Trap Tab key within modal
+  if (e.key === 'Tab') {
+    const modal = document.querySelector('.modal-content')
+    if (!modal) return
+    
+    const focusableElements = modal.querySelectorAll(
+      'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0]
+    const lastElement = focusableElements[focusableElements.length - 1]
+    
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (document.activeElement === firstElement) {
+        e.preventDefault()
+        lastElement.focus()
+      }
+    } else {
+      // Tab
+      if (document.activeElement === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
+    }
+  }
+}
 
 const handleLogin = () => {
+  error.value = ''
+  
   if (authStore.login(form.value.email, form.value.password)) {
     if (authStore.currentUser.role === form.value.role) {
       emit('close')
@@ -118,9 +225,16 @@ const switchToSignup = () => {
   justify-content: center;
 }
 
-.close-btn:hover { 
+.close-btn:hover,
+.close-btn:focus { 
   background: var(--hover-bg);
   color: var(--text-primary);
+  outline: none;
+}
+
+.close-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 form { 
@@ -156,6 +270,16 @@ form {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.form-group input:focus-visible {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.radio-label input[type="radio"]:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .radio-group { 
@@ -195,10 +319,28 @@ form {
   transition: all 0.2s ease;
 }
 
-.btn-submit:hover { 
+.btn-submit:hover,
+.btn-submit:focus { 
   background: var(--primary-hover);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px var(--primary-glow);
+  outline: none;
+}
+
+.btn-submit:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit:disabled:hover {
+  background: var(--primary-color);
+  box-shadow: none;
 }
 
 .error { 
@@ -223,10 +365,20 @@ form {
   cursor: pointer; 
   text-decoration: none;
   font-weight: 600;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: all 0.2s ease;
 }
 
-.footer-text a:hover { 
-  text-decoration: underline; 
+.footer-text a:hover,
+.footer-text a:focus { 
+  text-decoration: underline;
+  outline: none;
+}
+
+.footer-text a:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 /* Fallback for browsers without backdrop-filter */
