@@ -57,9 +57,24 @@ const getIcon = (category) => {
   border: 1px solid var(--border-primary);
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   cursor: pointer;
+  position: relative;
+}
+
+.event-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.1));
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .event-card:hover { 
@@ -67,6 +82,10 @@ const getIcon = (category) => {
   box-shadow: var(--shadow-lg);
   border-color: var(--border-hover);
   background: var(--bg-card-hover);
+}
+
+.event-card:hover::before {
+  opacity: 1;
 }
 
 .event-header { 
@@ -78,6 +97,7 @@ const getIcon = (category) => {
   border-bottom: 1px solid var(--border-primary);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .event-header::before {
@@ -96,6 +116,12 @@ const getIcon = (category) => {
   filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
   position: relative;
   z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.event-card:hover .event-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.8));
 }
 
 .event-body { padding: 25px; }
@@ -155,12 +181,19 @@ const getIcon = (category) => {
 }
 
 .status-badge { 
-  background: var(--bg-card);
+  background: rgba(16, 185, 129, 0.15);
   color: var(--accent-primary);
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 12px;
   border: 1px solid var(--border-primary);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.event-card:hover .status-badge {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: var(--accent-primary);
 }
 
 @media (max-width: 1024px) {

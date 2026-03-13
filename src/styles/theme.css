@@ -907,3 +907,343 @@ input, select, textarea {
               box-shadow 0.3s ease,
               transform 0.3s ease;
 }
+
+/* ============================================
+   MODAL COMPONENTS EXPLICIT DARK MODE
+   ============================================ */
+
+/* Login Modal Dark Mode */
+.dark-theme .modal {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.dark-theme .modal-content {
+  background: rgba(10, 10, 10, 0.98);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+}
+
+.dark-theme .modal-header h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .close-btn {
+  color: #9ca3af;
+}
+
+.dark-theme .close-btn:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.dark-theme .form-group label {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.dark-theme .form-group input[type="email"],
+.dark-theme .form-group input[type="password"],
+.dark-theme .form-group input[type="text"],
+.dark-theme .form-group input[type="tel"],
+.dark-theme .form-group select {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+.dark-theme .form-group input::placeholder {
+  color: #6b7280;
+}
+
+.dark-theme .form-group input:focus,
+.dark-theme .form-group select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.dark-theme .radio-label {
+  color: #ffffff;
+}
+
+.dark-theme .radio-label input[type="radio"] {
+  accent-color: #10b981;
+}
+
+.dark-theme .btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .btn-submit:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  transform: translateY(-2px);
+}
+
+.dark-theme .footer-text {
+  color: #9ca3af;
+}
+
+.dark-theme .footer-text a {
+  color: #10b981;
+}
+
+.dark-theme .footer-text a:hover {
+  color: #34d399;
+  text-decoration: underline;
+}
+
+/* Light Theme Modal Enhancements */
+.light-theme .modal {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.light-theme .modal-content {
+  background: #ffffff;
+  border: 2px solid #d1fae5;
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.2);
+}
+
+.light-theme .modal-header h2 {
+  color: #064e3b;
+}
+
+.light-theme .close-btn {
+  color: #6b7280;
+}
+
+.light-theme .close-btn:hover {
+  background: #f0fdf4;
+  color: #10b981;
+}
+
+.light-theme .form-group label {
+  color: #064e3b;
+  font-weight: 600;
+}
+
+.light-theme .form-group input[type="email"],
+.light-theme .form-group input[type="password"],
+.light-theme .form-group input[type="text"],
+.light-theme .form-group input[type="tel"],
+.light-theme .form-group select {
+  background: #f9fafb;
+  border: 2px solid #d1fae5;
+  color: #064e3b;
+}
+
+.light-theme .form-group input::placeholder {
+  color: #9ca3af;
+}
+
+.light-theme .form-group input:focus,
+.light-theme .form-group select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  background: #ffffff;
+}
+
+.light-theme .radio-label {
+  color: #064e3b;
+}
+
+.light-theme .radio-label input[type="radio"] {
+  accent-color: #10b981;
+}
+
+.light-theme .btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.light-theme .btn-submit:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+}
+
+.light-theme .footer-text {
+  color: #6b7280;
+}
+
+.light-theme .footer-text a {
+  color: #10b981;
+}
+
+.light-theme .footer-text a:hover {
+  color: #059669;
+  text-decoration: underline;
+}
+
+/* ============================================
+   PROFILE SETTINGS EXPLICIT DARK MODE
+   ============================================ */
+
+.dark-theme .profile-settings {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .profile-container {
+  background: transparent;
+}
+
+.dark-theme .profile-card {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .profile-card h3,
+.dark-theme .profile-card p {
+  color: white;
+}
+
+.dark-theme .upload-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.dark-theme .upload-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dark-theme .profile-form {
+  background: transparent;
+}
+
+.dark-theme .profile-form h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .profile-form label {
+  color: #ffffff;
+}
+
+.dark-theme .profile-form input,
+.dark-theme .profile-form textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+.dark-theme .profile-form input:focus,
+.dark-theme .profile-form textarea:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .profile-form input::placeholder,
+.dark-theme .profile-form textarea::placeholder {
+  color: #6b7280;
+}
+
+.dark-theme .profile-form button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .profile-form button:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  transform: translateY(-2px);
+}
+
+.dark-theme .settings-section h2,
+.dark-theme .settings-section h3 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.dark-theme .settings-section label {
+  color: #d1d5db;
+}
+
+.dark-theme .settings-section input[type="checkbox"] {
+  accent-color: #10b981;
+}
+
+.dark-theme .settings-section button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.dark-theme .settings-section button:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  transform: translateY(-2px);
+}
+
+.dark-theme .settings-section button.danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.dark-theme .settings-section button.danger:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+/* Light Theme Profile Settings */
+.light-theme .profile-settings {
+  background: white;
+  border: 2px solid #d1fae5;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.08);
+}
+
+.light-theme .profile-sidebar button {
+  background: white;
+  border: 1px solid #d1fae5;
+  color: #065f46;
+}
+
+.light-theme .profile-sidebar button:hover {
+  background: #f0fdf4;
+  border-color: #a7f3d0;
+}
+
+.light-theme .profile-sidebar button.active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-color: #10b981;
+}
+
+.light-theme .profile-form h2 {
+  color: #064e3b;
+}
+
+.light-theme .profile-form label {
+  color: #064e3b;
+}
+
+.light-theme .profile-form input,
+.light-theme .profile-form textarea {
+  background: #f9fafb;
+  border: 1px solid #d1fae5;
+  color: #064e3b;
+}
+
+.light-theme .profile-form input:focus,
+.light-theme .profile-form textarea:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  background: white;
+}
+
+.light-theme .settings-section h2,
+.light-theme .settings-section h3 {
+  color: #064e3b;
+}
+
+.light-theme .settings-section label {
+  color: #065f46;
+}

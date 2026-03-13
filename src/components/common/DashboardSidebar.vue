@@ -119,7 +119,7 @@ const sidebarItems = computed(() => {
   background: rgba(16, 185, 129, 0.2);
   border-color: rgba(16, 185, 129, 0.4);
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
-}
+} 
 
 .dark-theme .sidebar button.active {
   background: linear-gradient(135deg, #10b981, #059669);
