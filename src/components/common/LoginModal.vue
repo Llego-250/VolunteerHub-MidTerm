@@ -119,7 +119,7 @@ import { useAuthStore } from '../../stores/auth'
 import { useRouter } from 'vue-router'
 import { X } from 'lucide-vue-next'
 
-const emit = defineEmits(['close', 'switchToSignup'])
+const emit = defineEmits(['close', 'switchToSignup', 'loginSuccess'])
 const authStore = useAuthStore()
 const router = useRouter()
 const form = ref({ email: '', password: '', role: 'volunteer' })
@@ -238,6 +238,7 @@ const handleLogin = () => {
   
   if (authStore.login(form.value.email, form.value.password)) {
     if (authStore.currentUser.role === form.value.role) {
+      emit('loginSuccess')
       emit('close')
       router.push(form.value.role === 'volunteer' ? '/volunteer-dashboard' : '/organizer-dashboard')
     } else {

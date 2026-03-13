@@ -17,10 +17,32 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
+  
   if (to.meta.requiresAuth && !authStore.currentUser) {
-    next('/')
+    // Redirect to landing page with login modal trigger
+    next({ 
+      path: '/', 
+      query: { 
+        showLogin: 'true',
+        redirect: to.fullPath 
+      } 
+    })
   } else if (to.meta.role && authStore.currentUser?.role !== to.meta.role) {
-    next('/')
+    // Wrong role - redirect to appropriate dashboard or landing
+    if (authStore.currentUser) {
+      const correctDashboard = authStore.currentUser.role === 'volunteer' 
+        ? '/volunteer-dashboard' 
+        : '/organizer-dashboard'
+      next(correctDashboard)
+    } else {
+      next({ 
+        path: '/', 
+        query: { 
+          showLogin: 'true',
+          redirect: to.fullPath 
+        } 
+      })
+    }
   } else {
     next()
   }

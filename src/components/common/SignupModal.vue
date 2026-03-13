@@ -160,7 +160,7 @@ import { useRouter } from 'vue-router'
 import { X } from 'lucide-vue-next'
 
 const props = defineProps(['defaultRole'])
-const emit = defineEmits(['close', 'switchToLogin'])
+const emit = defineEmits(['close', 'switchToLogin', 'signupSuccess'])
 const authStore = useAuthStore()
 const router = useRouter()
 const form = ref({ name: '', email: '', password: '', phone: '', location: '', role: 'volunteer' })

@@ -209,9 +209,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useEventsStore } from '../stores/events'
 import { useAuthStore } from '../stores/auth'
+import { useRouter, useRoute } from 'vue-router'
 import MinimalNavbar from '../components/common/MinimalNavbar.vue'
 import Parallax3D from '../components/common/Parallax3D.vue'
 import FeaturedEvents from '../components/common/FeaturedEvents.vue'
@@ -222,13 +223,32 @@ import heroVideo from '../assets/vovo.mp4'
 
 const eventsStore = useEventsStore()
 const authStore = useAuthStore()
+const router = useRouter()
+const route = useRoute()
 const showLogin = ref(false)
 const showSignup = ref(false)
 const signupRole = ref('')
 const eventsToShow = ref(3)
+const redirectPath = ref('')
 
 const displayedEvents = computed(() => eventsStore.events.slice(0, eventsToShow.value))
 const canLoadMore = computed(() => eventsToShow.value < eventsStore.events.length)
+
+// Check for query parameters on mount
+onMounted(() => {
+  if (route.query.showLogin === 'true') {
+    showLogin.value = true
+    redirectPath.value = route.query.redirect || ''
+    // Clean up URL
+    router.replace({ path: '/', query: {} })
+  } else if (route.query.showSignup === 'true') {
+    showSignup.value = true
+    signupRole.value = route.query.role || ''
+    redirectPath.value = route.query.redirect || ''
+    // Clean up URL
+    router.replace({ path: '/', query: {} })
+  }
+})
 
 const loadMore = () => {
   eventsToShow.value += 3
@@ -241,6 +261,21 @@ const openSignup = (role) => {
 
 const scrollTo = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
+// Handle successful login/signup with redirect
+const handleLoginSuccess = () => {
+  showLogin.value = false
+  if (redirectPath.value) {
+    router.push(redirectPath.value)
+  }
+}
+
+const handleSignupSuccess = () => {
+  showSignup.value = false
+  if (redirectPath.value) {
+    router.push(redirectPath.value)
+  }
 }
 </script>
 
