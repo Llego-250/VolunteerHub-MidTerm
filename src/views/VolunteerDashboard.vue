@@ -374,11 +374,17 @@ const handleSearch = (query) => {
 </script>
 
 <style scoped>
-/* Base Layout */
+/* Base Layout - Dark Mode Enhanced */
 .dashboard { 
   min-height: 100vh; 
   background: #f9fafb; 
-  padding-top: 80px; 
+  padding-top: 80px;
+  transition: background 0.3s ease;
+}
+
+/* Dark Theme Dashboard */
+.dark-theme .dashboard {
+  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
 }
 
 .layout { 
@@ -418,6 +424,13 @@ const handleSearch = (query) => {
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Dark Theme Spotlight */
+.dark-theme .spotlight-banner {
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .spotlight-banner::before {
@@ -505,6 +518,13 @@ const handleSearch = (query) => {
   font-weight: 700;
   color: #1f2937;
   margin: 0 0 25px;
+  transition: color 0.3s ease;
+}
+
+/* Dark Theme Events Section */
+.dark-theme .events-section h3 {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
 
 /* Animated Grid */
@@ -533,6 +553,13 @@ const handleSearch = (query) => {
   text-align: center;
   color: white;
   animation: fadeInUp 0.6s ease-out 0.3s backwards;
+  transition: all 0.3s ease;
+}
+
+/* Dark Theme CTA */
+.dark-theme .discovery-cta {
+  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+  border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 .cta-content h3 {
