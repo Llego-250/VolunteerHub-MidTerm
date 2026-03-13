@@ -14,7 +14,7 @@ app.use(pinia)
 app.use(router)
 app.mount('#app')
 
-// Initialize theme
+// Initialize theme on app startup
 const themeStore = useThemeStore()
 themeStore.initTheme()
 

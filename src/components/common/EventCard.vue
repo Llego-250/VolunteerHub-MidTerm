@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Footer Section of our project -->
     <div class="card-footer">
       <button 
         @click="handleAction" 
@@ -132,7 +132,7 @@ const handleAction = () => {
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   
-  /* Background */
+  /* Background color*/
   background: white;
   
   /* Layout */
@@ -151,7 +151,7 @@ const handleAction = () => {
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
 }
 
-/* 2. HEADER SECTION */
+/* 2. HEADER SECTION of our project */
 .card-header {
   padding: 24px 24px 0;
   display: flex;
