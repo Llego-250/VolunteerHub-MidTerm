@@ -38,4 +38,3 @@ Create accounts via signup or use localStorage to add test users.
 - Pinia for state management
 - LocalStorage for data persistence
 - Vite for build tooling
-```Author: AZE SOLIDE, Kubwimana Jean Nicolas```
