@@ -1,5 +1,3 @@
-
-
 # VolunteerHub - Vue 3 + Vite
 
 A volunteer management platform connecting volunteers with organizations.
